@@ -31,4 +31,6 @@
 *.out
 *.app
 
-Interval Timer/ Interval Timer/x64
+/Interval Timer/Interval Timer/x64/
+/Interval Timer/x64/
+/Interval Timer/.vs/
