@@ -17,7 +17,6 @@
 #include <QtWidgets/QDockWidget>
 #include <QtCore/QElapsedTimer>
 
-
 QT_BEGIN_NAMESPACE
 
 /* Class: Ui_MainWindow
@@ -62,7 +61,7 @@ public:
 		centralwidget = new QWidget(MainWindow);
 		centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
 		MainWindow->setCentralWidget(centralwidget);
-
+        MainWindow->setFixedSize(800, 480);
 
 
 		//// set up timer 
@@ -72,7 +71,6 @@ public:
 		exeTimer = new QLabel(MainWindow);
 		exeTimer->setObjectName(QString::fromUtf8("exeTimer"));
 		exeTimer->setText("Execution Time: 0 \t");
-
 
 		// status bar
 		statusbar = new QStatusBar(MainWindow);

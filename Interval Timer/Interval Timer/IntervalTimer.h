@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MainWindow.h"
+#include "GUI_Stylesheet.h"
 
 class IntervalTimer : public QMainWindow
 {
@@ -13,4 +14,5 @@ public:
 
 private:
 	Ui::MainWindow *ui;
+    GUI_Style GUI_Style;
 };
