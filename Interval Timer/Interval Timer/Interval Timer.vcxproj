@@ -46,6 +46,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile />
+  </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
@@ -88,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="situationalPage.cpp" />
     <ClCompile Include="intervalTimerPage.cpp" />
+    <ClCompile Include="mainScreenWidget.cpp" />
     <ClCompile Include="timer.cpp" />
     <QtMoc Include="MainWindow.h" />
     <ClCompile Include="GUI_Stylesheet.cpp" />
@@ -96,9 +100,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI_Stylesheet.h" />
-    <ClInclude Include="situationalPage.h" />
+    <QtMoc Include="situationalPage.h" />
     <QtMoc Include="intervalTimerPage.h" />
     <QtMoc Include="timer.h" />
+    <QtMoc Include="mainScreenWidget.h" />
     <ClInclude Include="ui_MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

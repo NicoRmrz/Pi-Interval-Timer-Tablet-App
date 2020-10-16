@@ -35,7 +35,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;
 
-    // create label to be displayed on status bar
+    // create objects
     exeTimer = new QLabel(parent);
     exeTimer->setObjectName(QString::fromUtf8("exeTimer"));
     exeTimer->setText("00:00");
@@ -52,11 +52,19 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     pauseResumeBtn->setMinimumSize(100, 90);
     pauseResumeBtn->setMaximumSize(100, 90);
     pauseResumeBtn->setText("Pause/Resume");
+    pauseResumeBtn->setEnabled(false);
+
+    backBtn = new QPushButton(parent);
+    backBtn->setObjectName(QString::fromUtf8("back"));
+    backBtn->setMinimumSize(50, 50);
+    backBtn->setMaximumSize(50, 50);
+    backBtn->setText("back");
 
     // set layout
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
-    mainVLayout->setSpacing(0);
+    mainVLayout->setSpacing(20);
+    mainVLayout->addWidget(backBtn, 0, Qt::AlignLeft);
     mainVLayout->addWidget(exeTimer, 0, Qt::AlignCenter);
     mainVLayout->addWidget(startBtn, 0, Qt::AlignCenter);
     mainVLayout->addWidget(pauseResumeBtn, 0, Qt::AlignCenter);
@@ -68,6 +76,10 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(startBtn, &QPushButton::released, this, &IntervalTimer::startButton_Released);
     connect(pauseResumeBtn, &QPushButton::pressed, this, &IntervalTimer::pauseResumeButton_Pressed);
     connect(pauseResumeBtn, &QPushButton::released, this, &IntervalTimer::pauseResumeButton_Released);
+
+    connect(backBtn, &QPushButton::pressed, this, &IntervalTimer::backButton_Pressed);
+    connect(backBtn, &QPushButton::released, this, &IntervalTimer::backButton_Released);
+
 	connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
 	connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
@@ -130,10 +142,10 @@ void IntervalTimer::startButton_Released()
 {
 	currTimer->startTimer();  // start timer
     startBtn->setEnabled(false);
+    pauseResumeBtn->setEnabled(true);
     isRunning = true;
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
-
 }
 
 /* Function: pauseResumeButton_Pressed
@@ -170,9 +182,24 @@ void IntervalTimer::pauseResumeButton_Released()
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 }
 
+/* Function: backButton_Pressed
 
-// Deconstructor
-IntervalTimer::~IntervalTimer()
+        Slot to handle backbutton being pressed
+*/
+void IntervalTimer::backButton_Pressed()
 {
+    // color button grey indicating pressed button
+   // ui->startBtn->setStyleSheet(GUI_Style.buttonPressed);
+}
+
+/* Function: backButton_Released
+
+        Slot to handle back button is released.
+*/
+void IntervalTimer::backButton_Released()
+{
+
+    emit returnPage("timer");
+    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 
 }

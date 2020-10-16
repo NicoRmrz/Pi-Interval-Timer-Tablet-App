@@ -21,17 +21,19 @@ class IntervalTimer : public QWidget
 
 public:
     IntervalTimer(QWidget *parent);
-    ~IntervalTimer();
+    ~IntervalTimer() {};
     GUI_Style    GUI_Style;
     QLabel      *exeTimer;
 	timerReading      *currTimer;
     QPushButton *startBtn;
     QPushButton *pauseResumeBtn;
+    QPushButton *backBtn;
     QVBoxLayout *mainVLayout;
     bool isRunning;
 
 signals:
     void intervalState(int state);
+    void returnPage(QString page);
 
 public slots:
     void updateTimerDisplay();
@@ -40,6 +42,8 @@ public slots:
     void startButton_Released();
     void pauseResumeButton_Pressed();
     void pauseResumeButton_Released();
+    void backButton_Pressed();
+    void backButton_Released();
 
 private:
     int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;

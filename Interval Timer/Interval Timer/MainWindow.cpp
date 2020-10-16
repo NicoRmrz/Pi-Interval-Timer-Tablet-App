@@ -13,18 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
 	// call out GUI objects created in ui_MainWindow.h
 	ui->setupUi(this);
 
-    // instantiate pages
-    IntervalTimerWidget = new IntervalTimer(parent);
-
     // style all objects
     setStyleSheet(GUI_Style.mainWindowGrey);
     ui->statusbar->setStyleSheet(GUI_Style.statusBar);
-    ui->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
+
 
     // connect signals 
-    connect(ui->showIntervalTimer, &QPushButton::pressed, this, &MainWindow::intervalTimerButton_Pressed);
-    connect(ui->showIntervalTimer, &QPushButton::released, this, &MainWindow::intervalTimerButton_Released);
-
+    connect(ui->maingPage->showIntervalTimer, &QPushButton::pressed, this, &MainWindow::intervalTimerButton_Pressed);
+    connect(ui->maingPage->showIntervalTimer, &QPushButton::released, this, &MainWindow::intervalTimerButton_Released);
+    connect(ui->maingPage->situationalBtn, &QPushButton::pressed, this, &MainWindow::situationalButton_Pressed);
+    connect(ui->maingPage->situationalBtn, &QPushButton::released, this, &MainWindow::situationalButton_Released);
 }
 
 /* Function: intervalTimerButton_Pressed
@@ -34,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::intervalTimerButton_Pressed()
 {
     // color button grey indicating pressed button
-    ui->showIntervalTimer->setStyleSheet(GUI_Style.buttonPressed);
+    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.buttonPressed);
 }
 
 /* Function: intervalTimerButton_Released
@@ -45,7 +43,7 @@ void MainWindow::intervalTimerButton_Released()
 {
     setStyleSheet(GUI_Style.mainWindowIdle);
 
-    ui->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
+    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
 
     showIntervalTimer();
 }
@@ -59,13 +57,16 @@ void MainWindow::showIntervalTimer()
 {
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
-    delete (ui->showIntervalTimer);
-    ui->showIntervalTimer = NULL;
+    delete (ui->maingPage);
+    ui->maingPage = NULL;
+
+    IntervalTimerWidget = new IntervalTimer(this);
 
     // add timer interal app widget
     ui->mainLayout->addWidget(IntervalTimerWidget);
 
     connect(IntervalTimerWidget, &IntervalTimer::intervalState, this, &MainWindow::updateTimerState);
+    connect(IntervalTimerWidget, &IntervalTimer::returnPage, this, &MainWindow::returnToMain);
 }
 
 /* Define: IntervalTimer
@@ -87,6 +88,97 @@ void MainWindow::updateTimerState(int state)
     {
         setStyleSheet(GUI_Style.mainWindowRoll);
     }
+}
+
+/* Function: situationalButton_Pressed
+
+        Slot to handle situational button being pressed
+*/
+void MainWindow::situationalButton_Pressed()
+{
+    // color button grey indicating pressed button
+    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.buttonPressed);
+}
+
+/* Function: situationalButton_Released
+
+        Slot to handle situational button is released.
+*/
+void MainWindow::situationalButton_Released()
+{
+    setStyleSheet(GUI_Style.mainWindowIdle);
+
+    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
+
+    showSituationalGame();
+}
+
+
+/* Define: showSituationalGame
+
+        Show Situational app on Main Window
+
+ */
+void MainWindow::showSituationalGame()
+{
+    // remove main window widget
+    ui->mainLayout->removeWidget(ui->centralwidget);
+    delete (ui->maingPage);
+    ui->maingPage = NULL;
+
+    situationalWidget = new situationalGame(this);
+
+    // add timer interal app widget
+    ui->mainLayout->addWidget(situationalWidget);
+}
+
+/* Define: returnToMain
+
+        Return to main screen
+
+ */
+void MainWindow::returnToMain(QString page)
+{
+    if (page == "situational")
+    {
+       // remove page
+       ui->mainLayout->removeWidget(situationalWidget);
+       delete (situationalWidget);
+       situationalWidget = NULL;
+    }
+    if (page == "timer")
+    {
+        // remove page
+        ui->mainLayout->removeWidget(IntervalTimerWidget);
+        delete (IntervalTimerWidget);
+        IntervalTimerWidget = NULL;
+    }
+
+    // revert to main page
+    ui->maingPage = new mainScreen(this);
+    ui->mainLayout->addWidget(ui->maingPage);
+    setStyleSheet(GUI_Style.mainWindowGrey);
+
+    // connect signals 
+    connect(ui->maingPage->showIntervalTimer, &QPushButton::pressed, this, &MainWindow::intervalTimerButton_Pressed);
+    connect(ui->maingPage->showIntervalTimer, &QPushButton::released, this, &MainWindow::intervalTimerButton_Released);
+    connect(ui->maingPage->situationalBtn, &QPushButton::pressed, this, &MainWindow::situationalButton_Pressed);
+    connect(ui->maingPage->situationalBtn, &QPushButton::released, this, &MainWindow::situationalButton_Released);
+}
+
+/* Function: sendStatusBar
+
+        To send the status bar a message
+
+   Paramters:
+
+       message - message to be sent to the bottom status bar
+       time - time in ms for how long the message will be displayed
+*/
+void MainWindow::sendStatusBar(QString message, int time)
+{
+    ui->statusbar->setStyleSheet(GUI_Style.statusBar);
+    ui->statusbar->showMessage(message, time);
 }
 
 /* Function: closeEvent
