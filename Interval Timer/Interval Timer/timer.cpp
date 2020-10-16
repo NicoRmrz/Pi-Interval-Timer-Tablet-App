@@ -7,21 +7,17 @@
 */
 #include "timer.h"
 
-#include <QDebug>
-
 using namespace std;
-
 
 /* Constructor: timerReading
 
-		Lays out all objects for the Interval Timer page
+		Lays out all objects for the timer for Interval Timer page
 
 	Parameters:
 
 		parent - Inherits QObject attributes
 */
 timerReading::timerReading(QObject *parent) 
-
 {
 	state = 0;
 	cnt = 0;
@@ -124,10 +120,4 @@ void timerReading::clearTimer()
 		setClock(10, 0);
 		state = 0; // change state when done
 	}
-}
-
-// Deconstructor
-timerReading::~timerReading()
-{
-
 }

@@ -15,7 +15,7 @@ class timerReading : public QObject
 
 public:
 	timerReading(QObject *parent);
-	~timerReading();
+	~timerReading() {};
 	QTimer      *myTimer;
 	QTime       *time;
 	QElapsedTimer *eTimer;

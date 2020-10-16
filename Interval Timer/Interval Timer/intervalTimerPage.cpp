@@ -32,7 +32,6 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 
 	currTimer = new timerReading(this);
 
-
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;
 
