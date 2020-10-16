@@ -27,16 +27,17 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 {
     rollSec = 10;
     rollMin = 0;
-    restSec = 10;
+    restSec = 6;
     restMin = 0;
     pauseSec = 0;
     pauseMin = 0;
 
 
+    timer = new QTimer(this);
 
     // start on roll state. Rest = 0, Roll = 1
     state = 1;
-    playToggle = false;
+    isRunning = false;
 
     // create label to be displayed on status bar
     exeTimer = new QLabel(parent);
@@ -86,19 +87,14 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
  */
 void IntervalTimer::changeState()
 {
-    int toMs;
-    if (playToggle)
+    if (isRunning)
     {
         if (state == 0) // Rest
         {
             setClock(restSec, restMin);
 
-            //delete time;
-          /*  time = new QTime(0, restMin, restSec);
-            toMs = restMin * 60000 + restSec * 1000;
-            QTimer::singleShot(toMs, this, &IntervalTimer::changeState);*/
-
             setStyleSheet(GUI_Style.mainWindowRest);
+
             emit intervalState(0);
             state = 1; // change state when done
 
@@ -106,11 +102,6 @@ void IntervalTimer::changeState()
         else // Rolling
         {
             setClock(rollSec, rollMin);
-
-           // delete time;
-            //time = new QTime(0, rollMin, rollSec);
-            //toMs = rollMin * 60000 + rollSec * 1000;
-            //QTimer::singleShot(toMs, this, &IntervalTimer::changeState);
 
             setStyleSheet(GUI_Style.mainWindowRoll);
             emit intervalState(1);
@@ -120,14 +111,16 @@ void IntervalTimer::changeState()
     }
 }
 
-/* Define: updateTimer
+/* Define: updateTimerDisplay
 
     Update time on timer
 
  */
-void IntervalTimer::updateTimer()
+void IntervalTimer::updateTimerDisplay()
 {
-    if (playToggle)
+    qDebug() << "State: " + QString::number(state);
+    qDebug() << isRunning;
+    if (isRunning)
     {
         // timer countdown
         time->setHMS(0, time->addSecs(-1).minute(), time->addSecs(-1).second());
@@ -154,18 +147,18 @@ void IntervalTimer::startButton_Pressed()
 */
 void IntervalTimer::startButton_Released()
 {
-    // set up timer 
-    timer = new QTimer(this);
+    // set up time
     time = new QTime(0, 0, 5);
 
     state = 1;
     QTimer::singleShot(5000, this, &IntervalTimer::changeState);
 
-    connect(timer, &QTimer::timeout, this, &IntervalTimer::updateTimer);
+    // send timer to display
+    connect(timer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
     timer->start(1000);
    
     startBtn->setEnabled(false);
-    playToggle = true;
+    isRunning = true;
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 
@@ -187,34 +180,20 @@ void IntervalTimer::pauseResumeButton_Pressed()
 */
 void IntervalTimer::pauseResumeButton_Released()
 {
-    if (playToggle) // pause timer
+    if (isRunning) // Timer running click to pause
     {
-        delete timer;
-        timer = new QTimer(this);
-        timer->start(1000);
-        connect(timer, &QTimer::timeout, this, &IntervalTimer::updateTimer);
 
         pauseSec = time->second();
         pauseMin = time->minute();
-        playToggle = false;
-       // timer->stop();
-
+        isRunning = false;
     }
-    else // resume timer
+    else // Timer Paused Click to resume timer
     {
         setClock(pauseSec, pauseMin);
-       // delete time;
-       /* time = new QTime(0, pauseMin, pauseSec);
-        int toMs = pauseMin * 60000 + pauseSec * 1000;
-        QTimer::singleShot(toMs, this, &IntervalTimer::changeState);*/
-
-        playToggle = true;
-       // timer->start();
-
+        isRunning = true;
     }
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
-
 }
 
 /* Function: setClock
@@ -224,12 +203,22 @@ void IntervalTimer::pauseResumeButton_Released()
 void IntervalTimer::setClock(int sec, int min)
 {
     delete time;
+    time = NULL;
+
     time = new QTime(0, min, sec);
     int toMs = min * 60000 + sec * 1000;
     QTimer::singleShot(toMs, this, &IntervalTimer::changeState);
 
 }
 
+/* Function: resetTimer
+
+        Slot to set Clock
+*/
+void resetTimer(QTimer* oldTimey) 
+{
+
+}
 // Deconstructor
 IntervalTimer::~IntervalTimer()
 {

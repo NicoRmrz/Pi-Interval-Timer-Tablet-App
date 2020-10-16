@@ -31,13 +31,13 @@ public:
     QPushButton *pauseResumeBtn;
     QVBoxLayout *mainVLayout;
     int state;
-    bool playToggle;
+    bool isRunning;
 
 signals:
     void intervalState(int state);
 
 public slots:
-    void updateTimer();
+    void updateTimerDisplay();
     void changeState();
     void startButton_Pressed();
     void startButton_Released();
@@ -47,7 +47,8 @@ public slots:
 private:
     int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;
     void setClock(int sec, int min);
-    
+    void resetTimer(QTimer* timer);
+
     // void writeToOutput(QString mesaage);
    // void connectionIndicator(bool connection);
   //  bool checkValidInput(QString);

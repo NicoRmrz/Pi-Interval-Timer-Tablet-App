@@ -43,7 +43,7 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
 
     mainWindowIdle = "background-color: "+ BLUEBACKGROUND + "; ";
 
-    mainTimer = "font: 96px Bold Courier New; "
+    mainTimer = "font: 200px Bold Courier New; "
                     "color: white;"
                     "border: none";
 
