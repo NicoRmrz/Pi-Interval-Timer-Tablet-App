@@ -7,10 +7,9 @@
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <QtCore/QTimer>
-#include <QTime>
 
 #include "GUI_Stylesheet.h"
+#include "timer.h"
 
 /* Class: IntervalTimer
 
@@ -25,12 +24,10 @@ public:
     ~IntervalTimer();
     GUI_Style    GUI_Style;
     QLabel      *exeTimer;
-    QTimer      *timer;
-    QTime       *time;
+	timerReading      *currTimer;
     QPushButton *startBtn;
     QPushButton *pauseResumeBtn;
     QVBoxLayout *mainVLayout;
-    int state;
     bool isRunning;
 
 signals:
@@ -38,7 +35,7 @@ signals:
 
 public slots:
     void updateTimerDisplay();
-    void changeState();
+    void changeColor(int state);
     void startButton_Pressed();
     void startButton_Released();
     void pauseResumeButton_Pressed();
@@ -46,10 +43,5 @@ public slots:
 
 private:
     int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;
-    void setClock(int sec, int min);
-    void resetTimer(QTimer* timer);
 
-    // void writeToOutput(QString mesaage);
-   // void connectionIndicator(bool connection);
-  //  bool checkValidInput(QString);
 };

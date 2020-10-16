@@ -7,8 +7,6 @@
 */
 #include "intervalTimerPage.h"
 
-#include <QRegularExpression>
-#include <QFile>
 #include <QDebug>
 
 using namespace std;
@@ -32,11 +30,10 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     pauseSec = 0;
     pauseMin = 0;
 
+	currTimer = new timerReading(this);
 
-    timer = new QTimer(this);
 
     // start on roll state. Rest = 0, Roll = 1
-    state = 1;
     isRunning = false;
 
     // create label to be displayed on status bar
@@ -58,7 +55,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     pauseResumeBtn->setText("Pause/Resume");
 
     // set layout
-    mainVLayout = new QVBoxLayout(parent);
+    mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
     mainVLayout->setSpacing(0);
     mainVLayout->addWidget(exeTimer, 0, Qt::AlignCenter);
@@ -67,46 +64,37 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 
     setLayout(mainVLayout);
 
-  
     // connect signals
     connect(startBtn, &QPushButton::pressed, this, &IntervalTimer::startButton_Pressed);
     connect(startBtn, &QPushButton::released, this, &IntervalTimer::startButton_Released);
     connect(pauseResumeBtn, &QPushButton::pressed, this, &IntervalTimer::pauseResumeButton_Pressed);
     connect(pauseResumeBtn, &QPushButton::released, this, &IntervalTimer::pauseResumeButton_Released);
+	connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
+	connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
     // set stylesheet for each object
     exeTimer->setStyleSheet(GUI_Style.mainTimer);
     setStyleSheet(GUI_Style.mainWindowIdle);
-
 }
 
-/* Define: changeState
+/* Define: changeColor
 
-    Change State
+    Change Color
 
  */
-void IntervalTimer::changeState()
+void IntervalTimer::changeColor(int state)
 {
     if (isRunning)
     {
         if (state == 0) // Rest
         {
-            setClock(restSec, restMin);
-
             setStyleSheet(GUI_Style.mainWindowRest);
-
-            emit intervalState(0);
-            state = 1; // change state when done
-
+			emit intervalState(state);
         }
         else // Rolling
         {
-            setClock(rollSec, rollMin);
-
             setStyleSheet(GUI_Style.mainWindowRoll);
-            emit intervalState(1);
-            state = 0; // change state when done
-
+			emit intervalState(state);
         }
     }
 }
@@ -118,18 +106,12 @@ void IntervalTimer::changeState()
  */
 void IntervalTimer::updateTimerDisplay()
 {
-    qDebug() << "State: " + QString::number(state);
-    qDebug() << isRunning;
     if (isRunning)
     {
-        // timer countdown
-        time->setHMS(0, time->addSecs(-1).minute(), time->addSecs(-1).second());
-
         // show timer
-        exeTimer->setText(time->toString("mm:ss"));
+        exeTimer->setText(currTimer->getTime());
     }
 }
-
 
 /* Function: startButton_Pressed
 
@@ -147,16 +129,7 @@ void IntervalTimer::startButton_Pressed()
 */
 void IntervalTimer::startButton_Released()
 {
-    // set up time
-    time = new QTime(0, 0, 5);
-
-    state = 1;
-    QTimer::singleShot(5000, this, &IntervalTimer::changeState);
-
-    // send timer to display
-    connect(timer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
-    timer->start(1000);
-   
+	currTimer->startTimer();  // start timer
     startBtn->setEnabled(false);
     isRunning = true;
 
@@ -182,43 +155,23 @@ void IntervalTimer::pauseResumeButton_Released()
 {
     if (isRunning) // Timer running click to pause
     {
+		QString currTime = currTimer->getTime();
+		QStringList  timeSplit = currTime.split(":");
 
-        pauseSec = time->second();
-        pauseMin = time->minute();
+        pauseSec = timeSplit[1].toDouble() + 1;
+        pauseMin = timeSplit[0].toDouble();
         isRunning = false;
     }
     else // Timer Paused Click to resume timer
     {
-        setClock(pauseSec, pauseMin);
+		currTimer->setClock(pauseSec, pauseMin);
         isRunning = true;
     }
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 }
 
-/* Function: setClock
 
-        Slot to set Clock
-*/
-void IntervalTimer::setClock(int sec, int min)
-{
-    delete time;
-    time = NULL;
-
-    time = new QTime(0, min, sec);
-    int toMs = min * 60000 + sec * 1000;
-    QTimer::singleShot(toMs, this, &IntervalTimer::changeState);
-
-}
-
-/* Function: resetTimer
-
-        Slot to set Clock
-*/
-void resetTimer(QTimer* oldTimey) 
-{
-
-}
 // Deconstructor
 IntervalTimer::~IntervalTimer()
 {

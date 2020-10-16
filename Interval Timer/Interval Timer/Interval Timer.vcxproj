@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClCompile Include="situationalPage.cpp" />
     <ClCompile Include="intervalTimerPage.cpp" />
+    <ClCompile Include="timer.cpp" />
     <QtMoc Include="MainWindow.h" />
     <ClCompile Include="GUI_Stylesheet.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="GUI_Stylesheet.h" />
     <ClInclude Include="situationalPage.h" />
     <QtMoc Include="intervalTimerPage.h" />
+    <QtMoc Include="timer.h" />
     <ClInclude Include="ui_MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
