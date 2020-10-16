@@ -14,7 +14,12 @@
 
     Color scheme for GUI Objects setStyleSheet rgba/ hex values
  */
-#define MAINBACKGROUND  QString("rgba(49, 51, 53, 240)")
+//#define GREYBACKGROUND  QString("rgba(49, 51, 53, 240)")
+#define GREYBACKGROUND  QString("#20292F")
+#define GREENBACKGROUND QString("#07c40d")
+#define REDBACKGROUND   QString("#E3242B")
+#define BLUEBACKGROUND  QString("#6593F5")
+
 #define TABHOVER        QString("rgba(38,79,120,255)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
@@ -30,7 +35,38 @@
 */
 GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
 {
-    mainWindow = "background-color: "+ MAINBACKGROUND+ "; ";
+    mainWindowGrey = "background-color: "+ GREYBACKGROUND + "; ";
 
-   
+    mainWindowRest = "background-color: "+ GREENBACKGROUND + "; ";
+
+    mainWindowRoll = "background-color: "+ REDBACKGROUND + "; ";
+
+    mainWindowIdle = "background-color: "+ BLUEBACKGROUND + "; ";
+
+    mainTimer = "font: 96px Bold Courier New; "
+                    "color: white;"
+                    "border: none";
+
+    intervalTimerBtn = "font: bold 20px Verdana; "
+                        "background-color: #6497b1;"
+                        "border-radius: 4px; ";
+
+    situationalBtn = "font: bold 12px Verdana; "
+                        //"background-color:  #6497b1; "
+                         "background-color: #00A86B;"
+                        //"background-color: #FADA5E;"
+                        "border-radius: 4px";
+
+    buttonPressed = "font: bold 20px Verdana; "
+                        "background-color: rgb(100,100,100); "
+                        "border-radius: 4px";
+
+
+    statusBar = "QStatusBar { background:  rgba(100,100,100,0);"
+                "color:white; border:none;"
+                "font: 11px Verdana; } "
+                "QStatusBar::item {border: none; "
+                "font: 11px Verdana;  "
+                "border-radius: 3px; }";
+
 }

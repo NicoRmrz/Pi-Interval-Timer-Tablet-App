@@ -1,6 +1,4 @@
 /* File: ui_MainWindow.h
-
-
 */
 #pragma once
 #include <QtWidgets/QMainWindow>
@@ -12,10 +10,6 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QSplitter>
-#include <QtWidgets/QDockWidget>
-#include <QtCore/QElapsedTimer>
 
 QT_BEGIN_NAMESPACE
 
@@ -28,28 +22,8 @@ class Ui_MainWindow
 public:
 	QWidget     *centralwidget;
 	QStatusBar  *statusbar;
-	//QHBoxLayout *mainHLayout;
-	//QHBoxLayout *buttonLayout;
-	//QVBoxLayout *leftPanelVLayout;
-	//QHBoxLayout *MainSplitLayout;
-	//QPushButton *folderButton;
-	//QPushButton *runButton;
-	//QTabWidget  *projectTabWidget;
-	//QTabWidget  *myTabs;
-	//QCheckBox   *focusView;
-	//QCheckBox   *gridLines;
-	//QSplitter   *IDEHorizontalSplitter;
-	//QWidget     *HSplitcontainer;
-	//QWidget     *MainLeftcontainer;
-	QLabel      *exeTimer;
-	QElapsedTimer  *timer;
-
-	//QLabel      *xPos;
-	//QLabel      *yPos;
-	//QLabel      *redData;
-	//QLabel      *greenData;
-	//QLabel      *blueData;
-	//QDockWidget *outputDock;
+	QVBoxLayout *mainLayout;
+    QPushButton *showIntervalTimer;
 
 	/* Function: setupUi
 
@@ -63,30 +37,35 @@ public:
 		MainWindow->setCentralWidget(centralwidget);
         MainWindow->setFixedSize(800, 480);
 
+        /*---------------------------------------------------*/
+        /*----------------- Create Objects ------------------*/
+        /*---------------------------------------------------*/
 
-		//// set up timer 
-		timer = new QElapsedTimer();
-
-		// create label to be displayed on status bar
-		exeTimer = new QLabel(MainWindow);
-		exeTimer->setObjectName(QString::fromUtf8("exeTimer"));
-		exeTimer->setText("Execution Time: 0 \t");
+        // Create timer interval button
+        showIntervalTimer = new QPushButton(MainWindow);
+        showIntervalTimer->setObjectName(QString::fromUtf8("showIntervalTimer"));
+        showIntervalTimer->setMinimumSize(200, 90);
+        showIntervalTimer->setMaximumSize(200, 90);
+        showIntervalTimer->setText("INTERVAL TIMER");
 
 		// status bar
 		statusbar = new QStatusBar(MainWindow);
 		statusbar->setObjectName(QString::fromUtf8("statusbar"));
 		statusbar->showMessage("Initializing...", 5000);
-		statusbar->addPermanentWidget(exeTimer, 0);
 
 		// set status bar
 		MainWindow->setStatusBar(statusbar);
 
 		/*---------------------------------------------------*/
+		/*--------------------- Layout  ---------------------*/
 		/*---------------------------------------------------*/
-		/*---------------------------------------------------*/
+        mainLayout = new QVBoxLayout(MainWindow);
+        mainLayout->setContentsMargins(0, 0, 0, 0);
+        mainLayout->setSpacing(0);
+        mainLayout->addWidget(showIntervalTimer, 0, Qt::AlignCenter);
 
 		// Set final layout on central UI widget
-		//centralwidget->setLayout(MainSplitLayout);
+		centralwidget->setLayout(mainLayout);
 		centralwidget->isWindow();
 
 	}    // setupUi

@@ -20,7 +20,15 @@ public:
     GUI_Style(QObject *parent);
 
     /* Variable declarations */
-    QString mainWindow;
+    QString mainWindowGrey;
+    QString mainWindowRest;
+    QString mainWindowRoll;
+    QString mainWindowIdle;
+    QString mainTimer;
+    QString intervalTimerBtn;
+    QString situationalBtn;
+    QString buttonPressed;
+    QString statusBar;
 
 };
 

@@ -86,14 +86,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="IntervalTimer.qrc" />
-    <QtMoc Include="IntervalTimer.h" />
+    <ClCompile Include="situationalPage.cpp" />
+    <ClCompile Include="intervalTimerPage.cpp" />
+    <QtMoc Include="MainWindow.h" />
     <ClCompile Include="GUI_Stylesheet.cpp" />
-    <ClCompile Include="IntervalTimer.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUI_Stylesheet.h" />
+    <ClInclude Include="situationalPage.h" />
+    <QtMoc Include="intervalTimerPage.h" />
     <ClInclude Include="ui_MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
