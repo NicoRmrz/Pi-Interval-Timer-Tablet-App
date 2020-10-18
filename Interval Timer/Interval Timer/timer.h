@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QtCore/QTimer>
 #include <QTime>
-#include <QElapsedTimer> 
 
 /* Class: timerReading
 
@@ -18,7 +17,6 @@ public:
 	~timerReading() {};
 	QTimer      *myTimer;
 	QTime       *time;
-	QElapsedTimer *eTimer;
 
 	void setClock(int sec, int min);
 	void startTimer();

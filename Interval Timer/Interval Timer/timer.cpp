@@ -24,7 +24,6 @@ timerReading::timerReading(QObject *parent)
 	timeSet = 0;
 	isRunning = false;
 	myTimer = new QTimer();
-	eTimer = new QElapsedTimer();
 }
 
 /* Function: startTimer
@@ -43,7 +42,6 @@ void timerReading::startTimer()
 	// send timer to display
 	connect(myTimer, &QTimer::timeout, this, &timerReading::sendTimer);
 	myTimer->start(1000);
-	eTimer->start();
 }
 
 /* Define: getTime

@@ -1,7 +1,12 @@
 
 /* File: intervalTimerPage.cpp
 
-    Contains functions for IntervalTimer
+    Contains functions for IntervalTimer.
+
+    State       Description
+    0           Idle State
+    1           Timer Running
+    2           Timer Paused
 
     Author: Nico Ramirez
 */
@@ -44,15 +49,14 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     startBtn->setObjectName(QString::fromUtf8("startBtn"));
     startBtn->setMinimumSize(100, 90);
     startBtn->setMaximumSize(100, 90);
-    startBtn->setText("START");
-    startBtn->setEnabled(true);
+    startBtn->setText("START/STOP");
 
-    pauseResumeBtn = new QPushButton(parent);
-    pauseResumeBtn->setObjectName(QString::fromUtf8("pauseResumeBtn"));
-    pauseResumeBtn->setMinimumSize(100, 90);
-    pauseResumeBtn->setMaximumSize(100, 90);
-    pauseResumeBtn->setText("Pause/Resume");
-    pauseResumeBtn->setEnabled(false);
+    restartBtn = new QPushButton(parent);
+    restartBtn->setObjectName(QString::fromUtf8("restartBtn"));
+    restartBtn->setMinimumSize(100, 90);
+    restartBtn->setMaximumSize(100, 90);
+    restartBtn->setText("RESTART");
+    restartBtn->setEnabled(false);
 
     backBtn = new QPushButton(parent);
     backBtn->setObjectName(QString::fromUtf8("back"));
@@ -67,21 +71,21 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     mainVLayout->addWidget(backBtn, 0, Qt::AlignLeft);
     mainVLayout->addWidget(exeTimer, 0, Qt::AlignCenter);
     mainVLayout->addWidget(startBtn, 0, Qt::AlignCenter);
-    mainVLayout->addWidget(pauseResumeBtn, 0, Qt::AlignCenter);
+    mainVLayout->addWidget(restartBtn, 0, Qt::AlignCenter);
 
     setLayout(mainVLayout);
 
     // connect signals
     connect(startBtn, &QPushButton::pressed, this, &IntervalTimer::startButton_Pressed);
     connect(startBtn, &QPushButton::released, this, &IntervalTimer::startButton_Released);
-    connect(pauseResumeBtn, &QPushButton::pressed, this, &IntervalTimer::pauseResumeButton_Pressed);
-    connect(pauseResumeBtn, &QPushButton::released, this, &IntervalTimer::pauseResumeButton_Released);
+    connect(restartBtn, &QPushButton::pressed, this, &IntervalTimer::restartButton_Pressed);
+    connect(restartBtn, &QPushButton::released, this, &IntervalTimer::restartButton_Released);
 
     connect(backBtn, &QPushButton::pressed, this, &IntervalTimer::backButton_Pressed);
     connect(backBtn, &QPushButton::released, this, &IntervalTimer::backButton_Released);
 
-	connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
-	connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
+    connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
+    connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
     // set stylesheet for each object
     exeTimer->setStyleSheet(GUI_Style.mainTimer);
@@ -93,19 +97,19 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     Change Color
 
  */
-void IntervalTimer::changeColor(int state)
+void IntervalTimer::changeColor(int colorState)
 {
     if (isRunning)
     {
-        if (state == 0) // Rest
+        if (colorState == 0) // Rest
         {
             setStyleSheet(GUI_Style.mainWindowRest);
-			emit intervalState(state);
+            emit intervalState(state);
         }
         else // Rolling
         {
             setStyleSheet(GUI_Style.mainWindowRoll);
-			emit intervalState(state);
+            emit intervalState(state);
         }
     }
 }
@@ -140,43 +144,62 @@ void IntervalTimer::startButton_Pressed()
 */
 void IntervalTimer::startButton_Released()
 {
-	currTimer->startTimer();  // start timer
-    startBtn->setEnabled(false);
-    pauseResumeBtn->setEnabled(true);
-    isRunning = true;
+    if (state == 0) // IDE - Start Timer
+    {
+        currTimer->startTimer();  
+        isRunning = true;
+        state = 1;
+        restartBtn->setEnabled(true);
+
+    }
+    else if (state == 1) // RUNNING - Press to Pause
+    {
+        // get timer time
+        QString currTime = currTimer->getTime();
+        QStringList  timeSplit = currTime.split(":");
+
+        // save time to class variables
+        pauseSec = timeSplit[1].toDouble() + 1;
+        pauseMin = timeSplit[0].toDouble();
+
+        // timer paused and next click transistion to state 2
+        isRunning = false;
+        state = 2;
+    }
+    else if (state == 2) // PAUSED - Press to resume
+    {
+        currTimer->setClock(pauseSec, pauseMin);
+        isRunning = true;
+        state = 1;
+    }
+
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 }
 
-/* Function: pauseResumeButton_Pressed
+/* Function: restartButton_Pressed
 
-        Slot to handle pause/resume timer button being pressed
+        Slot to handle restarting the timer button being pressed
 */
-void IntervalTimer::pauseResumeButton_Pressed()
+void IntervalTimer::restartButton_Pressed()
 {
     // color button grey indicating pressed button
    // ui->startBtn->setStyleSheet(GUI_Style.buttonPressed);
 }
 
-/* Function: pauseResumeButton_Released
+/* Function: restartButton_Released
 
-        Slot to handle pause/resume timer button is released.
+        Slot to handle restarting the timer button is released.
 */
-void IntervalTimer::pauseResumeButton_Released()
+void IntervalTimer::restartButton_Released()
 {
-    if (isRunning) // Timer running click to pause
+    if (state == 1)
     {
-		QString currTime = currTimer->getTime();
-		QStringList  timeSplit = currTime.split(":");
 
-        pauseSec = timeSplit[1].toDouble() + 1;
-        pauseMin = timeSplit[0].toDouble();
-        isRunning = false;
     }
-    else // Timer Paused Click to resume timer
+     else if (state == 2)
     {
-		currTimer->setClock(pauseSec, pauseMin);
-        isRunning = true;
+ 
     }
 
    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);

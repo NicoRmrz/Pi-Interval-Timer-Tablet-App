@@ -1,6 +1,11 @@
 #include "MainWindow.h"
 #include "GUI_Stylesheet.h"
 
+
+QString appVersion = "1.0";
+QString windowtitle = "BJJ Interval Timer v" + appVersion;
+          //Path to icon image from resource file
+
 /* Define: IntervalTimer
 
     IntervalTimer app Main Window
@@ -12,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	// call out GUI objects created in ui_MainWindow.h
 	ui->setupUi(this);
+    setWindowTitle(windowtitle);
 
     // style all objects
     setStyleSheet(GUI_Style.mainWindowGrey);
@@ -97,7 +103,7 @@ void MainWindow::updateTimerState(int state)
 void MainWindow::situationalButton_Pressed()
 {
     // color button grey indicating pressed button
-    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.buttonPressed);
+    ui->maingPage->situationalBtn->setStyleSheet(GUI_Style.buttonPressed);
 }
 
 /* Function: situationalButton_Released
@@ -108,7 +114,7 @@ void MainWindow::situationalButton_Released()
 {
     setStyleSheet(GUI_Style.mainWindowIdle);
 
-    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
+    ui->maingPage->situationalBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 
     showSituationalGame();
 }

@@ -26,10 +26,11 @@ public:
     QLabel      *exeTimer;
 	timerReading      *currTimer;
     QPushButton *startBtn;
-    QPushButton *pauseResumeBtn;
+    QPushButton *restartBtn;
     QPushButton *backBtn;
     QVBoxLayout *mainVLayout;
     bool isRunning;
+    int state = 0;
 
 signals:
     void intervalState(int state);
@@ -40,8 +41,8 @@ public slots:
     void changeColor(int state);
     void startButton_Pressed();
     void startButton_Released();
-    void pauseResumeButton_Pressed();
-    void pauseResumeButton_Released();
+    void restartButton_Pressed();
+    void restartButton_Released();
     void backButton_Pressed();
     void backButton_Released();
 

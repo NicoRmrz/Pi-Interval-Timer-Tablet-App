@@ -9,6 +9,9 @@
 
 #include <QDebug>
 
+QString situationalLogo = ":/Interval Timer/icons/situationalButton.PNG";            //Path to icon image from resource file
+QString intervalTimerIcon = ":/Interval Timer/icons/intervalTimer.png";
+
 using namespace std;
 
 /* Constructor: mainScreen
@@ -35,7 +38,8 @@ mainScreen::mainScreen(QWidget *parent) :
     situationalBtn->setObjectName(QString::fromUtf8("showSituationalPage"));
     situationalBtn->setMinimumSize(200, 90);
     situationalBtn->setMaximumSize(200, 90);
-    situationalBtn->setText("SITUATIONAL");
+    situationalBtn->setIcon(QIcon(situationalLogo));
+    situationalBtn->setIconSize(QSize(90, 100));
 
     mainLayout = new QVBoxLayout();
     mainLayout->setContentsMargins(0, 0, 0, 0);
