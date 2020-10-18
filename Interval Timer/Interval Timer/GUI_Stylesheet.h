@@ -25,7 +25,9 @@ public:
     QString mainWindowRoll;
     QString mainWindowIdle;
     QString mainTimer;
-    QString intervalTimerBtn;
+    QString iconBtn;
+    QString iconBtn1;
+    QString iconBtnPressed;
     QString situationalBtn;
     QString buttonPressed;
     QString statusBar;

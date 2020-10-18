@@ -18,10 +18,7 @@ public:
     situationalGame *situationalWidget;
 
 public slots:
-    void intervalTimerButton_Pressed();
-    void intervalTimerButton_Released();
-    void situationalButton_Pressed();
-    void situationalButton_Released();
+
     void sendStatusBar(QString message, int time);
     void returnToMain(QString page);
 

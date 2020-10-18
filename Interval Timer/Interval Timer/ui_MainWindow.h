@@ -25,7 +25,7 @@ public:
 	QWidget     *centralwidget;
 	QStatusBar  *statusbar;
 	QVBoxLayout *mainLayout;
-    mainScreen  *maingPage;
+    mainScreen  *mainPage;
 
 	/* Function: setupUi
 
@@ -40,7 +40,7 @@ public:
         MainWindow->setFixedSize(800, 480);
 
         // front page
-        maingPage = new mainScreen(MainWindow);
+		mainPage = new mainScreen(MainWindow);
 
 		// status bar
 		statusbar = new QStatusBar(MainWindow);
@@ -51,7 +51,7 @@ public:
 		MainWindow->setStatusBar(statusbar);
 
         mainLayout = new QVBoxLayout();
-        mainLayout->addWidget(maingPage, 0, Qt::AlignCenter);
+        mainLayout->addWidget(mainPage, 0, Qt::AlignCenter);
 
 		// Set final layout on central UI widget
 		centralwidget->setLayout(mainLayout);

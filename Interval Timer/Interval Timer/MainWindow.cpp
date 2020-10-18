@@ -23,35 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     setStyleSheet(GUI_Style.mainWindowGrey);
     ui->statusbar->setStyleSheet(GUI_Style.statusBar);
 
-
     // connect signals 
-    connect(ui->maingPage->showIntervalTimer, &QPushButton::pressed, this, &MainWindow::intervalTimerButton_Pressed);
-    connect(ui->maingPage->showIntervalTimer, &QPushButton::released, this, &MainWindow::intervalTimerButton_Released);
-    connect(ui->maingPage->situationalBtn, &QPushButton::pressed, this, &MainWindow::situationalButton_Pressed);
-    connect(ui->maingPage->situationalBtn, &QPushButton::released, this, &MainWindow::situationalButton_Released);
-}
-
-/* Function: intervalTimerButton_Pressed
-
-        Slot to handle interval timer button being pressed
-*/
-void MainWindow::intervalTimerButton_Pressed()
-{
-    // color button grey indicating pressed button
-    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.buttonPressed);
-}
-
-/* Function: intervalTimerButton_Released
-
-        Slot to handle interval timer button is released. 
-*/
-void MainWindow::intervalTimerButton_Released()
-{
-    setStyleSheet(GUI_Style.mainWindowIdle);
-
-    ui->maingPage->showIntervalTimer->setStyleSheet(GUI_Style.intervalTimerBtn);
-
-    showIntervalTimer();
+	connect(ui->mainPage, &mainScreen::switchToIntervalPage, this, &MainWindow::showIntervalTimer);
+	connect(ui->mainPage, &mainScreen::switchToSituationalPage, this, &MainWindow::showSituationalGame);
 }
 
 /* Define: showIntervalTimer
@@ -61,10 +35,12 @@ void MainWindow::intervalTimerButton_Released()
  */
 void MainWindow::showIntervalTimer()
 {
+	setStyleSheet(GUI_Style.mainWindowIdle);
+
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
-    delete (ui->maingPage);
-    ui->maingPage = NULL;
+    delete (ui->mainPage);
+    ui->mainPage = NULL;
 
     IntervalTimerWidget = new IntervalTimer(this);
 
@@ -96,30 +72,6 @@ void MainWindow::updateTimerState(int state)
     }
 }
 
-/* Function: situationalButton_Pressed
-
-        Slot to handle situational button being pressed
-*/
-void MainWindow::situationalButton_Pressed()
-{
-    // color button grey indicating pressed button
-    ui->maingPage->situationalBtn->setStyleSheet(GUI_Style.buttonPressed);
-}
-
-/* Function: situationalButton_Released
-
-        Slot to handle situational button is released.
-*/
-void MainWindow::situationalButton_Released()
-{
-    setStyleSheet(GUI_Style.mainWindowIdle);
-
-    ui->maingPage->situationalBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
-
-    showSituationalGame();
-}
-
-
 /* Define: showSituationalGame
 
         Show Situational app on Main Window
@@ -127,10 +79,12 @@ void MainWindow::situationalButton_Released()
  */
 void MainWindow::showSituationalGame()
 {
+	setStyleSheet(GUI_Style.mainWindowIdle);
+
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
-    delete (ui->maingPage);
-    ui->maingPage = NULL;
+    delete (ui->mainPage);
+    ui->mainPage = NULL;
 
     situationalWidget = new situationalGame(this);
 
@@ -161,15 +115,13 @@ void MainWindow::returnToMain(QString page)
     }
 
     // revert to main page
-    ui->maingPage = new mainScreen(this);
-    ui->mainLayout->addWidget(ui->maingPage);
+    ui->mainPage = new mainScreen(this);
+    ui->mainLayout->addWidget(ui->mainPage);
     setStyleSheet(GUI_Style.mainWindowGrey);
 
     // connect signals 
-    connect(ui->maingPage->showIntervalTimer, &QPushButton::pressed, this, &MainWindow::intervalTimerButton_Pressed);
-    connect(ui->maingPage->showIntervalTimer, &QPushButton::released, this, &MainWindow::intervalTimerButton_Released);
-    connect(ui->maingPage->situationalBtn, &QPushButton::pressed, this, &MainWindow::situationalButton_Pressed);
-    connect(ui->maingPage->situationalBtn, &QPushButton::released, this, &MainWindow::situationalButton_Released);
+	connect(ui->mainPage, &mainScreen::switchToIntervalPage, this, &MainWindow::showIntervalTimer);
+	connect(ui->mainPage, &mainScreen::switchToSituationalPage, this, &MainWindow::showSituationalGame);
 }
 
 /* Function: sendStatusBar

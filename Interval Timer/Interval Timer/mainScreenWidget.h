@@ -1,11 +1,10 @@
 #pragma once
 #include <QWidget>
-
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
-#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
 
 #include "GUI_Stylesheet.h"
@@ -22,9 +21,17 @@ public:
     mainScreen(QWidget *parent);
     ~mainScreen() {};
     GUI_Style    GUI_Style;
-    QVBoxLayout *mainLayout;
+    QHBoxLayout *mainLayout;
     QPushButton *showIntervalTimer;
     QPushButton *situationalBtn;
 
+signals:
+	void switchToIntervalPage();
+	void switchToSituationalPage();
 
+public slots:
+	void intervalTimerButton_Pressed();
+	void intervalTimerButton_Released();
+	void situationalButton_Pressed();
+	void situationalButton_Released();
 };

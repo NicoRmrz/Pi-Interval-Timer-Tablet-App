@@ -1,5 +1,8 @@
-﻿<RCC>
-    <qresource prefix="/new/prefix1">
-
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/backButton.png</file>
+        <file>icons/situationalButton.PNG</file>
+        <file>icons/intervalTimer.png</file>
+        <file>icons/closeTab.png</file>
     </qresource>
 </RCC>
