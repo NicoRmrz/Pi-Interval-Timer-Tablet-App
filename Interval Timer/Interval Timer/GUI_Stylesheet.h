@@ -28,7 +28,7 @@ public:
     QString iconBtn;
     QString iconBtn1;
     QString iconBtnPressed;
-    QString situationalBtn;
+    QString iconOnlyButton;
     QString buttonPressed;
     QString statusBar;
 

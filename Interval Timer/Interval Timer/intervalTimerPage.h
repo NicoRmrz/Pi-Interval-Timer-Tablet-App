@@ -24,11 +24,14 @@ public:
     ~IntervalTimer() {};
     GUI_Style    GUI_Style;
     QLabel      *exeTimer;
-	timerReading      *currTimer;
+	timerReading *currTimer;
     QPushButton *startBtn;
     QPushButton *restartBtn;
     QPushButton *backBtn;
+    QPushButton *editBtn;
     QVBoxLayout *mainVLayout;
+    QHBoxLayout *controlBtnLayout;
+
     bool isRunning;
     int state = 0;
 
@@ -44,7 +47,9 @@ public slots:
     void restartButton_Pressed();
     void restartButton_Released();
     void backButton_Pressed();
-    void backButton_Released();
+    void backButton_Released();    
+	void editButton_Pressed();
+    void editButton_Released();
 
 private:
     int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;

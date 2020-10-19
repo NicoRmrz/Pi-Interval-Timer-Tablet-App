@@ -21,6 +21,7 @@
 #define BLUEBACKGROUND  QString("#6593F5")
 #define ICONPRESSED		QString("rgba(72,146,73,240)")
 
+#define ICONBUTTON      QString("rgba(0,0,0,0)")
 #define TABHOVER        QString("rgba(38,79,120,255)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
@@ -52,26 +53,23 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
 					//"border:none; "
 					"border-style: outset; "
 					"border-width: 20px; "
-					"border-radius: 70px; "
+					"border-radius: 60px; "
 					"border-color:  " + TABHOVER + ";";
 
 	iconBtn1 = "background-color: " + TABHOVER + ";"
 				"border-style: outset; "
 				"border-width: 20px; "
-				"border-radius: 70px; "
+				"border-radius: 60px; "
 				"border-color:  " + TABHOVER + ";";
 
 	iconBtnPressed = "background-color: " + ICONPRESSED + "; "
 					"border-style: outset; "
 					"border-width: 20px; "
 					"border-color: " + ICONPRESSED + ";"
-					"border-radius: 70px";
+					"border-radius: 60px";
 
-    situationalBtn = "font: bold 12px Verdana; "
-                        //"background-color:  #6497b1; "
-                         "background-color: #00A86B;"
-                        //"background-color: #FADA5E;"
-                        "border-radius: 4px";
+    iconOnlyButton = "background-color: " + ICONBUTTON + "; "
+					"border: none; ";
 
     buttonPressed = "font: bold 20px Verdana; "
                         "background-color: rgb(100,100,100); "

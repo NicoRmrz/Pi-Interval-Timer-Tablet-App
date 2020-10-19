@@ -1,10 +1,9 @@
 #include "MainWindow.h"
 #include "GUI_Stylesheet.h"
 
-
+//Path to icon image from resource file
 QString appVersion = "1.0";
 QString windowtitle = "BJJ Interval Timer v" + appVersion;
-          //Path to icon image from resource file
 
 /* Define: IntervalTimer
 

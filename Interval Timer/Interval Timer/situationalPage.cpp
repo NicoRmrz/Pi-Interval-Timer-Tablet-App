@@ -14,6 +14,8 @@ using namespace std;
 situationalGame::situationalGame(QWidget *parent) :
     GUI_Style(parent)
 {
+	setFixedSize(QSize(parent->size()));
+
     // set layout
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);

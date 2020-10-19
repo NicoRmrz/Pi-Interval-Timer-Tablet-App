@@ -5,6 +5,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
 
 #include "GUI_Stylesheet.h"
@@ -21,9 +22,11 @@ public:
     mainScreen(QWidget *parent);
     ~mainScreen() {};
     GUI_Style    GUI_Style;
-    QHBoxLayout *mainLayout;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *buttonLayout;
     QPushButton *showIntervalTimer;
     QPushButton *situationalBtn;
+    QPushButton *exitButton;
 
 signals:
 	void switchToIntervalPage();
@@ -34,4 +37,7 @@ public slots:
 	void intervalTimerButton_Released();
 	void situationalButton_Pressed();
 	void situationalButton_Released();
+
+	void exitButton_Pressed();
+
 };

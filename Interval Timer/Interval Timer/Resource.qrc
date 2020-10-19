@@ -1,8 +1,14 @@
 <RCC>
     <qresource prefix="/images">
-        <file>icons/backButton.png</file>
         <file>icons/situationalButton.PNG</file>
         <file>icons/intervalTimer.png</file>
-        <file>icons/closeTab.png</file>
+        <file>icons/exit.png</file>
+        <file>icons/intervalTimer1.png</file>
+        <file>icons/situationalButtonPressed.PNG</file>
+        <file>icons/back.png</file>
+        <file>icons/backPressed.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/play.png</file>
+        <file>icons/restart.png</file>
     </qresource>
 </RCC>
