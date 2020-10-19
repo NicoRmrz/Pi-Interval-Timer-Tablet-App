@@ -15,13 +15,16 @@
 #include <QDebug>
 
 #define ICONSIZE 100
-#define BACKICONSIZE 75
+#define BACKICONSIZE 50
 
 QString backIcon = ":/images/icons/back.png";
 QString backIconPressed = ":/images/icons/backPressed.png";
 QString playIcon = ":/images/icons/play.png";
 QString pauseIcon = ":/images/icons/pause.png";
 QString restartIcon = ":/images/icons/restart.png";
+QString restartPressedIcon = ":/images/icons/restartPressed.png";
+QString editIcon = ":/images/icons/edit.png";
+QString editPressedIcon = ":/images/icons/editPressed.png";
 
 using namespace std;
 
@@ -78,6 +81,13 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	backBtn->setIcon(QIcon(backIcon));
 	backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
 
+	editBtn = new QPushButton(parent);
+	editBtn->setObjectName(QString::fromUtf8("edit"));
+	editBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+	editBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
+	editBtn->setIcon(QIcon(editIcon));
+	editBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+
     // set layout
 	controlBtnLayout = new QHBoxLayout();
 	controlBtnLayout->setContentsMargins(0, 0, 0, 20);
@@ -85,10 +95,16 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	controlBtnLayout->addWidget(restartBtn, 0, Qt::AlignCenter);
 	controlBtnLayout->addWidget(startBtn, 0, Qt::AlignCenter);
 
+	topBtnLayout = new QHBoxLayout();
+	topBtnLayout->setContentsMargins(0, 0, 20, 0);
+	topBtnLayout->setSpacing(0);
+	topBtnLayout->addWidget(backBtn, 0, Qt::AlignLeft);
+	topBtnLayout->addWidget(editBtn, 0, Qt::AlignRight);
+
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
     mainVLayout->setSpacing(0);
-    mainVLayout->addWidget(backBtn, 0, Qt::AlignLeft);
+    mainVLayout->addLayout(topBtnLayout);
     mainVLayout->addWidget(exeTimer, 0, Qt::AlignCenter);
     mainVLayout->addLayout(controlBtnLayout);
 
@@ -99,9 +115,10 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(startBtn, &QPushButton::released, this, &IntervalTimer::startButton_Released);
     connect(restartBtn, &QPushButton::pressed, this, &IntervalTimer::restartButton_Pressed);
     connect(restartBtn, &QPushButton::released, this, &IntervalTimer::restartButton_Released);
-
     connect(backBtn, &QPushButton::pressed, this, &IntervalTimer::backButton_Pressed);
     connect(backBtn, &QPushButton::released, this, &IntervalTimer::backButton_Released);
+    connect(editBtn, &QPushButton::pressed, this, &IntervalTimer::editButton_Pressed);
+    connect(editBtn, &QPushButton::released, this, &IntervalTimer::editButton_Released);
 
     connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
     connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
@@ -110,9 +127,9 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	setStyleSheet(GUI_Style.mainWindowIdle);
     exeTimer->setStyleSheet(GUI_Style.mainTimer);
 	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
+	editBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	restartBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	startBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-
 }
 
 /* Define: changeColor
@@ -157,7 +174,6 @@ void IntervalTimer::updateTimerDisplay()
 */
 void IntervalTimer::startButton_Pressed()
 {
-    // color button grey indicating pressed button
 	startBtn->setIcon(QIcon(pauseIcon));
 }
 
@@ -198,9 +214,6 @@ void IntervalTimer::startButton_Released()
         isRunning = true;
         state = 1;
     }
-
-
-   // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
 }
 
 /* Function: restartButton_Pressed
@@ -209,8 +222,7 @@ void IntervalTimer::startButton_Released()
 */
 void IntervalTimer::restartButton_Pressed()
 {
-    // color button grey indicating pressed button
-   // ui->startBtn->setStyleSheet(GUI_Style.buttonPressed);
+	restartBtn->setIcon(QIcon(restartPressedIcon));
 }
 
 /* Function: restartButton_Released
@@ -219,6 +231,7 @@ void IntervalTimer::restartButton_Pressed()
 */
 void IntervalTimer::restartButton_Released()
 {
+
     if (state == 1)
     {
 
@@ -228,7 +241,7 @@ void IntervalTimer::restartButton_Released()
  
     }
 
-   // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
+	restartBtn->setIcon(QIcon(restartIcon));
 }
 
 /* Function: backButton_Pressed
@@ -239,9 +252,7 @@ void IntervalTimer::backButton_Pressed()
 {
     // color button green indicating pressed button
 	backBtn->setIcon(QIcon(backIconPressed));
-
 }
-
 /* Function: backButton_Released
 
         Slot to handle back button is released.
@@ -249,8 +260,23 @@ void IntervalTimer::backButton_Pressed()
 void IntervalTimer::backButton_Released()
 {
 	backBtn->setIcon(QIcon(backIcon));
-
     emit returnPage("timer");
-    // ui->startBtn->setStyleSheet(GUI_Style.intervalTimerBtn);
+}
 
+/* Function: editButton_Pressed
+
+        Slot to handle edit being pressed
+*/
+void IntervalTimer::editButton_Pressed()
+{
+	editBtn->setIcon(QIcon(editPressedIcon));
+
+}
+/* Function: editButton_Released
+
+        Slot to handle edit button is released.
+*/
+void IntervalTimer::editButton_Released()
+{
+	editBtn->setIcon(QIcon(editIcon));
 }

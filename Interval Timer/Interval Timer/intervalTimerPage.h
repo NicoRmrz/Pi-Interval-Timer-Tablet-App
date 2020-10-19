@@ -31,6 +31,7 @@ public:
     QPushButton *editBtn;
     QVBoxLayout *mainVLayout;
     QHBoxLayout *controlBtnLayout;
+    QHBoxLayout *topBtnLayout;
 
     bool isRunning;
     int state = 0;

@@ -10,5 +10,8 @@
         <file>icons/pause.png</file>
         <file>icons/play.png</file>
         <file>icons/restart.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/restartPressed.png</file>
+        <file>icons/editPressed.png</file>
     </qresource>
 </RCC>
