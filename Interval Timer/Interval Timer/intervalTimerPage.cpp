@@ -224,6 +224,26 @@ void IntervalTimer::restartButton_Pressed()
 */
 void IntervalTimer::restartButton_Released()
 {
+	if (currTimer->isRunning == true)
+	{
+		pauseSec = currTimer->sec;
+		pauseMin = currTimer->min;
+
+		QString second = QString::number(currTimer->sec);
+		QString minute = QString::number(currTimer->min);
+
+		if (currTimer->sec < 10)
+		{
+			second = "0" + second;
+		}
+		if (currTimer->min < 10)
+		{
+			minute = "0" + minute;
+		}
+
+		exeTimer->setText(minute + ":" + second);
+	}
+
     currTimer->restartTimer();
 	restartBtn->setIcon(QIcon(restartIcon));
 }
@@ -262,5 +282,7 @@ void IntervalTimer::editButton_Pressed()
 */
 void IntervalTimer::editButton_Released()
 {
+
+
 	editBtn->setIcon(QIcon(editIcon));
 }

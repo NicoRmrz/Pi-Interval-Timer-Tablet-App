@@ -4,6 +4,13 @@
 #include <QtCore/QTimer>
 #include <QTime>
 
+#define STARTUP_TIMEOUT 5
+#define DEFAULT_ROLL_SECOND 10
+#define DEFAULT_ROLL_MINUTE 0
+#define DEFAULT_REST_SECOND 5
+#define DEFAULT_REST_MINUTE 0
+
+
 /* Class: timerReading
 
 	QWidget widget to hold all objects needed for IntervalTimer implementation
@@ -22,8 +29,7 @@ public:
 	void clearTimer();
 	void restartTimer();
 	QString getTime();
-	void sendTimer();
-	int state, cnt, timeSet;
+	int state, cnt, timeSet, sec, min;
 	bool isRunning;
 	int convertToMS(int sec, int min);
 	void setRollTime(int sec, int min);

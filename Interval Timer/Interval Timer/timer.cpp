@@ -8,7 +8,7 @@
 #include "timer.h"
 
 using namespace std;
-#define STARTUP_TIMEOUT 5
+
 
 /* Constructor: timerReading
 
@@ -23,13 +23,15 @@ timerReading::timerReading(QObject *parent)
 	state = 0;
 	cnt = 0;
 	timeSet = 0;
+	sec = 0;
+	min = 0;
 	isRunning = false;
 	myTimer = new QTimer();
 	currState = 0;  // current timer state
-	rollSec = 10;
-	rollMin = 0;
-	restSec = 6;
-	restMin = 0;
+	rollSec = DEFAULT_ROLL_SECOND;
+	rollMin = DEFAULT_ROLL_MINUTE;
+	restSec = DEFAULT_REST_SECOND;
+	restMin = DEFAULT_REST_MINUTE;
 }
 
 /* Function: startTimer
@@ -51,7 +53,7 @@ void timerReading::startTimer()
 
 /* Define: getTime
 
-		Update time on timer
+		Update current time for timer
 
 	Return:
 
@@ -75,15 +77,17 @@ QString timerReading::getTime()
 
 /* Function: setClock
 
-		Slot to set Clock
+		Slot to reset clock and input new start time
 */
-void timerReading::setClock(int sec, int min)
+void timerReading::setClock(int secIn, int minIn)
 {
+	sec = secIn;
+	min = minIn;
 	cnt = 0;
 	delete time;
 	time = NULL;
-	time = new QTime(0, min, sec);
-	timeSet = convertToMS(sec, min);
+	time = new QTime(0, minIn, secIn);
+	timeSet = convertToMS(secIn, minIn);
 }
 
 /* Function: convertToMS
@@ -101,6 +105,8 @@ int timerReading::convertToMS(int sec, int min)
  */
 void timerReading::clearTimer()
 {
+	isRunning = true;
+
 	if (state == 0) // Rest
 	{
 		currState = 0;
@@ -123,7 +129,7 @@ void timerReading::clearTimer()
  */
 void timerReading::restartTimer()
 {
-	if 	(isRunning == false)
+	if 	(isRunning == true)
 	{
 		if (currState == 0) // Idle
 		{
