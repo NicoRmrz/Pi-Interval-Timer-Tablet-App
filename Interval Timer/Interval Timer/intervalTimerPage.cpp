@@ -128,7 +128,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 
 /* Define: changeColor
 
-    Change Color
+    Receive timer rest/rolling state to Change Color and save state
 
  */
 void IntervalTimer::changeColor(int colorState)

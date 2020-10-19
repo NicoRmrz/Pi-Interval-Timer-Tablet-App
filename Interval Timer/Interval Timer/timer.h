@@ -30,9 +30,8 @@ public:
 	void setRestTime(int sec, int min);
 
 signals:
-	void showTime();
 	void updateColor(int state);
 
 private:
-	int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;
+	int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin, currState;
 };

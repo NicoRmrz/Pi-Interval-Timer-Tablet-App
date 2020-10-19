@@ -25,7 +25,7 @@ timerReading::timerReading(QObject *parent)
 	timeSet = 0;
 	isRunning = false;
 	myTimer = new QTimer();
-
+	currState = 0;  // current timer state
 	rollSec = 10;
 	rollMin = 0;
 	restSec = 6;
@@ -46,7 +46,6 @@ void timerReading::startTimer()
 	timeSet = convertToMS(STARTUP_TIMEOUT, 0);
 
 	// send timer to display
-	connect(myTimer, &QTimer::timeout, this, &timerReading::sendTimer);
 	myTimer->start(1000);
 }
 
@@ -72,15 +71,6 @@ QString timerReading::getTime()
 	}
 
 	return ("00:00");
-}
-
-/* Define: sendTimer
-
-	Send TImer to be updated
- */
-void timerReading::sendTimer()
-{
-	emit showTime();
 }
 
 /* Function: setClock
@@ -113,13 +103,15 @@ void timerReading::clearTimer()
 {
 	if (state == 0) // Rest
 	{
-		emit updateColor(0);
+		currState = 0;
+		emit updateColor(currState);
 		setClock(restSec, restMin);
 		state = 1; // change state when done
 	}
 	else // Rolling
 	{
-		emit updateColor(1);
+		currState = 1;
+		emit updateColor(currState);
 		setClock(rollSec, rollMin);
 		state = 0; // change state when done
 	}
@@ -131,17 +123,16 @@ void timerReading::clearTimer()
  */
 void timerReading::restartTimer()
 {
-	if (state == 0) // Rest
+	if 	(isRunning == false)
 	{
-		setClock(restSec, restMin);
-	}
-	else if (state == 1) // Rolling
-	{
-		setClock(rollSec, rollMin);
-	}
-	else
-	{
-
+		if (currState == 0) // Idle
+		{
+			setClock(restSec, restMin);
+		}
+		else if (currState == 1) // Rolling
+		{
+			setClock(rollSec, rollMin);
+		}
 	}
 }
 
