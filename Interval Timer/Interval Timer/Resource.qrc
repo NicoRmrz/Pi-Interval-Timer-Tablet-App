@@ -13,5 +13,6 @@
         <file>icons/edit.png</file>
         <file>icons/restartPressed.png</file>
         <file>icons/editPressed.png</file>
+        <file>icons/specific/bjj_stand_up.PNG</file>
     </qresource>
 </RCC>

@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="editPopUp.cpp" />
     <ClCompile Include="situationalPage.cpp" />
     <ClCompile Include="intervalTimerPage.cpp" />
     <ClCompile Include="mainScreenWidget.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="editPopUp.h" />
     <ClInclude Include="GUI_Stylesheet.h" />
     <QtMoc Include="situationalPage.h" />
     <QtMoc Include="intervalTimerPage.h" />

@@ -10,6 +10,10 @@
 
 #include "GUI_Stylesheet.h"
 #include "timer.h"
+#include "editPopUp.h"
+
+#define ICONSIZE 100
+#define BACKICONSIZE 50
 
 /* Class: IntervalTimer
 
@@ -32,6 +36,7 @@ public:
     QVBoxLayout *mainVLayout;
     QHBoxLayout *controlBtnLayout;
     QHBoxLayout *topBtnLayout;
+	//editWindow	*editPopup;
 
     bool isRunning;
     int state = 0;

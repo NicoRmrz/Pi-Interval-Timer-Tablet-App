@@ -10,7 +10,6 @@
 #define DEFAULT_REST_SECOND 5
 #define DEFAULT_REST_MINUTE 0
 
-
 /* Class: timerReading
 
 	QWidget widget to hold all objects needed for IntervalTimer implementation

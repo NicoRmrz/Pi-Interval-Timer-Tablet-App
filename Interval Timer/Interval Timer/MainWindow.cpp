@@ -1,10 +1,6 @@
 #include "MainWindow.h"
 #include "GUI_Stylesheet.h"
 
-//Path to icon image from resource file
-QString appVersion = "1.0";
-QString windowtitle = "BJJ Interval Timer v" + appVersion;
-
 /* Define: IntervalTimer
 
     IntervalTimer app Main Window
@@ -16,7 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	// call out GUI objects created in ui_MainWindow.h
 	ui->setupUi(this);
-    setWindowTitle(windowtitle);
+    setWindowTitle(WINDOW_TITLE);
+    setWindowIcon(QIcon(MAIN_ICON));
 
     // style all objects
     setStyleSheet(GUI_Style.mainWindowGrey);

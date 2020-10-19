@@ -6,6 +6,10 @@
 #include "intervalTimerPage.h"
 #include "situationalPage.h"
 
+//Path to icon image from resource file
+#define APP_VERSION QString("1.0")
+#define WINDOW_TITLE QString("BJJ Interval Timer v" + APP_VERSION)
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

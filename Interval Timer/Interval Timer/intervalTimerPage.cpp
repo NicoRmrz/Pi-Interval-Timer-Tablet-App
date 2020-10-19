@@ -13,9 +13,7 @@
 #include "intervalTimerPage.h"
 
 #include <QDebug>
-
-#define ICONSIZE 100
-#define BACKICONSIZE 50
+#include <QDialog>
 
 QString backIcon = ":/images/icons/back.png";
 QString backIconPressed = ":/images/icons/backPressed.png";
@@ -44,7 +42,9 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     pauseSec = 0;
     pauseMin = 0;
 
+	// Instance modules
 	currTimer = new timerReading(this);
+	//editPopup = new editWindow(*dialog);
 
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;
@@ -282,7 +282,9 @@ void IntervalTimer::editButton_Pressed()
 */
 void IntervalTimer::editButton_Released()
 {
+	editWindow *editPopup = new editWindow(0);
 
+	editPopup->exec();
 
 	editBtn->setIcon(QIcon(editIcon));
 }
