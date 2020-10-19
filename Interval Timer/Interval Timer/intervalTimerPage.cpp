@@ -38,14 +38,9 @@ using namespace std;
 */
 IntervalTimer::IntervalTimer(QWidget *parent) :
     GUI_Style(parent)
-
 {
 	setFixedSize(QSize(parent->size()));
 
-    rollSec = 10;
-    rollMin = 0;
-    restSec = 6;
-    restMin = 0;
     pauseSec = 0;
     pauseMin = 0;
 
@@ -119,7 +114,6 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(backBtn, &QPushButton::released, this, &IntervalTimer::backButton_Released);
     connect(editBtn, &QPushButton::pressed, this, &IntervalTimer::editButton_Pressed);
     connect(editBtn, &QPushButton::released, this, &IntervalTimer::editButton_Released);
-
     connect(currTimer->myTimer, &QTimer::timeout, this, &IntervalTimer::updateTimerDisplay);
     connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
@@ -189,7 +183,6 @@ void IntervalTimer::startButton_Released()
         isRunning = true;
         state = 1;
         restartBtn->setEnabled(true);
-
     }
     else if (state == 1) // RUNNING - Press to Pause
     {
@@ -231,16 +224,7 @@ void IntervalTimer::restartButton_Pressed()
 */
 void IntervalTimer::restartButton_Released()
 {
-
-    if (state == 1)
-    {
-
-    }
-     else if (state == 2)
-    {
- 
-    }
-
+    currTimer->restartTimer();
 	restartBtn->setIcon(QIcon(restartIcon));
 }
 

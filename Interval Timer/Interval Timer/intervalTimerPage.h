@@ -53,6 +53,6 @@ public slots:
     void editButton_Released();
 
 private:
-    int rollSec, rollMin, restSec, restMin, pauseSec, pauseMin;
+    int pauseSec, pauseMin;
 
 };

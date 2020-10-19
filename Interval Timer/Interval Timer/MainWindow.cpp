@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
 /* Define: showIntervalTimer
 
         Show IntervalTimer app on Main Window
-
  */
 void MainWindow::showIntervalTimer()
 {
@@ -94,7 +93,6 @@ void MainWindow::showSituationalGame()
 /* Define: returnToMain
 
         Return to main screen
-
  */
 void MainWindow::returnToMain(QString page)
 {
@@ -151,7 +149,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
    /* cvThread.terminate();
     cvThread.wait(100);*/
-
 }
 
 /* Deconstructor */

@@ -8,6 +8,7 @@
 #include "timer.h"
 
 using namespace std;
+#define STARTUP_TIMEOUT 5
 
 /* Constructor: timerReading
 
@@ -24,6 +25,11 @@ timerReading::timerReading(QObject *parent)
 	timeSet = 0;
 	isRunning = false;
 	myTimer = new QTimer();
+
+	rollSec = 10;
+	rollMin = 0;
+	restSec = 6;
+	restMin = 0;
 }
 
 /* Function: startTimer
@@ -36,8 +42,8 @@ void timerReading::startTimer()
 	cnt = 0;
 
 	// set up time
-	time = new QTime(0, 0, 5);
-	timeSet = convertToMS(5, 0);
+	time = new QTime(0, 0, STARTUP_TIMEOUT);
+	timeSet = convertToMS(STARTUP_TIMEOUT, 0);
 
 	// send timer to display
 	connect(myTimer, &QTimer::timeout, this, &timerReading::sendTimer);
@@ -102,20 +108,60 @@ int timerReading::convertToMS(int sec, int min)
 /* Define: clearTimer
 
 	Change State
-
  */
 void timerReading::clearTimer()
 {
 	if (state == 0) // Rest
 	{
 		emit updateColor(0);
-		setClock(6, 0);
+		setClock(restSec, restMin);
 		state = 1; // change state when done
 	}
 	else // Rolling
 	{
 		emit updateColor(1);
-		setClock(10, 0);
+		setClock(rollSec, rollMin);
 		state = 0; // change state when done
 	}
 }
+
+/* Define: restartTimer
+
+	Restart timer
+ */
+void timerReading::restartTimer()
+{
+	if (state == 0) // Rest
+	{
+		setClock(restSec, restMin);
+	}
+	else if (state == 1) // Rolling
+	{
+		setClock(rollSec, rollMin);
+	}
+	else
+	{
+
+	}
+}
+
+/* Function: setRollTime
+
+		Set Roll Timer
+*/
+void timerReading::setRollTime(int sec, int min)
+{
+	rollSec = sec;
+	rollMin = min;
+}
+
+/* Function: setRestTime
+
+		Set Rest Timer
+*/
+void timerReading::setRestTime(int sec, int min)
+{
+	restSec = sec;
+	restMin = min;
+}
+
