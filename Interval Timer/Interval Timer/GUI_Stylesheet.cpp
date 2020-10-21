@@ -44,7 +44,57 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
 
     mainWindowIdle = "background-color: "+ BLUEBACKGROUND + "; ";
 
-    mainTimer = "font: 200px Bold Courier New; "
+	bjjMoveBox = "font: 150px Bold Courier New; "
+				"color: white;"
+				"background-color: " + TABHOVER + "; "
+				"border-width: 20px; "
+				"border-radius: 60px; "
+				"border-color:  " + TABHOVER + ";"
+				"border-style: outset;";
+
+	bjjMoveBox_pressed = "font: 150px Bold Courier New; "
+				"color: white;"
+				"background-color: " + ICONPRESSED + "; "
+				"border-width: 20px; "
+				"border-radius: 60px; "
+				"border-color:  " + ICONPRESSED + ";"
+				"border-style: outset;";
+
+	moveList =  "QListWidget {"
+		"font: 22px Verdana; "
+		"color: white;"
+		"background-color: " + TABHOVER + "; "
+	/*	"border-style: dashed; "
+		"border-radius: 4px; "
+		"border-width: 4px; "
+		"border-color: black;"*/
+		"border: none; "
+		"padding: 9px;}"
+		"QListWidget::item {"
+		"border: none;}"
+		"QListWidget::item:selected {"
+		"font: 22px Verdana; "
+		"color: black;"
+		"background-color: #add8e6;}";
+
+	splitterClosed = "QSplitter::handle {image:url(:/images/icons/play.png);}"
+				"QSplitter::handle:horizontal{width: 50px; }"
+											//"border: 3px dashed black; "
+											//"margin: 50px  50px;} "
+				"QSplitter::handle:vertical{height: 50px; }"
+				//"QSplitter::handle:pressed{image:url(:/images/icons/exit.png); }";
+				"QSplitter::handle:pressed{image:url(""); "
+											"background-color: " + ICONPRESSED + "; }";
+
+	splitter = "QSplitter::handle {image:url(:/images/icons/play.png);}"
+		"QSplitter::handle:horizontal{width: 30px; }"
+		//"border: 3px dashed black; "
+		//"margin: 50px  50px;} "
+		"QSplitter::handle:vertical{height: 30px; }"
+		"QSplitter::handle:pressed{image:url(""); "
+						"background-color: " + ICONPRESSED + "; }";
+
+    mainTimer = "font: 220px Bold Courier New; "
                     "color: white;"
                     "border: none";
 

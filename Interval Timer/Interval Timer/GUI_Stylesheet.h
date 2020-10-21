@@ -27,6 +27,11 @@ public:
     QString mainWindowRest;
     QString mainWindowRoll;
     QString mainWindowIdle;
+    QString bjjMoveBox;
+    QString bjjMoveBox_pressed;
+    QString moveList;
+    QString splitterClosed;
+    QString splitter;
     QString mainTimer;
     QString iconBtn;
     QString iconBtn1;
