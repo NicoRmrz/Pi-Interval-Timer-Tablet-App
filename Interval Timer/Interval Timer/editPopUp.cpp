@@ -31,20 +31,27 @@ editWindow::editWindow(QDialog *parent = 0) :
 	rollSecondInput->setFixedHeight(35);
 	rollSecondInput->setFixedWidth(32);
 
-	rollMinueInput = new QSpinBox();
-	QScroller::grabGesture(rollMinueInput, QScroller::LeftMouseButtonGesture);
-	rollMinueInput->setRange(0, 60);
-
-	restSecondInput = new QSlider();
+	restSecondInput = new QComboBox();
 	QScroller::grabGesture(restSecondInput, QScroller::LeftMouseButtonGesture);
+	restSecondInput->setStyleSheet(GUI_Style.comboBox);
+	restSecondInput->setFixedHeight(35);
+	restSecondInput->setFixedWidth(32);
+
+	rollMinuteInput = new QSpinBox();
+	QScroller::grabGesture(rollMinuteInput, QScroller::LeftMouseButtonGesture);
+	rollMinuteInput->setRange(0, 60);
+
+	restMinuteInput = new QSlider();
+	QScroller::grabGesture(restMinuteInput, QScroller::LeftMouseButtonGesture);
 
 
 	mainVLayout = new QVBoxLayout();
 	mainVLayout->setContentsMargins(0, 0, 0, 0);
 	mainVLayout->setSpacing(20);
 	mainVLayout->addWidget(rollSecondInput);
-	mainVLayout->addWidget(rollMinueInput);
+	mainVLayout->addWidget(rollMinuteInput);
 	mainVLayout->addWidget(restSecondInput);
+	mainVLayout->addWidget(restMinuteInput);
 
 	setLayout(mainVLayout);
 

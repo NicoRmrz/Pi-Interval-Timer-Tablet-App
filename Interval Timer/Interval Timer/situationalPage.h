@@ -10,7 +10,6 @@
 #include <QFile>
 #include <QMap>
 
-
 #include "GUI_Stylesheet.h"
 
 /* Class: IntervalTimer
@@ -24,13 +23,18 @@ class situationalGame : public QWidget
 public:
     situationalGame(QWidget *parent);
     ~situationalGame() {};
-    GUI_Style    GUI_Style;
-    QMap<QString, QString> map;
-
+    GUI_Style	GUI_Style;
+	QPushButton	*backBtn;
     QVBoxLayout *mainVLayout;
     void getMoveList();
 
+
+public slots:
+	void backButton_Pressed();
+	void backButton_Released();
+
 signals:
     void sendStatusBar(QString message, int time);
+	void returnPage(QString page);
 
 };

@@ -12,9 +12,6 @@
 #include "timer.h"
 #include "editPopUp.h"
 
-#define ICONSIZE 100
-#define BACKICONSIZE 50
-
 /* Class: IntervalTimer
 
     QWidget widget to hold all objects needed for IntervalTimer implementation
@@ -36,7 +33,6 @@ public:
     QVBoxLayout *mainVLayout;
     QHBoxLayout *controlBtnLayout;
     QHBoxLayout *topBtnLayout;
-	//editWindow	*editPopup;
 
     bool isRunning;
     int state = 0;

@@ -1,5 +1,14 @@
+/* File: situationalPage.cpp
+
+Contains functions for situational page.
+
+Author: Nico Ramirez
+*/
 #include "situationalPage.h"
 #include <QDebug>
+
+QString backIcon2 = ":/images/icons/back.png";
+QString backIconPressed2= ":/images/icons/backPressed.png";
 
 using namespace std;
 
@@ -16,10 +25,19 @@ situationalGame::situationalGame(QWidget *parent) :
 {
 	setFixedSize(QSize(parent->size()));
 
+	backBtn = new QPushButton(parent);
+	backBtn->setObjectName(QString::fromUtf8("back"));
+	backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+	backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
+	backBtn->setIcon(QIcon(backIcon2));
+	backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+
     // set layout
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
     mainVLayout->setSpacing(0);
+	mainVLayout->addWidget(backBtn, 0, Qt::AlignLeft);
+
     //mainVLayout->addWidget(exeTimer, 0, Qt::AlignCenter);
     //mainVLayout->addWidget(startBtn, 0, Qt::AlignCenter);
     //mainVLayout->addWidget(pauseResumeBtn, 0, Qt::AlignCenter);
@@ -28,11 +46,12 @@ situationalGame::situationalGame(QWidget *parent) :
 
 
     // connect signals
-    //connect(startBtn, &QPushButton::pressed, this, &IntervalTimer::startButton_Pressed);
-   
+	connect(backBtn, &QPushButton::pressed, this, &situationalGame::backButton_Pressed);
+	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
+
     // set stylesheet for each object
-    //exeTimer->setStyleSheet(GUI_Style.mainTimer);
-    setStyleSheet(GUI_Style.mainWindowIdle);
+    parent->setStyleSheet(GUI_Style.mainWindowRoll);
+	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 
     getMoveList();
 }
@@ -68,3 +87,24 @@ void situationalGame::getMoveList()
     }
 
 }
+
+
+/* Function: backButton_Pressed
+
+		Slot to handle backbutton being pressed
+*/
+void situationalGame::backButton_Pressed()
+{
+	// color button green indicating pressed button
+	backBtn->setIcon(QIcon(backIconPressed2));
+}
+/* Function: backButton_Released
+
+		Slot to handle back button is released.
+*/
+void situationalGame::backButton_Released()
+{
+	backBtn->setIcon(QIcon(backIcon2));
+	emit returnPage("situational");
+}
+

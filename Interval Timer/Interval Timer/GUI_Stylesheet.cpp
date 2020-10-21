@@ -20,7 +20,6 @@
 #define REDBACKGROUND   QString("#E3242B")
 #define BLUEBACKGROUND  QString("#6593F5")
 #define ICONPRESSED		QString("rgba(72,146,73,240)")
-
 #define ICONBUTTON      QString("rgba(0,0,0,0)")
 #define TABHOVER        QString("rgba(38,79,120,255)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")

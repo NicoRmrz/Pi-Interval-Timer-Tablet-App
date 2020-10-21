@@ -8,6 +8,9 @@
 #include <qstring.h> 
 #include <qobject.h> 
 
+#define ICONSIZE 100
+#define BACKICONSIZE 50
+
 /* Class: GUI_Style
 
     QObject class to hold all strings customization of front end.

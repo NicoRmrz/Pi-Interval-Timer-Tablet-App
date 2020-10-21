@@ -30,8 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
  */
 void MainWindow::showIntervalTimer()
 {
-	setStyleSheet(GUI_Style.mainWindowIdle);
-
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
     delete (ui->mainPage);
@@ -74,8 +72,6 @@ void MainWindow::updateTimerState(int state)
  */
 void MainWindow::showSituationalGame()
 {
-	setStyleSheet(GUI_Style.mainWindowIdle);
-
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
     delete (ui->mainPage);
@@ -85,6 +81,8 @@ void MainWindow::showSituationalGame()
 
     // add timer interal app widget
     ui->mainLayout->addWidget(situationalWidget);
+
+	connect(situationalWidget, &situationalGame::returnPage, this, &MainWindow::returnToMain);
 }
 
 /* Define: returnToMain

@@ -26,8 +26,9 @@ public:
 	GUI_Style    GUI_Style;
 	QVBoxLayout *mainVLayout;
 	QComboBox	*rollSecondInput;
-	QSpinBox	*rollMinueInput;
-	QSlider	*restSecondInput;
+	QComboBox	*restSecondInput;
+	QSpinBox	*rollMinuteInput;
+	QSlider		*restMinuteInput;
 
 private:
 	void setComboBoxes(void);

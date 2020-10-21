@@ -1,4 +1,3 @@
-
 /* File: intervalTimerPage.cpp
 
     Contains functions for IntervalTimer.
@@ -118,7 +117,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
     // set stylesheet for each object
-	setStyleSheet(GUI_Style.mainWindowIdle);
+	parent->setStyleSheet(GUI_Style.mainWindowIdle);
     exeTimer->setStyleSheet(GUI_Style.mainTimer);
 	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	editBtn->setStyleSheet(GUI_Style.iconOnlyButton);
