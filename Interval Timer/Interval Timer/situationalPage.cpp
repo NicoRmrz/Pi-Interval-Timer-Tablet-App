@@ -6,6 +6,7 @@ Author: Nico Ramirez
 */
 #include "situationalPage.h"
 #include <QDebug>
+#include <string>
 
 QString backIcon2 = ":/images/icons/back.png";
 QString backIconPressed2= ":/images/icons/backPressed.png";
@@ -90,7 +91,7 @@ situationalGame::situationalGame(QWidget *parent) :
 	moveList->setStyleSheet(GUI_Style.moveList);
 	horizontalSplitter->setStyleSheet(GUI_Style.splitterClosed);
 
-    getMoveList();
+    getMoveList(JSONmoveList);
 }
 
 /* Define: getMoveList
@@ -98,28 +99,36 @@ situationalGame::situationalGame(QWidget *parent) :
     Get bjj moves list and store them in QMap
 
  */
-void situationalGame::getMoveList()
+void situationalGame::getMoveList(QString inputFile)
 {
-    QString filename = "bjjMoveList.txt";
-    QFile myFile(filename);
-
-    if (myFile.open(QIODevice::ReadOnly))
+    // read in JSON file
+    QString val;
+    QFile file;
+    file.setFileName(inputFile);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        // read each line of template file 
-        while (!myFile.atEnd())
-        {
-            // read each line from template and write on newfile
-            QString line = myFile.readLine();
-            line.remove("\r\n");
-            QStringList item = line.split(", ");
-            qDebug() << item[0] << ", " << item[1];
-			populateMoveList(item[0], item[1]);
-        }
-
+        val = file.readAll();
+        file.close();
     }
     else
     {
         emit sendStatusBar("Unable to open file", 5000);
+    }
+
+    // Convert Data read in to QJSON Document
+    QJsonDocument JSONdoc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json_obj = JSONdoc.object();
+    QJsonValue json_Val = json_obj.value(QString("bjjPosition"));
+
+    // set JSON array to class variabel
+    json_arr = json_Val.toArray();
+
+    for (int i = 0; i < json_arr.size(); i++)
+    {
+        QString position = json_arr.at(i)["Name"].toString();
+        QString level = json_arr.at(i)["Level"].toString();
+
+        populateMoveList(position, level);
     }
 
 }
@@ -134,7 +143,6 @@ void situationalGame::populateMoveList(QString move, QString difficulty)
 
 	item = new QListWidgetItem(tr(""));
 	item->setData(Qt::UserRole, difficulty);    // set path to backend data for later retireval
-	//item->setIcon(QIcon(File));            // set for image icon to be dropped
 	item->setText(move);            // set for image icon to be dropped
 	moveList->addItem(item);                // add item to QListWidget
 	moveList->scrollToBottom();

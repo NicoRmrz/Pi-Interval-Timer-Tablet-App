@@ -7,11 +7,17 @@
 #include <QPushButton>
 #include <QList>
 #include <QFile>
-#include <QMap>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
 #include <QSplitter>
 #include <QListWidget>
+#include <QListWidgetItem>
 
 #include "GUI_Stylesheet.h"
+
+#define JSONmoveList ".\\inputMoveList\\bjjMoveList.json"
 
 /* Class: IntervalTimer
 
@@ -29,15 +35,15 @@ public:
     QHBoxLayout	*mainHLayout;
     QHBoxLayout	*mainLayout;
     QWidget		*leftContainer;
-	QPushButton		*bjjBtn;
+	QPushButton *bjjBtn;
 	QListWidget	*moveList;
 	QSplitter	*horizontalSplitter;
-    void getMoveList();
-	//QList moveList;
-
+    void getMoveList(QString inputFile);
 
 private:
 	void populateMoveList(QString move, QString difficulty);
+    QJsonArray json_arr;
+  //  QList<QString> bjjMoveList;
 
 public slots:
 	void backButton_Pressed();

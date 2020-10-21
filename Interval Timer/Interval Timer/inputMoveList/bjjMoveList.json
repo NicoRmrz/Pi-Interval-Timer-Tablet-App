@@ -1,0 +1,29 @@
+{
+	"bjjPosition": 
+	[
+	    {
+	        "Name": "Saddle",
+	        "Level": "Advanced"
+	    },	    
+	    {
+	        "Name": "50/50",
+	        "Level": "Advanced"
+	    },	    
+	    {
+	        "Name": "Dog Fight",
+	        "Level": "All"
+	    },	    
+	    {
+	        "Name": "Full Guard",
+	        "Level": "Beginner"
+	    },	    
+	    {
+	        "Name": "Half Guard",
+	        "Level": "Beginner"
+	    },	    
+	    {
+	        "Name": "Spider Web",
+	        "Level": "All"
+	    }
+	]
+}
