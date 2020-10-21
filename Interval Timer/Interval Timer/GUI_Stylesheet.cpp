@@ -82,5 +82,59 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
                 "QStatusBar::item {border: none; "
                 "font: 11px Verdana;  "
                 "border-radius: 3px; }";
+    
+    comboBox = "QComboBox {border: 1px solid gray;"
+        "font: 30px Verdana;"
+          "border-radius: 3px;"
+    //  " background: white;"
+       " padding: 1px 18px 1px 3px;"
+       "min-width: 55px;}"
+
+      "  QComboBox:editable{background: white;  }"
+
+       " QComboBox:!editable, QComboBox::drop-down:editable{"
+           "  background: qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1,"
+                                     "    stop : 0 #E1E1E1, stop: 0.4 #DDDDDD,"
+                                     "    stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);}"
+
+        /* QComboBox gets the "on" state when the popup is open */
+ /*      " QComboBox:!editable:on, QComboBox::drop-down:editable:on{"
+         "   background: qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1,"
+                "                        stop : 0 #D3D3D3, stop: 0.4 #D8D8D8,"
+                "                        stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);}"*/
+
+      //"  QComboBox:on{ "/* shift the text when the popup opens */
+      //    "  padding-top: 3px;"
+      //       //   "font: 40px Verdana;"
+      //           "padding-left: 4px;}"
+
+        " QComboBox::indicator{"
+            " background-color:transparent;"
+            " selection-background-color:transparent;"
+            " color:transparent;"
+            " selection-color:transparent;}"
+
+    // "   QComboBox:item{ background: white; }"
+
+     "   QComboBox::item:selected:!active, QComboBox::item:selected:active{"
+       "  border: 2px solid black;"
+     //  "  background-color: black;"
+        " background: black;}"
+
+        "QComboBox:item::hover{ background: blue; "
+        "color: blue;"
+        "background-color: blue;}"
+
+        "QComboBox::drop-down{"
+            " subcontrol-origin: padding;"
+            " subcontrol-position: top right;"
+            " width: 15px;"
+            // "  background: white;"
+            "  background-color: white;"
+            " border-left-width: 1px;"
+            " border-left-color: darkgray;"
+            " border-left-style: solid;" /* just a single line */
+            " border-top-right-radius: 3px;" /* same radius as the QComboBox */
+            "border-bottom-right-radius: 3px;}";
 
 }

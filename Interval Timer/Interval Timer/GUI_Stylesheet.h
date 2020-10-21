@@ -31,6 +31,7 @@ public:
     QString iconOnlyButton;
     QString buttonPressed;
     QString statusBar;
+    QString comboBox;
 
 };
 
