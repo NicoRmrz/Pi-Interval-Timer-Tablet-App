@@ -43,6 +43,7 @@ public:
 private:
 	void populateMoveList(QString move, QString difficulty);
     QJsonArray json_arr;
+    bool splitterOpen;
   //  QList<QString> bjjMoveList;
 
 public slots:
@@ -50,6 +51,7 @@ public slots:
 	void backButton_Released();	
 	void bjjButton_Pressed();
 	void bjjButton_Released();
+	void splitterHasMoved(int pos, int index);
 
 signals:
     void sendStatusBar(QString message, int time);

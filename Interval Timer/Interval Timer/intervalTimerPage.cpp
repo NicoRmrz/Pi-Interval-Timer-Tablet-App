@@ -43,7 +43,6 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 
 	// Instance modules
 	currTimer = new timerReading(this);
-	//editPopup = new editWindow(*dialog);
 
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;
@@ -52,6 +51,10 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     exeTimer = new QLabel(parent);
     exeTimer->setObjectName(QString::fromUtf8("exeTimer"));
     exeTimer->setText("00:00");
+
+    timerState = new QLabel(parent);
+    timerState->setObjectName(QString::fromUtf8("timerState"));
+    timerState->setText("");
 
     startBtn = new QPushButton(parent);
     startBtn->setObjectName(QString::fromUtf8("startBtn"));
@@ -93,6 +96,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	topBtnLayout->setContentsMargins(0, 0, 20, 0);
 	topBtnLayout->setSpacing(0);
 	topBtnLayout->addWidget(backBtn, 0, Qt::AlignLeft);
+	topBtnLayout->addWidget(timerState, 0, Qt::AlignCenter);
 	topBtnLayout->addWidget(editBtn, 0, Qt::AlignRight);
 
     mainVLayout = new QVBoxLayout();
@@ -123,6 +127,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	editBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	restartBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	startBtn->setStyleSheet(GUI_Style.iconOnlyButton);
+    timerState->setStyleSheet(GUI_Style.timerState);
 }
 
 /* Define: changeColor
@@ -138,11 +143,13 @@ void IntervalTimer::changeColor(int colorState)
         {
             setStyleSheet(GUI_Style.mainWindowRest);
             emit intervalState(colorState);
+            timerState->setText("REST");
         }
         else // Rolling
         {
             setStyleSheet(GUI_Style.mainWindowRoll);
             emit intervalState(colorState);
+            timerState->setText("ROLL");
         }
     }
 }

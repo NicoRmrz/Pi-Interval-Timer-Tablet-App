@@ -14,5 +14,7 @@
         <file>icons/restartPressed.png</file>
         <file>icons/editPressed.png</file>
         <file>icons/specific/bjj_stand_up.PNG</file>
+        <file>icons/splitterBoth.png</file>
+        <file>icons/splitterOpen.png</file>
     </qresource>
 </RCC>

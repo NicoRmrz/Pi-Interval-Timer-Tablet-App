@@ -25,6 +25,7 @@ public:
     ~IntervalTimer() {};
     GUI_Style    GUI_Style;
     QLabel      *exeTimer;
+    QLabel      *timerState;
 	timerReading *currTimer;
     QPushButton *startBtn;
     QPushButton *restartBtn;

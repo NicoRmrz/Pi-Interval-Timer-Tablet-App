@@ -85,6 +85,8 @@ void MainWindow::showSituationalGame()
 
     // add timer interal app widget
     ui->mainLayout->addWidget(situationalWidget);
+    connect(situationalWidget, &situationalGame::returnPage, this, &MainWindow::returnToMain);
+
 }
 
 /* Define: returnToMain

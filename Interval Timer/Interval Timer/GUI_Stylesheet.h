@@ -40,6 +40,7 @@ public:
     QString buttonPressed;
     QString statusBar;
     QString comboBox;
+    QString timerState;
 
 };
 
