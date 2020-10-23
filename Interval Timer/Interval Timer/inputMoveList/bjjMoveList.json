@@ -24,6 +24,22 @@
 	    {
 	        "Name": "Spider Web",
 	        "Level": "All"
+	    },	    
+	    {
+	        "Name": "Back",
+	        "Level": "All"
+	    },	    
+	    {
+	        "Name": "Side Control",
+	        "Level": "Beginner"
+	    },	    
+	    {
+	        "Name": "Full Mount",
+	        "Level": "Beginner"
+	    },	    
+	    {
+	        "Name": "Front Headlock",
+	        "Level": "All"
 	    }
 	]
 }

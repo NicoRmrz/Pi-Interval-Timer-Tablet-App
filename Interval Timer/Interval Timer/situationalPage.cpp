@@ -28,9 +28,10 @@ situationalGame::situationalGame(QWidget *parent) :
 
 	setFixedSize(QSize(parent->size()));
 
-	backBtn = new QPushButton(parent);
+    backBtn = new QPushButton(parent);
 	backBtn->setObjectName(QString::fromUtf8("back"));
 	backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+	backBtn = new QPushButton(parent);
 	backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
 	backBtn->setIcon(QIcon(backIcon2));
 	backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
@@ -39,23 +40,25 @@ situationalGame::situationalGame(QWidget *parent) :
 	bjjBtn->setText("touch");
 	bjjBtn->setMaximumHeight(400);
 
-	moveList = new QListWidget(parent);
-	moveList->setDragEnabled(true);
-	moveList->setAcceptDrops(true);
-	moveList->setAutoScroll(false);
-	moveList->setDropIndicatorShown(true);
-	moveList->setDefaultDropAction(Qt::MoveAction);
-	moveList->setMaximumWidth(150);
-	moveList->setLineWidth(0);
-	moveList->setViewMode(QListView::ListMode);
-	moveList->setWordWrap(true);
-	moveList->setResizeMode(QListWidget::Adjust);
-	moveList->setSelectionMode(QListWidget::SingleSelection);
-	moveList->setFlow(QListView::TopToBottom);
-	moveList->setMovement(QListView::Free);
-	moveList->setSelectionBehavior(QAbstractItemView::SelectRows);
-	moveList->setDragDropMode(QAbstractItemView::NoDragDrop);
-	moveList->setSelectionMode(QAbstractItemView::SingleSelection);
+    moveListWidget = new QListWidget(parent);
+    moveListWidget->setDragEnabled(true);
+    moveListWidget->setAcceptDrops(false);
+    moveListWidget->setAutoScroll(true);
+    moveListWidget->setDropIndicatorShown(true);
+    moveListWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    moveListWidget->setDefaultDropAction(Qt::MoveAction);
+    moveListWidget->setMaximumWidth(150);
+    moveListWidget->setLineWidth(0);
+    moveListWidget->setViewMode(QListView::ListMode);
+    moveListWidget->setWordWrap(true);
+    moveListWidget->setResizeMode(QListWidget::Adjust);
+    moveListWidget->setSelectionMode(QListWidget::SingleSelection);
+    moveListWidget->setFlow(QListView::TopToBottom);
+    moveListWidget->setMovement(QListView::Free);
+    moveListWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    moveListWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
+    moveListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    moveListWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
 
 	mainLayout = new QHBoxLayout();
 	mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -68,7 +71,7 @@ situationalGame::situationalGame(QWidget *parent) :
 
 	horizontalSplitter = new QSplitter(parent);
 	horizontalSplitter->addWidget(leftContainer);
-	horizontalSplitter->addWidget(moveList);
+	horizontalSplitter->addWidget(moveListWidget);
     QList<int> sizes;
     sizes << 0 ;
 	horizontalSplitter->setSizes(sizes);
@@ -92,7 +95,7 @@ situationalGame::situationalGame(QWidget *parent) :
     parent->setStyleSheet(GUI_Style.mainWindowGrey);
 	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
 	bjjBtn->setStyleSheet(GUI_Style.bjjMoveBox);
-	moveList->setStyleSheet(GUI_Style.moveList);
+    moveListWidget->setStyleSheet(GUI_Style.moveList);
 	horizontalSplitter->setStyleSheet(GUI_Style.splitterClosed);
 
     getMoveList(JSONmoveList);
@@ -129,12 +132,16 @@ void situationalGame::getMoveList(QString inputFile)
 
     for (int i = 0; i < json_arr.size(); i++)
     {
-        QString position = json_arr.at(i)["Name"].toString();
-        QString level = json_arr.at(i)["Level"].toString();
+        bjjMove inputMove;
+        inputMove.position = json_arr.at(i)["Name"].toString();
+        inputMove.level = json_arr.at(i)["Level"].toString();
+        inputMove.position.replace(" ", "\n");
 
-        populateMoveList(position, level);
+
+
+        bjjMoveList.append(inputMove);
+        populateMoveList(inputMove.position, inputMove.level);
     }
-
 }
 
 /* Function: populateMoveList
@@ -144,12 +151,11 @@ void situationalGame::getMoveList(QString inputFile)
 void situationalGame::populateMoveList(QString move, QString difficulty)
 {
 	QListWidgetItem *item;
-
 	item = new QListWidgetItem(tr(""));
 	item->setData(Qt::UserRole, difficulty);    // set path to backend data for later retireval
 	item->setText(move);            // set for image icon to be dropped
-	moveList->addItem(item);                // add item to QListWidget
-	moveList->scrollToBottom();
+    moveListWidget->addItem(item);                // add item to QListWidget
+    moveListWidget->scrollToBottom();
 }
 
 /* Function: backButton_Pressed
@@ -186,8 +192,10 @@ void situationalGame::bjjButton_Pressed()
 */
 void situationalGame::bjjButton_Released()
 {
+    int randomNum = rand() % bjjMoveList.size();
+    moveListWidget->setCurrentRow(randomNum);
 
-
+    bjjBtn->setText(bjjMoveList[randomNum].position);
 	bjjBtn->setStyleSheet(GUI_Style.bjjMoveBox);
 }
 
