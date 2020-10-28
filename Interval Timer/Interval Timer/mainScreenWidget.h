@@ -21,7 +21,7 @@ class mainScreen : public QWidget
 public:
     mainScreen(QWidget *parent);
     ~mainScreen() {};
-    GUI_Style    GUI_Style;
+    GUI_Style    GUI_Stylesheet;
     QVBoxLayout *mainLayout;
     QHBoxLayout *buttonLayout;
     QPushButton *showIntervalTimer;

@@ -23,7 +23,7 @@ class IntervalTimer : public QWidget
 public:
     IntervalTimer(QWidget *parent);
     ~IntervalTimer() {};
-    GUI_Style    GUI_Style;
+    GUI_Style    GUI_Stylesheet;
     QLabel      *exeTimer;
     QLabel      *timerState;
 	timerReading *currTimer;

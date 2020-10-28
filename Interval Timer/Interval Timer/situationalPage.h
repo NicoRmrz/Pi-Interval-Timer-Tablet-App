@@ -17,7 +17,7 @@
 
 #include "GUI_Stylesheet.h"
 
-#define JSONmoveList ".\\inputMoveList\\bjjMoveList.json"
+#define JSONmoveList ":/images/inputMoveList/bjjMoveList.json"
 
 // struct of bjj moves and level of difficulty
 struct bjjMove {
@@ -36,7 +36,7 @@ class situationalGame : public QWidget
 public:
     situationalGame(QWidget *parent);
     ~situationalGame() {};
-    GUI_Style	GUI_Style;
+    GUI_Style	GUI_Stylesheet;
 	QPushButton	*backBtn;
     QHBoxLayout	*mainLayout;
     QHBoxLayout	*mainHLayout;

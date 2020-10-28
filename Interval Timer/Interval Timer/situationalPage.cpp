@@ -22,7 +22,7 @@ using namespace std;
         parent - Inherits QWidget attributes
 */
 situationalGame::situationalGame(QWidget *parent) :
-    GUI_Style(parent)
+    GUI_Stylesheet(parent)
 {
     splitterOpen = false;
 
@@ -92,11 +92,11 @@ situationalGame::situationalGame(QWidget *parent) :
 	connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
 
     // set stylesheet for each object
-    parent->setStyleSheet(GUI_Style.mainWindowGrey);
-	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-	bjjBtn->setStyleSheet(GUI_Style.bjjMoveBox);
-    moveListWidget->setStyleSheet(GUI_Style.moveList);
-	horizontalSplitter->setStyleSheet(GUI_Style.splitterClosed);
+    parent->setStyleSheet(GUI_Stylesheet.mainWindowGrey);
+	backBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox);
+    moveListWidget->setStyleSheet(GUI_Stylesheet.moveList);
+	horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
 
     getMoveList(JSONmoveList);
 }
@@ -184,7 +184,7 @@ void situationalGame::backButton_Released()
 void situationalGame::bjjButton_Pressed()
 {
 	// color button green indicating pressed button
-	bjjBtn->setStyleSheet(GUI_Style.bjjMoveBox_pressed);
+	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox_pressed);
 }
 /* Function: bjjButton_Released
 
@@ -196,7 +196,7 @@ void situationalGame::bjjButton_Released()
     moveListWidget->setCurrentRow(randomNum);
 
     bjjBtn->setText(bjjMoveList[randomNum].position);
-	bjjBtn->setStyleSheet(GUI_Style.bjjMoveBox);
+	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox);
 }
 
 /* Function: splitterHasMoved
@@ -207,14 +207,14 @@ void situationalGame::splitterHasMoved(int pos, int index)
 {
     if (pos > 720) // splitter closed
     {
-        horizontalSplitter->setStyleSheet(GUI_Style.splitterClosed);
+        horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
         splitterOpen = false;
     }
     else
     {
         if (splitterOpen == false)
         {
-            horizontalSplitter->setStyleSheet(GUI_Style.splitter);
+            horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
             splitterOpen = true;
         }
     }

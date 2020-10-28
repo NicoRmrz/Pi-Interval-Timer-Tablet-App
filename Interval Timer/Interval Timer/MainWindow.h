@@ -32,5 +32,5 @@ private:
     void showIntervalTimer();
     void showSituationalGame();
 	Ui::MainWindow *ui;
-    GUI_Style GUI_Style;
+    GUI_Style GUI_Stylesheet;
 };

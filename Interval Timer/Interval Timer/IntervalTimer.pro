@@ -1,3 +1,5 @@
+QT           += core gui widgets 
+
 HEADERS       = intervalTimerPage.h \
 				editPopUp.h \
 				GUI_Stylesheet.h \
@@ -15,11 +17,15 @@ SOURCES       = intervalTimerPage.cpp \
 				MainWindow.cpp \
 				situationalPage.cpp \
 				timer.cpp 
-
-QT           += core gui widgets 
+				
+#OTHER_SOURCES += inputMoveList/bjjMoveList.json
 
 RESOURCES = Resource.qrc
-
 CONFIG      += debug
 #DEFINES      += QT_NO_DEBUG_OUTPUT
 DEFINES      += DEBUG
+
+DESTDIR = ../build/
+OBJECTS_DIR = obj/
+MOC_DIR = moc/
+

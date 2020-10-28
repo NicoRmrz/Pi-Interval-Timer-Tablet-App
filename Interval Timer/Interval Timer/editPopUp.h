@@ -23,7 +23,7 @@ class editWindow : public QDialog
 public:
 	editWindow(QDialog *parent);
 	~editWindow() {};
-	GUI_Style    GUI_Style;
+	GUI_Style    GUI_Stylesheet;
 	QVBoxLayout *mainVLayout;
 	QComboBox	*rollSecondInput;
 	QComboBox	*restSecondInput;

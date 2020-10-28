@@ -16,5 +16,6 @@
         <file>icons/specific/bjj_stand_up.PNG</file>
         <file>icons/splitterBoth.png</file>
         <file>icons/splitterOpen.png</file>
+        <file>inputMoveList/bjjMoveList.json</file>
     </qresource>
 </RCC>

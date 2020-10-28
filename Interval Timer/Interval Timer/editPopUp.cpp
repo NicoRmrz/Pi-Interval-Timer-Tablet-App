@@ -18,22 +18,22 @@ using namespace std;
 		parent - Inherits QObject attributes
 */
 editWindow::editWindow(QDialog *parent = 0) :
-	GUI_Style(parent)
+	GUI_Stylesheet(parent)
 {
 	setFixedSize(300, 400);
 	setWindowTitle("Edit");
-	setStyleSheet(GUI_Style.mainWindowIdle);
+	setStyleSheet(GUI_Stylesheet.mainWindowIdle);
 	setWindowIcon(QIcon(MAIN_ICON));
 
 	rollSecondInput = new QComboBox();
 	QScroller::grabGesture(rollSecondInput, QScroller::LeftMouseButtonGesture);
-	rollSecondInput->setStyleSheet(GUI_Style.comboBox);
+	rollSecondInput->setStyleSheet(GUI_Stylesheet.comboBox);
 	rollSecondInput->setFixedHeight(35);
 	rollSecondInput->setFixedWidth(32);
 
 	restSecondInput = new QComboBox();
 	QScroller::grabGesture(restSecondInput, QScroller::LeftMouseButtonGesture);
-	restSecondInput->setStyleSheet(GUI_Style.comboBox);
+	restSecondInput->setStyleSheet(GUI_Stylesheet.comboBox);
 	restSecondInput->setFixedHeight(35);
 	restSecondInput->setFixedWidth(32);
 

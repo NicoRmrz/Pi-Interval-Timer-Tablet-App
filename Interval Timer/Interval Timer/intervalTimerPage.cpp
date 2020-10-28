@@ -34,7 +34,7 @@ using namespace std;
         parent - Inherits QWidget attributes
 */
 IntervalTimer::IntervalTimer(QWidget *parent) :
-    GUI_Style(parent)
+    GUI_Stylesheet(parent)
 {
 	setFixedSize(QSize(parent->size()));
 
@@ -121,13 +121,13 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
     // set stylesheet for each object
-	parent->setStyleSheet(GUI_Style.mainWindowIdle);
-    exeTimer->setStyleSheet(GUI_Style.mainTimer);
-	backBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-	editBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-	restartBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-	startBtn->setStyleSheet(GUI_Style.iconOnlyButton);
-    timerState->setStyleSheet(GUI_Style.timerState);
+	parent->setStyleSheet(GUI_Stylesheet.mainWindowIdle);
+    exeTimer->setStyleSheet(GUI_Stylesheet.mainTimer);
+	backBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+	editBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+	restartBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+	startBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+    timerState->setStyleSheet(GUI_Stylesheet.timerState);
 }
 
 /* Define: changeColor
@@ -141,13 +141,13 @@ void IntervalTimer::changeColor(int colorState)
     {
         if (colorState == 0) // Rest
         {
-            setStyleSheet(GUI_Style.mainWindowRest);
+            setStyleSheet(GUI_Stylesheet.mainWindowRest);
             emit intervalState(colorState);
             timerState->setText("REST");
         }
         else // Rolling
         {
-            setStyleSheet(GUI_Style.mainWindowRoll);
+            setStyleSheet(GUI_Stylesheet.mainWindowRoll);
             emit intervalState(colorState);
             timerState->setText("ROLL");
         }
