@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     a.setOverrideCursor( QCursor( Qt::BlankCursor ) );
 
     MainWindow w;
-    //w.show();
-    w.showFullScreen();
+    w.show();
+    //w.showFullScreen();
     return a.exec();
 }

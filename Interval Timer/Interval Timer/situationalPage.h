@@ -14,6 +14,8 @@
 #include <QSplitter>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QTouchEvent>
+#include <QEvent>
 
 #include "GUI_Stylesheet.h"
 
@@ -37,23 +39,24 @@ public:
     situationalGame(QWidget *parent);
     ~situationalGame() {};
     GUI_Style	GUI_Stylesheet;
-	QPushButton	*backBtn;
+    QPushButton	*backBtn;
     QHBoxLayout	*mainLayout;
     QHBoxLayout	*mainHLayout;
     QWidget		*leftContainer;
-	QPushButton *bjjBtn;
-	QListWidget	*moveListWidget;
-	QSplitter	*horizontalSplitter;
+    QPushButton *bjjBtn;
+    QListWidget	*moveListWidget;
+    QSplitter	*horizontalSplitter;
     void getMoveList(QString inputFile);
+    bool event (QEvent *event);
+    //~ bool eventFilter(QObject* obj, QEvent* event);
+    //~ void sendTouchEvent();
 
 private:
 	void populateMoveList(QString move, QString difficulty);
     QJsonArray json_arr;
     bool splitterOpen;
     QList<bjjMove> bjjMoveList;
-
-    //QList<QString> bjjMoveList;
-    //QList<QString> bjjMoveList;
+    QList<QTouchEvent::TouchPoint> touchPoints;
 
 public slots:
 	void backButton_Pressed();
