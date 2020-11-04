@@ -18,4 +18,7 @@
         <file>icons/splitterOpen.png</file>
         <file>inputMoveList/bjjMoveList.json</file>
     </qresource>
+    <qresource prefix="/sound">
+        <file>sounds/menu_done.wav</file>
+    </qresource>
 </RCC>

@@ -13,7 +13,6 @@
 
 #include <QDebug>
 #include <QDialog>
-#include <QProcess>
 
 QString backIcon = ":/images/icons/back.png";
 QString backIconPressed = ":/images/icons/backPressed.png";
@@ -23,6 +22,7 @@ QString restartIcon = ":/images/icons/restart.png";
 QString restartPressedIcon = ":/images/icons/restartPressed.png";
 QString editIcon = ":/images/icons/edit.png";
 QString editPressedIcon = ":/images/icons/editPressed.png";
+QString switchTimer = ":/sound/sounds/menu_done.wav";
 
 using namespace std;
 
@@ -44,6 +44,10 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 
 	// Instance modules
 	currTimer = new timerReading(this);
+
+    soundProcess = new QProcess(parent);
+    soundProcess->start(switchTimer);
+    soundProcess->startDetached("play", QStringList() << ":/sound/sounds/menu_done.wav");
 
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;

@@ -7,6 +7,7 @@
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QProcess>
 
 #include "GUI_Stylesheet.h"
 #include "timer.h"
@@ -34,6 +35,7 @@ public:
     QVBoxLayout *mainVLayout;
     QHBoxLayout *controlBtnLayout;
     QHBoxLayout *topBtnLayout;
+    QProcess    *soundProcess;
 
     bool isRunning;
     int state = 0;
