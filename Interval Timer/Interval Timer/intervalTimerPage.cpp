@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include <QDialog>
+#include <QProcess>
 
 QString backIcon = ":/images/icons/back.png";
 QString backIconPressed = ":/images/icons/backPressed.png";
