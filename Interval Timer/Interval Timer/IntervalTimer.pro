@@ -24,9 +24,9 @@ RESOURCES = Resource.qrc
 CONFIG      += debug
 #DEFINES      += QT_NO_DEBUG_OUTPUT
 DEFINES      += DEBUG
-IDI_ICON1               ICON    "icons/icon.ico"
+RC_ICONS = icons/icon.ico
 
-DESTDIR = ../build/
+DESTDIR = /home/pi/Desktop
 OBJECTS_DIR = obj/
 MOC_DIR = moc/
 
