@@ -24,6 +24,7 @@ RESOURCES = Resource.qrc
 CONFIG      += debug
 #DEFINES      += QT_NO_DEBUG_OUTPUT
 DEFINES      += DEBUG
+IDI_ICON1               ICON    "icons/icon.ico"
 
 DESTDIR = ../build/
 OBJECTS_DIR = obj/
