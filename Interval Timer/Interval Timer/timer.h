@@ -5,9 +5,9 @@
 #include <QTime>
 
 #define STARTUP_TIMEOUT 5
-#define DEFAULT_ROLL_SECOND 10
-#define DEFAULT_ROLL_MINUTE 0
-#define DEFAULT_REST_SECOND 5
+#define DEFAULT_ROLL_SECOND 30
+#define DEFAULT_ROLL_MINUTE 2
+#define DEFAULT_REST_SECOND 30
 #define DEFAULT_REST_MINUTE 0
 
 /* Class: timerReading

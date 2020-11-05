@@ -140,9 +140,12 @@ void situationalGame::getMoveList(QString inputFile)
         inputMove.position.replace(" ", "\n");
 
 
-
-        bjjMoveList.append(inputMove);
-        populateMoveList(inputMove.position, inputMove.level);
+	if (inputMove.level != "Beginner")
+	{
+	    bjjMoveList.append(inputMove);
+	    populateMoveList(inputMove.position, inputMove.level);
+	}
+       
     }
 }
 
