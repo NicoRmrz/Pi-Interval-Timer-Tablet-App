@@ -37,6 +37,8 @@ public:
     QHBoxLayout *topBtnLayout;
     QProcess    *soundProcess;
 
+    void playSound(QString sound);
+    
     bool isRunning;
     int state = 0;
 

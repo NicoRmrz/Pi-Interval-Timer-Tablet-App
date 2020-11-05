@@ -22,7 +22,10 @@ QString restartIcon = ":/images/icons/restart.png";
 QString restartPressedIcon = ":/images/icons/restartPressed.png";
 QString editIcon = ":/images/icons/edit.png";
 QString editPressedIcon = ":/images/icons/editPressed.png";
-QString switchTimer = ":/sound/sounds/menu_done.wav";
+//QString switchTimer = ":/sound/sounds/menu_done.wav";
+//QString switchTimer = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/Interval Timer/'Interval Timer'/sounds/menu_done.wav";
+QString switchTimer = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/sounds/menu_done.wav";
+QString tone1 = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/sounds/switchtimer.wav";
 
 using namespace std;
 
@@ -45,9 +48,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	// Instance modules
 	currTimer = new timerReading(this);
 
-    soundProcess = new QProcess(parent);
-    soundProcess->start(switchTimer);
-    soundProcess->startDetached("play", QStringList() << ":/sound/sounds/menu_done.wav");
+    playSound(switchTimer);
 
     // start on roll state. Rest = 0, Roll = 1
     isRunning = false;
@@ -146,12 +147,16 @@ void IntervalTimer::changeColor(int colorState)
     {
         if (colorState == 0) // Rest
         {
+	    playSound(tone1);
+
             setStyleSheet(GUI_Stylesheet.mainWindowRest);
             emit intervalState(colorState);
             timerState->setText("REST");
         }
         else // Rolling
         {
+	    playSound(tone1);
+
             setStyleSheet(GUI_Stylesheet.mainWindowRoll);
             emit intervalState(colorState);
             timerState->setText("ROLL");
@@ -298,4 +303,13 @@ void IntervalTimer::editButton_Released()
 	editPopup->exec();
 
 	editBtn->setIcon(QIcon(editIcon));
+}
+/* Function: playSound
+
+       PlaySound Tone
+*/
+void IntervalTimer::playSound(QString sound)
+{
+    soundProcess = new QProcess(this);
+    soundProcess->start(sound);
 }
