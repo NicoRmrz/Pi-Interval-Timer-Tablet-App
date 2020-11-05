@@ -22,10 +22,10 @@ QString restartIcon = ":/images/icons/restart.png";
 QString restartPressedIcon = ":/images/icons/restartPressed.png";
 QString editIcon = ":/images/icons/edit.png";
 QString editPressedIcon = ":/images/icons/editPressed.png";
-//QString switchTimer = ":/sound/sounds/menu_done.wav";
-//QString switchTimer = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/Interval Timer/'Interval Timer'/sounds/menu_done.wav";
+
 QString switchTimer = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/sounds/menu_done.wav";
 QString tone1 = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/sounds/switchtimer.wav";
+QString buzzer = "cvlc /home/pi/Pi-Interval-Timer-Tablet-App/sounds/buzzer.wav";
 
 using namespace std;
 
@@ -147,7 +147,7 @@ void IntervalTimer::changeColor(int colorState)
     {
         if (colorState == 0) // Rest
         {
-	    playSound(tone1);
+	        playSound(buzzer);
 
             setStyleSheet(GUI_Stylesheet.mainWindowRest);
             emit intervalState(colorState);
@@ -155,7 +155,7 @@ void IntervalTimer::changeColor(int colorState)
         }
         else // Rolling
         {
-	    playSound(tone1);
+	        playSound(buzzer);
 
             setStyleSheet(GUI_Stylesheet.mainWindowRoll);
             emit intervalState(colorState);
