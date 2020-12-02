@@ -49,7 +49,6 @@ public:
     void getMoveList(QString inputFile);
     bool event (QEvent *event);
 	bool eventFilter(QObject * obj, QEvent * event);
-    //~ bool eventFilter(QObject* obj, QEvent* event);
     //~ void sendTouchEvent();
 
 private:
@@ -58,7 +57,7 @@ private:
     bool splitterOpen;
     QList<bjjMove> bjjMoveList;
     QList<QTouchEvent::TouchPoint> touchPoints;
-	int handlePos;
+	int handlePos, prevPos;
 
 public slots:
 	void backButton_Pressed();

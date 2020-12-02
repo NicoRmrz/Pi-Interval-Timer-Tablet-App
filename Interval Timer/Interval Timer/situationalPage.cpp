@@ -26,11 +26,12 @@ situationalGame::situationalGame(QWidget *parent) :
 {
     splitterOpen = false;
 	setFixedSize(QSize(parent->size()));
-	handlePos = 740;
+	handlePos = 1330;
+	prevPos = 1330;
+
     backBtn = new QPushButton(parent);
     backBtn->setObjectName(QString::fromUtf8("back"));
     backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
-    backBtn = new QPushButton(parent);
     backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
     backBtn->setIcon(QIcon(backIcon2));
     backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
@@ -46,8 +47,10 @@ situationalGame::situationalGame(QWidget *parent) :
     moveListWidget->setDropIndicatorShown(true);
     moveListWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     moveListWidget->setDefaultDropAction(Qt::MoveAction);
-    moveListWidget->setMaximumWidth(150);
-    moveListWidget->setLineWidth(0);
+	moveListWidget->setMinimumWidth(0);
+	moveListWidget->setMaximumWidth(0);
+	moveListWidget->setFixedWidth(0);    
+	//moveListWidget->setLineWidth(0);
     moveListWidget->setViewMode(QListView::ListMode);
     moveListWidget->setWordWrap(true);
     moveListWidget->setResizeMode(QListWidget::Adjust);
@@ -71,11 +74,10 @@ situationalGame::situationalGame(QWidget *parent) :
 	horizontalSplitter = new QSplitter(parent);
 	horizontalSplitter->addWidget(leftContainer);
 	horizontalSplitter->addWidget(moveListWidget);
-	//horizontalSplitter->setAttribute(Qt::WA_AcceptTouchEvents);
 	
-    QList<int> sizes;
-    sizes << 0 ;
-	horizontalSplitter->setSizes(sizes);
+   // QList<int> sizes;
+   // sizes << 0 ;
+	//horizontalSplitter->setSizes(sizes);
 	horizontalSplitter->handle(1)->installEventFilter(this);
 
     // set layout
@@ -91,7 +93,7 @@ situationalGame::situationalGame(QWidget *parent) :
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
 	connect(bjjBtn, &QPushButton::pressed, this, &situationalGame::bjjButton_Pressed);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
-//	connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
+	//connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
     // set stylesheet for each object
@@ -140,13 +142,11 @@ void situationalGame::getMoveList(QString inputFile)
         inputMove.level = json_arr.at(i)["Level"].toString();
         inputMove.position.replace(" ", "\n");
 
-
-	if (inputMove.level != "Beginner")
-	{
-	    bjjMoveList.append(inputMove);
-	    populateMoveList(inputMove.position, inputMove.level);
-	}
-       
+		if (inputMove.level != "Beginner")
+		{
+			bjjMoveList.append(inputMove);
+			populateMoveList(inputMove.position, inputMove.level);
+		}
     }
 }
 
@@ -173,6 +173,7 @@ void situationalGame::backButton_Pressed()
 	// color button green indicating pressed button
 	backBtn->setIcon(QIcon(backIconPressed2));
 }
+
 /* Function: backButton_Released
 
 		Slot to handle back button is released.
@@ -192,6 +193,7 @@ void situationalGame::bjjButton_Pressed()
 	// color button green indicating pressed button
 	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox_pressed);
 }
+
 /* Function: bjjButton_Released
 
 		Slot to handle back button is released.
@@ -240,37 +242,66 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 {
 	if (event->type() == QEvent::MouseButtonPress)
 	{
-		qDebug() << handlePos;
-		qDebug() << splitterOpen;
+		const QMouseEvent* const me = static_cast<const QMouseEvent*>(event);
+		const int p = me->globalX();
+		qDebug() << p;
 
 		if (splitterOpen)
 		{
-			//moveListWidget->setFixedSize(0, moveListWidget->height());
-			//moveListWidget->setFixedWidth(0);
-
 			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
-			qDebug() << "i am open";
-
-		//	moveListWidget->setFixedWidth(0);
-			moveListWidget->setMinimumWidth(0);
-			moveListWidget->setMaximumWidth(0);
-			moveListWidget->setFixedWidth(0);
 			splitterOpen = false;
 
+			for (int i = 0; i < 5; i++)
+			{
+				moveListWidget->setMinimumWidth(0);
+				moveListWidget->setMaximumWidth(0);
+				moveListWidget->setFixedWidth(0);
+			}
 
+			/*if (prevPos == handlePos)
+			{
+				moveListWidget->setMinimumWidth(0);
+				moveListWidget->setMaximumWidth(0);
+				moveListWidget->setFixedWidth(0);
+			}
+			else
+			{
+				horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
+				moveListWidget->setMinimumWidth(0);
+				moveListWidget->setMaximumWidth(0);
+				moveListWidget->setFixedWidth(0);
+				splitterOpen = false;
+			}*/
 		}
 		else
 		{
-			//moveListWidget->setFixedSize(150, moveListWidget->height());
-			//moveListWidget->setFixedSize(150, moveListWidget->height());
 			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
-			qDebug() << "i am closed";
-			moveListWidget->setMinimumWidth(150);
-			moveListWidget->setMaximumWidth(150);
-			moveListWidget->setFixedWidth(150);
 			splitterOpen = true;
 
+			for (int i = 0; i < 5; i++)
+			{
+				moveListWidget->setMinimumWidth(150);
+				moveListWidget->setMaximumWidth(150);
+				moveListWidget->setFixedWidth(150);
+			}
+
+			/*if (prevPos == handlePos)
+			{
+				moveListWidget->setMinimumWidth(150);
+				moveListWidget->setMaximumWidth(150);
+				moveListWidget->setFixedWidth(150);
+			}
+			else
+			{
+				splitterOpen = true;
+				horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
+				moveListWidget->setMinimumWidth(150);
+				moveListWidget->setMaximumWidth(150);
+				moveListWidget->setFixedWidth(150);
+			}*/
 		}
+
+		//prevPos = handlePos;
 	}
 
 	return false;
@@ -284,7 +315,6 @@ void situationalGame::moveListItemClicked(QListWidgetItem* listWidgetItem)
 {
 	bjjBtn->setText(listWidgetItem->text());
 }
-
 
 
 bool situationalGame::event(QEvent* event)
@@ -312,90 +342,3 @@ bool situationalGame::event(QEvent* event)
     QWidget::event(event);
     return true;
 }
-
-
-//~ bool situationalGame::eventFilter(QObject* obj, QEvent* event)
-//~ {
-    //~ if (event->type() == QEvent::MouseButtonPress
-        //~ || event->type() == QEvent::MouseButtonRelease
-        //~ || event->type() == QEvent::MouseButtonDblClick
-        //~ || event->type() == QEvent::MouseMove) {
-	    
-	//~ QMouseEvent* ev = static_cast<QMouseEvent*>(event);
-        //~ if (ev->type() == QEvent::MouseMove && !(ev->buttons() & Qt::LeftButton))
-            //~ return false;
-
-        //~ QTouchEvent::TouchPoint touchPoint;
-        //~ touchPoint.setState(Qt::TouchPointMoved);
-        //~ if ((ev->type() == QEvent::MouseButtonPress || ev->type() == QEvent::MouseButtonDblClick))
-            //~ touchPoint.setState(Qt::TouchPointPressed);
-        //~ else if (ev->type() == QEvent::MouseButtonRelease)
-            //~ touchPoint.setState(Qt::TouchPointReleased);
-
-        //~ touchPoint.setId(0);
-        //~ touchPoint.setScreenPos(ev->globalPos());
-        //~ touchPoint.setPos(ev->pos());
-        //~ touchPoint.setPressure(1);
-	
-	  //~ // If the point already exists, update it. Otherwise create it.
-        //~ if (touchPoints.size() > 0 && !touchPoints[0].id())
-            //~ touchPoints[0] = touchPoint;
-        //~ else if (touchPoints.size() > 1 && !touchPoints[1].id())
-            //~ touchPoints[1] = touchPoint;
-        //~ else
-            //~ touchPoints.append(touchPoint);
-
-        //~ sendTouchEvent();
-	//~ }
-	//~ else if (event->type() == QEvent::KeyPress
-        //~ && static_cast<QKeyEvent*>(event)->key() == Qt::Key_F
-        //~ && static_cast<QKeyEvent*>(event)->modifiers() == Qt::ControlModifier) {
-
-        //~ // If the keyboard point is already pressed, release it.
-        //~ // Otherwise create it and append to touchPoints.
-        //~ if (touchPoints.size() > 0 && touchPoints[0].id() == 1) {
-            //~ touchPoints[0].setState(Qt::TouchPointReleased);
-            //~ sendTouchEvent();
-        //~ } else if (touchPoints.size() > 1 && touchPoints[1].id() == 1) {
-            //~ touchPoints[1].setState(Qt::TouchPointReleased);
-            //~ sendTouchEvent();
-        //~ } else {
-            //~ QTouchEvent::TouchPoint touchPoint;
-            //~ touchPoint.setState(Qt::TouchPointPressed);
-            //~ touchPoint.setId(1);
-            //~ touchPoint.setScreenPos(QCursor::pos());
-          //~ //  touchPoint.setPos(m_view->mapFromGlobal(QCursor::pos()));
-            //~ touchPoint.setPressure(1);
-            //~ touchPoints.append(touchPoint);
-            //~ sendTouchEvent();
-
-            //~ // After sending the event, change the touchpoint state to stationary
-            //~ touchPoints.last().setState(Qt::TouchPointStationary);
-        //~ }
-    //~ }
-    //~ return false;
-//~ }
-
-//~ void situationalGame::sendTouchEvent()
-//~ {
-    //~ if (touchPoints.isEmpty())
-        //~ return;
-
-    //~ QEvent::Type type = QEvent::TouchUpdate;
-    //~ if (touchPoints.size() == 1) {
-        //~ if (touchPoints[0].state() == Qt::TouchPointReleased)
-            //~ type = QEvent::TouchEnd;
-        //~ else if (touchPoints[0].state() == Qt::TouchPointPressed)
-            //~ type = QEvent::TouchBegin;
-    //~ }
-
-    //~ QTouchEvent touchEv(type);
-    //~ touchEv.setTouchPoints(touchPoints);
-    //~ //QCoreApplication::sendEvent(horizontalSplitter, &touchEv);
-
-    //~ // After sending the event, remove all touchpoints that were released
-    //~ if (touchPoints[0].state() == Qt::TouchPointReleased)
-        //~ touchPoints.removeAt(0);
-    //~ if (touchPoints.size() > 1 && touchPoints[1].state() == Qt::TouchPointReleased)
-        //~ touchPoints.removeAt(1);
-//~ }
