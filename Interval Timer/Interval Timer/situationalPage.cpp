@@ -25,9 +25,8 @@ situationalGame::situationalGame(QWidget *parent) :
     GUI_Stylesheet(parent)
 {
     splitterOpen = false;
-
 	setFixedSize(QSize(parent->size()));
-
+	handlePos = 740;
     backBtn = new QPushButton(parent);
     backBtn->setObjectName(QString::fromUtf8("back"));
     backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
@@ -77,6 +76,7 @@ situationalGame::situationalGame(QWidget *parent) :
     QList<int> sizes;
     sizes << 0 ;
 	horizontalSplitter->setSizes(sizes);
+	horizontalSplitter->handle(1)->installEventFilter(this);
 
     // set layout
     mainHLayout = new QHBoxLayout();
@@ -91,7 +91,8 @@ situationalGame::situationalGame(QWidget *parent) :
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
 	connect(bjjBtn, &QPushButton::pressed, this, &situationalGame::bjjButton_Pressed);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
-	connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
+//	connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
+	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
     // set stylesheet for each object
     parent->setStyleSheet(GUI_Stylesheet.mainWindowGrey);
@@ -208,22 +209,83 @@ void situationalGame::bjjButton_Released()
 
         Function to change splitter icon when collapsed
 */
-void situationalGame::splitterHasMoved(int pos, int index)
+//void situationalGame::splitterHasMoved(int pos, int index)
+//{
+//	//qDebug() << pos;
+//	handlePos = pos;
+//
+//	//if (pos > 720) // splitter closed
+//	//{
+//	//	horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
+//	//	splitterOpen = false;
+//	////	moveListWidget->setFixedSize(150, moveListWidget->height());
+//	//	//qDebug() << "open";
+//
+//	//}
+//	//else
+//	//{
+//	//	if (splitterOpen == false)
+//	//	{
+//	//		horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
+//	//		splitterOpen = true;
+//	//	//	moveListWidget->setFixedSize(0, moveListWidget->height());
+//	//		//qDebug() << "CLOSED";
+//	//	}
+//
+//	//}
+//}
+
+
+bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 {
-    if (pos > 720) // splitter closed
-    {
-        horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
-        splitterOpen = false;
-    }
-    else
-    {
-        if (splitterOpen == false)
-        {
-            horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
-            splitterOpen = true;
-        }
-    }
+	if (event->type() == QEvent::MouseButtonPress)
+	{
+		qDebug() << handlePos;
+		qDebug() << splitterOpen;
+
+		if (splitterOpen)
+		{
+			//moveListWidget->setFixedSize(0, moveListWidget->height());
+			//moveListWidget->setFixedWidth(0);
+
+			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
+			qDebug() << "i am open";
+
+		//	moveListWidget->setFixedWidth(0);
+			moveListWidget->setMinimumWidth(0);
+			moveListWidget->setMaximumWidth(0);
+			moveListWidget->setFixedWidth(0);
+			splitterOpen = false;
+
+
+		}
+		else
+		{
+			//moveListWidget->setFixedSize(150, moveListWidget->height());
+			//moveListWidget->setFixedSize(150, moveListWidget->height());
+			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
+			qDebug() << "i am closed";
+			moveListWidget->setMinimumWidth(150);
+			moveListWidget->setMaximumWidth(150);
+			moveListWidget->setFixedWidth(150);
+			splitterOpen = true;
+
+		}
+	}
+
+	return false;
 }
+
+/* Function: moveListItemClicked
+
+		Slot to handle a single click on a bjj move in the layer order QListWidget
+*/
+void situationalGame::moveListItemClicked(QListWidgetItem* listWidgetItem)
+{
+	bjjBtn->setText(listWidgetItem->text());
+}
+
+
 
 bool situationalGame::event(QEvent* event)
 {
@@ -242,7 +304,7 @@ bool situationalGame::event(QEvent* event)
 	QTouchEvent::TouchPoint touchPoint;
 	qDebug() << "MOUSE release";
     }
-    else if (event->type() == QEvent::MouseTrackingChange)
+	if (event->type() == QEvent::MouseTrackingChange)
     {
 	QTouchEvent::TouchPoint touchPoint;
 	qDebug() << "MOUSE move";
@@ -250,6 +312,7 @@ bool situationalGame::event(QEvent* event)
     QWidget::event(event);
     return true;
 }
+
 
 //~ bool situationalGame::eventFilter(QObject* obj, QEvent* event)
 //~ {
