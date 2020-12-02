@@ -119,10 +119,20 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
     iconOnlyButton = "background-color: " + ICONBUTTON + "; "
 					"border: none; ";
 
-    buttonPressed = "font: bold 20px Verdana; "
+    buttonPressed = "font: 30px Bold Courier New; "
+						"color: white;"
                         "background-color: rgb(100,100,100); "
                         "border-radius: 4px";
 
+	buttonIdle = "font: 30px Bold Courier New; "
+						"color: white;"
+						"background-color: " + TABHOVER +"; "
+						"border-radius: 4px";
+
+	optionsLabel = "font: 25px Bold Courier New; "
+		"color: white;"
+		"background-color: " + BUTTONPRESSED + "; "
+		"border: none";
 
     statusBar = "QStatusBar { background:  rgba(100,100,100,0);"
                 "color:white; border:none;"
@@ -185,4 +195,25 @@ GUI_Style::GUI_Style(QObject *parent) : QObject(parent)
             " border-top-right-radius: 3px;" /* same radius as the QComboBox */
             "border-bottom-right-radius: 3px;}";
 
+	spinBox = "QSpinBox { padding-right: 10px;" /* make room for the arrows */
+		"color:white;"
+		"font: 30px Verdana;"
+		"border: none;}"
+
+		"QSpinBox::up-button{subcontrol-origin: border;"
+		"subcontrol-position: top right;" /* position at the top right corner */
+	//	"border-position: top;"
+		"padding-right: 10px;"
+		//"padding: 1px;"
+		"border-radius: 3px;"
+		"border-color: black;"
+		"width: 25px;"
+		"height: 25px;";
+		//"border-image: url(:/images/icons/splitterBoth.png) 1;}";
+		//"border-width: 1px;}";
+		
+			/*	"QSpinBox::up-arrow {image: url(:/images/icons/splitterBoth.png);"
+					"width: 25px;"
+					"height: 25px;}";*/
+				
 }

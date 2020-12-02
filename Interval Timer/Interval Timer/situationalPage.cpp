@@ -26,8 +26,6 @@ situationalGame::situationalGame(QWidget *parent) :
 {
     splitterOpen = false;
 	setFixedSize(QSize(parent->size()));
-	handlePos = 1330;
-	prevPos = 1330;
 
     backBtn = new QPushButton(parent);
     backBtn->setObjectName(QString::fromUtf8("back"));
@@ -50,7 +48,6 @@ situationalGame::situationalGame(QWidget *parent) :
 	moveListWidget->setMinimumWidth(0);
 	moveListWidget->setMaximumWidth(0);
 	moveListWidget->setFixedWidth(0);    
-	//moveListWidget->setLineWidth(0);
     moveListWidget->setViewMode(QListView::ListMode);
     moveListWidget->setWordWrap(true);
     moveListWidget->setResizeMode(QListWidget::Adjust);
@@ -74,10 +71,6 @@ situationalGame::situationalGame(QWidget *parent) :
 	horizontalSplitter = new QSplitter(parent);
 	horizontalSplitter->addWidget(leftContainer);
 	horizontalSplitter->addWidget(moveListWidget);
-	
-   // QList<int> sizes;
-   // sizes << 0 ;
-	//horizontalSplitter->setSizes(sizes);
 	horizontalSplitter->handle(1)->installEventFilter(this);
 
     // set layout
@@ -93,7 +86,6 @@ situationalGame::situationalGame(QWidget *parent) :
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
 	connect(bjjBtn, &QPushButton::pressed, this, &situationalGame::bjjButton_Pressed);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
-	//connect(horizontalSplitter, &QSplitter::splitterMoved, this, &situationalGame::splitterHasMoved);
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
     // set stylesheet for each object
@@ -207,44 +199,16 @@ void situationalGame::bjjButton_Released()
 	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox);
 }
 
-/* Function: splitterHasMoved
+/* Function: eventFilter
 
-        Function to change splitter icon when collapsed
+		Function to handle QSplitter handle press to open/close qlistwidget
 */
-//void situationalGame::splitterHasMoved(int pos, int index)
-//{
-//	//qDebug() << pos;
-//	handlePos = pos;
-//
-//	//if (pos > 720) // splitter closed
-//	//{
-//	//	horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
-//	//	splitterOpen = false;
-//	////	moveListWidget->setFixedSize(150, moveListWidget->height());
-//	//	//qDebug() << "open";
-//
-//	//}
-//	//else
-//	//{
-//	//	if (splitterOpen == false)
-//	//	{
-//	//		horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
-//	//		splitterOpen = true;
-//	//	//	moveListWidget->setFixedSize(0, moveListWidget->height());
-//	//		//qDebug() << "CLOSED";
-//	//	}
-//
-//	//}
-//}
-
-
 bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 {
 	if (event->type() == QEvent::MouseButtonPress)
 	{
 		const QMouseEvent* const me = static_cast<const QMouseEvent*>(event);
 		const int p = me->globalX();
-		qDebug() << p;
 
 		if (splitterOpen)
 		{
@@ -257,21 +221,6 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 				moveListWidget->setMaximumWidth(0);
 				moveListWidget->setFixedWidth(0);
 			}
-
-			/*if (prevPos == handlePos)
-			{
-				moveListWidget->setMinimumWidth(0);
-				moveListWidget->setMaximumWidth(0);
-				moveListWidget->setFixedWidth(0);
-			}
-			else
-			{
-				horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
-				moveListWidget->setMinimumWidth(0);
-				moveListWidget->setMaximumWidth(0);
-				moveListWidget->setFixedWidth(0);
-				splitterOpen = false;
-			}*/
 		}
 		else
 		{
@@ -284,24 +233,7 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 				moveListWidget->setMaximumWidth(150);
 				moveListWidget->setFixedWidth(150);
 			}
-
-			/*if (prevPos == handlePos)
-			{
-				moveListWidget->setMinimumWidth(150);
-				moveListWidget->setMaximumWidth(150);
-				moveListWidget->setFixedWidth(150);
-			}
-			else
-			{
-				splitterOpen = true;
-				horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
-				moveListWidget->setMinimumWidth(150);
-				moveListWidget->setMaximumWidth(150);
-				moveListWidget->setFixedWidth(150);
-			}*/
 		}
-
-		//prevPos = handlePos;
 	}
 
 	return false;
@@ -314,31 +246,4 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 void situationalGame::moveListItemClicked(QListWidgetItem* listWidgetItem)
 {
 	bjjBtn->setText(listWidgetItem->text());
-}
-
-
-bool situationalGame::event(QEvent* event)
-{
-    if (event->type() == QEvent::TouchBegin)
-    {
-	QTouchEvent::TouchPoint touchPoint;
-	qDebug() << "Touch";
-    }
-    else if (event->type() == QEvent::MouseButtonPress)
-    {
-	QTouchEvent::TouchPoint touchPoint;
-	qDebug() << "MOUSE Touch";
-    }
-    else if (event->type() == QEvent::MouseButtonRelease)
-    {
-	QTouchEvent::TouchPoint touchPoint;
-	qDebug() << "MOUSE release";
-    }
-	if (event->type() == QEvent::MouseTrackingChange)
-    {
-	QTouchEvent::TouchPoint touchPoint;
-	qDebug() << "MOUSE move";
-    }
-    QWidget::event(event);
-    return true;
 }

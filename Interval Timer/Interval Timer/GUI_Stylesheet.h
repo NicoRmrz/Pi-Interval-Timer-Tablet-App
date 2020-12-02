@@ -38,9 +38,13 @@ public:
     QString iconBtnPressed;
     QString iconOnlyButton;
     QString buttonPressed;
+    QString buttonIdle;
+    QString optionsLabel;
     QString statusBar;
     QString comboBox;
     QString timerState;
+	QString spinBox;
+
 
 };
 

@@ -2,12 +2,11 @@
 #include <QWidget>
 #include <QObject>
 #include <QDialog>
-#include <QIcon>
 #include <QVBoxLayout>
-#include <QComboBox>
-#include <QScroller>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QSpinBox>
-#include <QSlider>
+#include <QPushButton>
 #include "GUI_Stylesheet.h"
 
 #define MAIN_ICON QString(":/images/icons/specific/bjj_stand_up.PNG")
@@ -25,12 +24,19 @@ public:
 	~editWindow() {};
 	GUI_Style    GUI_Stylesheet;
 	QVBoxLayout *mainVLayout;
-	QComboBox	*rollSecondInput;
-	QComboBox	*restSecondInput;
+	QSpinBox	*rollSecondInput;
+	QSpinBox	*restSecondInput;
 	QSpinBox	*rollMinuteInput;
-	QSlider		*restMinuteInput;
+	QSpinBox	*restMinuteInput;
+	QLabel		*restLabel;
+	QLabel		*rollLabel;
+	QVBoxLayout *restLayout;
+	QVBoxLayout *rollLayout;
+	QHBoxLayout *restOptionsLayout;
+	QHBoxLayout *rollOptionsLayout;
+	QPushButton	*saveExitBtn;
 
-private:
-	void setComboBoxes(void);
-
+public slots:		
+	void exitButton_Pressed();
+	void exitButton_Released();
 };

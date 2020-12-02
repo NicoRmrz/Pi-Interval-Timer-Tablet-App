@@ -47,9 +47,7 @@ public:
     QListWidget	*moveListWidget;
     QSplitter	*horizontalSplitter;
     void getMoveList(QString inputFile);
-    bool event (QEvent *event);
 	bool eventFilter(QObject * obj, QEvent * event);
-    //~ void sendTouchEvent();
 
 private:
 	void populateMoveList(QString move, QString difficulty);
@@ -57,14 +55,12 @@ private:
     bool splitterOpen;
     QList<bjjMove> bjjMoveList;
     QList<QTouchEvent::TouchPoint> touchPoints;
-	int handlePos, prevPos;
 
 public slots:
 	void backButton_Pressed();
 	void backButton_Released();	
 	void bjjButton_Pressed();
 	void bjjButton_Released();
-	//void splitterHasMoved(int pos, int index);
 	void moveListItemClicked(QListWidgetItem* listWidgetItem);
 
 signals:
