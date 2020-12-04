@@ -26,8 +26,7 @@ using namespace std;
 
         parent - Inherits QWidget attributes
 */
-mainScreen::mainScreen(QWidget *parent) :
-    GUI_Stylesheet(parent)
+mainScreen::mainScreen(QWidget *parent) 
 
 {
 	setFixedSize(QSize(parent->size()));
@@ -70,10 +69,10 @@ mainScreen::mainScreen(QWidget *parent) :
 
     setLayout(mainLayout);
 
-    setStyleSheet(GUI_Stylesheet.mainWindowGrey);
-    showIntervalTimer->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-    situationalBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-	exitButton->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
+    setStyleSheet(mainWindowGrey);
+    showIntervalTimer->setStyleSheet(iconOnlyButton);
+    situationalBtn->setStyleSheet(iconOnlyButton);
+	exitButton->setStyleSheet(iconOnlyButton);
 
 	// connect signals 
 	connect(showIntervalTimer, &QPushButton::pressed, this, &mainScreen::intervalTimerButton_Pressed);

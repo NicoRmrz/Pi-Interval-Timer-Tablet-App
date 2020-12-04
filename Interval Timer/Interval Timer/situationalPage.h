@@ -14,7 +14,6 @@
 #include <QSplitter>
 #include <QListWidget>
 #include <QListWidgetItem>
-#include <QTouchEvent>
 #include <QEvent>
 
 #include "GUI_Stylesheet.h"
@@ -38,7 +37,6 @@ class situationalGame : public QWidget
 public:
     situationalGame(QWidget *parent);
     ~situationalGame() {};
-    GUI_Style	GUI_Stylesheet;
     QPushButton	*backBtn;
     QHBoxLayout	*mainLayout;
     QHBoxLayout	*mainHLayout;

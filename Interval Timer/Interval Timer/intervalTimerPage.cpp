@@ -37,8 +37,7 @@ using namespace std;
 
         parent - Inherits QWidget attributes
 */
-IntervalTimer::IntervalTimer(QWidget *parent) :
-    GUI_Stylesheet(parent)
+IntervalTimer::IntervalTimer(QWidget *parent) 
 {
 	setFixedSize(QSize(parent->size()));
 
@@ -58,9 +57,9 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     exeTimer->setObjectName(QString::fromUtf8("exeTimer"));
     exeTimer->setText("00:00");
 
-    timerState = new QLabel(parent);
-    timerState->setObjectName(QString::fromUtf8("timerState"));
-    timerState->setText("");
+	timerStateLabel = new QLabel(parent);
+	timerStateLabel->setObjectName(QString::fromUtf8("timerState"));
+	timerStateLabel->setText("");
 
     startBtn = new QPushButton(parent);
     startBtn->setObjectName(QString::fromUtf8("startBtn"));
@@ -102,7 +101,7 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
 	topBtnLayout->setContentsMargins(0, 0, 20, 0);
 	topBtnLayout->setSpacing(0);
 	topBtnLayout->addWidget(backBtn, 0, Qt::AlignLeft);
-	topBtnLayout->addWidget(timerState, 0, Qt::AlignCenter);
+	topBtnLayout->addWidget(timerStateLabel, 0, Qt::AlignCenter);
 	topBtnLayout->addWidget(editBtn, 0, Qt::AlignRight);
 
     mainVLayout = new QVBoxLayout();
@@ -127,13 +126,13 @@ IntervalTimer::IntervalTimer(QWidget *parent) :
     connect(currTimer, &timerReading::updateColor, this, &IntervalTimer::changeColor);
 
     // set stylesheet for each object
-	parent->setStyleSheet(GUI_Stylesheet.mainWindowIdle);
-    exeTimer->setStyleSheet(GUI_Stylesheet.mainTimer);
-	backBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-	editBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-	restartBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-	startBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-    timerState->setStyleSheet(GUI_Stylesheet.timerState);
+	parent->setStyleSheet(mainWindowIdle);
+    exeTimer->setStyleSheet(mainTimer);
+	backBtn->setStyleSheet(iconOnlyButton);
+	editBtn->setStyleSheet(iconOnlyButton);
+	restartBtn->setStyleSheet(iconOnlyButton);
+	startBtn->setStyleSheet(iconOnlyButton);
+	timerStateLabel->setStyleSheet(timerState);
 }
 
 /* Define: changeColor
@@ -149,17 +148,17 @@ void IntervalTimer::changeColor(int colorState)
         {
 	        playSound(buzzer);
 
-            setStyleSheet(GUI_Stylesheet.mainWindowRest);
+            setStyleSheet(mainWindowRest);
             emit intervalState(colorState);
-            timerState->setText("REST");
+			timerStateLabel->setText("REST");
         }
         else // Rolling
         {
 	        playSound(buzzer);
 
-            setStyleSheet(GUI_Stylesheet.mainWindowRoll);
+            setStyleSheet(mainWindowRoll);
             emit intervalState(colorState);
-            timerState->setText("ROLL");
+			timerStateLabel->setText("ROLL");
         }
     }
 }

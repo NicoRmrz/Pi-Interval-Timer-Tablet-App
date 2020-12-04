@@ -21,8 +21,7 @@ using namespace std;
 
         parent - Inherits QWidget attributes
 */
-situationalGame::situationalGame(QWidget *parent) :
-    GUI_Stylesheet(parent)
+situationalGame::situationalGame(QWidget *parent) 
 {
     splitterOpen = false;
 	setFixedSize(QSize(parent->size()));
@@ -89,11 +88,11 @@ situationalGame::situationalGame(QWidget *parent) :
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
     // set stylesheet for each object
-    parent->setStyleSheet(GUI_Stylesheet.mainWindowGrey);
-	backBtn->setStyleSheet(GUI_Stylesheet.iconOnlyButton);
-	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox);
-    moveListWidget->setStyleSheet(GUI_Stylesheet.moveList);
-	horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
+    parent->setStyleSheet(mainWindowGrey);
+	backBtn->setStyleSheet(iconOnlyButton);
+	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
+    moveListWidget->setStyleSheet(moveListSTYLE);
+	horizontalSplitter->setStyleSheet(splitterClosed);
 
     getMoveList(JSONmoveList);
 }
@@ -183,7 +182,7 @@ void situationalGame::backButton_Released()
 void situationalGame::bjjButton_Pressed()
 {
 	// color button green indicating pressed button
-	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox_pressed);
+	bjjBtn->setStyleSheet(bjjMoveBox_pressed);
 }
 
 /* Function: bjjButton_Released
@@ -196,7 +195,7 @@ void situationalGame::bjjButton_Released()
     moveListWidget->setCurrentRow(randomNum);
 
     bjjBtn->setText(bjjMoveList[randomNum].position);
-	bjjBtn->setStyleSheet(GUI_Stylesheet.bjjMoveBox);
+	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
 }
 
 /* Function: eventFilter
@@ -212,7 +211,7 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 
 		if (splitterOpen)
 		{
-			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitterClosed);
+			horizontalSplitter->setStyleSheet(splitterClosed);
 			splitterOpen = false;
 
 			for (int i = 0; i < 5; i++)
@@ -224,7 +223,7 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 		}
 		else
 		{
-			horizontalSplitter->setStyleSheet(GUI_Stylesheet.splitter);
+			horizontalSplitter->setStyleSheet(splitterSTYLE);
 			splitterOpen = true;
 
 			for (int i = 0; i < 5; i++)
