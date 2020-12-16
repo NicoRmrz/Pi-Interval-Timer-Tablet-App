@@ -206,8 +206,13 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 {
 	if (event->type() == QEvent::MouseButtonPress)
 	{
+<<<<<<< HEAD
 		//const QMouseEvent* const me = static_cast<const QMouseEvent*>(event);
 		//const int p = me->globalX();
+=======
+		//QMouseEvent* me = QMouseEvent*(event);
+		//int p = me->globalX();
+>>>>>>> f275701b6696d344979d61f3bc7d383c1b42d583
 
 		if (splitterOpen)
 		{

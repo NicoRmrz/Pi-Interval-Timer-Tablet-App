@@ -36,16 +36,16 @@ mainScreen::mainScreen(QWidget *parent)
     showIntervalTimer->setObjectName(QString::fromUtf8("showIntervalTimer"));
     showIntervalTimer->setMinimumSize(230, 230);
     showIntervalTimer->setMaximumSize(230, 230);
-	showIntervalTimer->setIcon(QIcon(QPixmap(intervalTimerIcon).scaled(showIntervalTimer->size())));
+	showIntervalTimer->setIcon(QIcon(intervalTimerIcon));
 	showIntervalTimer->setIconSize(QSize(250, 230));
 
     // Create timer interval button
     situationalBtn = new QPushButton(parent);
     situationalBtn->setObjectName(QString::fromUtf8("showSituationalPage"));
     situationalBtn->setMinimumSize(230, 230);
-    situationalBtn->setMaximumSize(230, 230);
-    situationalBtn->setIcon(QIcon(QPixmap(situationalIcon).scaled(situationalBtn->size())));
-    situationalBtn->setIconSize(QSize(250, 220));
+    situationalBtn->setMaximumSize(250, 260);
+    situationalBtn->setIcon(QIcon(situationalIcon));
+    situationalBtn->setIconSize(QSize(240, 250));
 
 	// exit button
 	exitButton = new QPushButton(parent);
@@ -89,7 +89,7 @@ mainScreen::mainScreen(QWidget *parent)
 void mainScreen::intervalTimerButton_Pressed()
 {
 	// color button green indicating pressed button
-	showIntervalTimer->setIcon(QIcon(QPixmap(intervalTimerIconPressed).scaled(showIntervalTimer->size())));
+	showIntervalTimer->setIcon(QIcon(intervalTimerIconPressed));
 }
 
 /* Function: intervalTimerButton_Released
@@ -98,7 +98,7 @@ void mainScreen::intervalTimerButton_Pressed()
 */
 void mainScreen::intervalTimerButton_Released()
 {
-	showIntervalTimer->setIcon(QIcon(QPixmap(intervalTimerIcon).scaled(showIntervalTimer->size())));
+    showIntervalTimer->setIcon(QIcon(intervalTimerIcon));
 	emit switchToIntervalPage();
 }
 
@@ -109,7 +109,7 @@ void mainScreen::intervalTimerButton_Released()
 void mainScreen::situationalButton_Pressed()
 {
 	// color button green indicating pressed button
-	situationalBtn->setIcon(QIcon(QPixmap(situationalIconPressed).scaled(situationalBtn->size())));
+    situationalBtn->setIcon(QIcon(situationalIconPressed));
 }
 
 /* Function: situationalButton_Released
@@ -118,7 +118,7 @@ void mainScreen::situationalButton_Pressed()
 */
 void mainScreen::situationalButton_Released()
 {
-	situationalBtn->setIcon(QIcon(QPixmap(situationalIcon).scaled(situationalBtn->size())));
+    situationalBtn->setIcon(QIcon(situationalIcon));
 	emit switchToSituationalPage();
 }
 
