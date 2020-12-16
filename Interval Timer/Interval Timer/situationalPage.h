@@ -52,7 +52,6 @@ private:
     QJsonArray json_arr;
     bool splitterOpen;
     QList<bjjMove> bjjMoveList;
-    QList<QTouchEvent::TouchPoint> touchPoints;
 
 public slots:
 	void backButton_Pressed();
