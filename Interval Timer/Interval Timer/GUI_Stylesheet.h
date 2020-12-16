@@ -5,46 +5,141 @@
     Author: Nico Ramirez
 */
 #pragma once
-#include <qstring.h> 
-#include <qobject.h> 
+#include <QString>
+#include "qstring.h"
 
 #define ICONSIZE 100
 #define BACKICONSIZE 50
+#define MAIN_ICON QString(":/images/icons/specific/bjj_stand_up.PNG")
 
-/* Class: GUI_Style
+/* Define: Color Scheme
 
-    QObject class to hold all strings customization of front end.
-    To be called out by .setStyleSheet() function of each object
-*/
-class GUI_Style : public QObject
-{
-public:
-    /* Function declarations */
-    GUI_Style(QObject *parent);
-
-    /* Variable declarations */
-    QString mainWindowGrey;
-    QString mainWindowRest;
-    QString mainWindowRoll;
-    QString mainWindowIdle;
-    QString bjjMoveBox;
-    QString bjjMoveBox_pressed;
-    QString moveList;
-    QString splitterClosed;
-    QString splitter;
-    QString mainTimer;
-    QString iconBtn;
-    QString iconBtn1;
-    QString iconBtnPressed;
-    QString iconOnlyButton;
-    QString buttonPressed;
-    QString buttonIdle;
-    QString optionsLabel;
-    QString statusBar;
-    QString comboBox;
-    QString timerState;
-	QString spinBox;
+	Color scheme for GUI Objects setStyleSheet rgba/ hex values
+ */
+#define GREYBACKGROUND  QString("#20292F")
+#define GREENBACKGROUND QString("#07c40d")
+#define REDBACKGROUND   QString("#E3242B")
+#define BLUEBACKGROUND  QString("#6593F5")
+#define ICONPRESSED		QString("rgba(72,146,73,240)")
+#define ICONBUTTON      QString("rgba(0,0,0,0)")
+#define TABHOVER        QString("rgba(38,79,120,255)")
+#define BUTTONPRESSED   QString("rgb(100,100,100)")
+#define UIBUTTON        QString("#6497b1")
 
 
-};
+#define mainWindowGrey	QString("background-color: " + GREYBACKGROUND + "; ")
+#define mainWindowRest	QString("background-color: " + GREENBACKGROUND + "; ")
+#define mainWindowRoll	QString("background-color: " + REDBACKGROUND + "; ")
+#define mainWindowIdle	QString("background-color: " + BLUEBACKGROUND + "; ")
+
+
+#define bjjMoveBoxSTYLE			QString("font: 150px Bold Courier New; "\
+										"color: white;"\
+										"background-color: " + TABHOVER + "; "\
+										"border-width: 20px; "\
+										"border-radius: 60px; "\
+										"border-color:  " + TABHOVER + ";"\
+										"border-style: outset;")
+
+#define bjjMoveBox_pressed		QString("font: 150px Bold Courier New; "\
+										"color: white;"\
+										"background-color: " + ICONPRESSED + "; "\
+										"border-width: 20px; "\
+										"border-radius: 60px; "\
+										"border-color:  " + ICONPRESSED + ";"\
+										"border-style: outset;")
+
+#define moveListSTYLE			QString("QListWidget {"\
+										"font: 22px Verdana; "\
+										"color: white;"\
+										"background-color: " + TABHOVER + "; "\
+										"border: none; "\
+										"padding: 9px;}"\
+										"QListWidget::item {"\
+										"border: none;}"\
+										"QListWidget::item:selected {"\
+										"font: 22px Verdana; "\
+										"color: black;"\
+										"background-color: #add8e6;}")
+
+#define splitterClosed	QString("QSplitter::handle {image:url(:/images/icons/splitterOpen.png);}"\
+								"QSplitter::handle:horizontal{width: 50px; }"\
+								"QSplitter::handle:vertical{height: 50px; }"\
+								"QSplitter::handle:pressed{image:url(:/images/icons/splitterBoth.png); "\
+								"background-color: " + ICONPRESSED + "; }")\
+
+#define splitterSTYLE 	QString("QSplitter::handle {image:url(:/images/icons/splitterBoth.png);}"\
+								"QSplitter::handle:horizontal{width: 50px; }"\
+								"QSplitter::handle:vertical{height: 50px; }"\
+								"QSplitter::handle:pressed{image:url(:/images/icons/splitterBoth.png); "\
+								"background-color: " + ICONPRESSED + "; }")
+
+#define mainTimer		QString("font: 220px Bold Courier New; "\
+								"color: white;"\
+								"border: none")
+
+#define timerState		QString("font:  50px 'Times New Roman'; "\
+								"color: white;"\
+								"border: none")
+
+#define iconBtn			QString("background-color: " + TABHOVER + " ;"\
+								"border-style: outset; "\
+								"border-width: 20px; "\
+								"border-radius: 60px; "\
+								"border-color:  " + TABHOVER + ";")
+
+#define iconBtn1		QString("background-color: " + TABHOVER + ";"\
+								"border-style: outset; "\
+								"border-width: 20px; "\
+								"border-radius: 60px; "\
+								"border-color:  " + TABHOVER + ";")
+
+#define iconBtnPressed	QString("background-color: " + ICONPRESSED + "; "\
+								"border-style: outset; "\
+								"border-width: 20px; "\
+								"border-color: " + ICONPRESSED + ";"\
+								"border-radius: 60px")
+
+#define iconOnlyButton	QString("background-color: " + ICONBUTTON + "; "\
+								"border: none; ")
+
+#define buttonPressed	QString("font: 30px Bold Courier New; "\
+								"color: white;"\
+								"background-color: rgb(100,100,100); "\
+								"border-radius: 4px")
+
+#define buttonIdle		QString("font: 30px Bold Courier New; "\
+								"color: white;"\
+								"background-color: " + TABHOVER + "; "\
+								"border-radius: 4px")
+
+#define restOptLabel	QString("font: 30px'Times New Roman'; "\
+								"color: white;"\
+								"background-color: " + GREENBACKGROUND + "; "\
+								"border: none")
+
+#define rollOptLabel	QString("font: 30px'Times New Roman'; "\
+								"color: white;"\
+								"background-color: " + REDBACKGROUND + "; "\
+								"border: none")
+
+#define statusBarSTYLE	QString("QStatusBar { background:  rgba(100,100,100,0);"\
+											"color:white; border:none;"\
+											"font: 11px Verdana; } "\
+								"QStatusBar::item {border: none; "\
+												"font: 11px Verdana;  "\
+												"border-radius: 3px; }")
+
+#define spinBox			QString("QSpinBox { padding-right: 25px;"\
+										"color:white;"\
+										"font: 30px Verdana;"\
+										"border: none;}"\
+								"QSpinBox::up-button{subcontrol-origin: border;"\
+										"subcontrol-position: top right;" \
+										"border-image: url(:/images/icons/back.png);"\
+										"width: 30px;"\
+										"height: 30px;}")
+							/*	"QSpinBox::up-arrow{image: url(:/images/icons/back.png);"\
+										"width: 35px;"\
+										"height: 25px;}")*/
 

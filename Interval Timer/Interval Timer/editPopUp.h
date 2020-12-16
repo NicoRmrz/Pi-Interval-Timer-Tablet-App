@@ -9,7 +9,6 @@
 #include <QPushButton>
 #include "GUI_Stylesheet.h"
 
-#define MAIN_ICON QString(":/images/icons/specific/bjj_stand_up.PNG")
 
 /* Class: editWindow
 
@@ -22,7 +21,6 @@ class editWindow : public QDialog
 public:
 	editWindow(QDialog *parent);
 	~editWindow() {};
-	GUI_Style    GUI_Stylesheet;
 	QVBoxLayout *mainVLayout;
 	QSpinBox	*rollSecondInput;
 	QSpinBox	*restSecondInput;

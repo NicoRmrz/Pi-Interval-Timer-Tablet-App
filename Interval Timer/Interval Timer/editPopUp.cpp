@@ -18,12 +18,11 @@ using namespace std;
 
 		parent - Inherits QObject attributes
 */
-editWindow::editWindow(QDialog *parent = 0) :
-	GUI_Stylesheet(parent)
+editWindow::editWindow(QDialog *parent = 0) 
 {
-	setFixedSize(350, 425);
+	setFixedSize(450, 425);
 	setWindowTitle("Edit");
-	setStyleSheet(GUI_Stylesheet.mainWindowGrey);
+	setStyleSheet(mainWindowGrey);
 	setWindowIcon(QIcon(MAIN_ICON));
 	setWindowFlags(Qt::FramelessWindowHint);
 
@@ -77,7 +76,6 @@ editWindow::editWindow(QDialog *parent = 0) :
 	rollOptionsLayout->addWidget(rollMinuteInput);
 	rollOptionsLayout->addWidget(rollSecondInput);
 
-
 	restLayout = new QVBoxLayout();
 	restLayout->setContentsMargins(0, 0, 0, 0);
 	restLayout->setSpacing(0);
@@ -99,21 +97,17 @@ editWindow::editWindow(QDialog *parent = 0) :
 
 	setLayout(mainVLayout);
 
-	rollMinuteInput->setStyleSheet(GUI_Stylesheet.spinBox);
-	restMinuteInput->setStyleSheet(GUI_Stylesheet.spinBox);
-	rollSecondInput->setStyleSheet(GUI_Stylesheet.spinBox);
-	restSecondInput->setStyleSheet(GUI_Stylesheet.spinBox);
-	saveExitBtn->setStyleSheet(GUI_Stylesheet.buttonIdle);
-	rollLabel->setStyleSheet(GUI_Stylesheet.optionsLabel);
-	restLabel->setStyleSheet(GUI_Stylesheet.optionsLabel);
-
+	rollMinuteInput->setStyleSheet(spinBox);
+	restMinuteInput->setStyleSheet(spinBox);
+	rollSecondInput->setStyleSheet(spinBox);
+	restSecondInput->setStyleSheet(spinBox);
+	saveExitBtn->setStyleSheet(buttonIdle);
+	rollLabel->setStyleSheet(rollOptLabel);
+	restLabel->setStyleSheet(restOptLabel);
 
 	connect(saveExitBtn, &QPushButton::pressed, this, &editWindow::exitButton_Pressed);
 	connect(saveExitBtn, &QPushButton::released, this, &editWindow::exitButton_Released);
-
-
 }
-
 
 /* Function: exitButton_Pressed
 
@@ -121,7 +115,7 @@ editWindow::editWindow(QDialog *parent = 0) :
 */
 void editWindow::exitButton_Pressed()
 {
-	saveExitBtn->setStyleSheet(GUI_Stylesheet.buttonPressed);
+	saveExitBtn->setStyleSheet(buttonPressed);
 }
 
 /* Function: exitButton_Released
@@ -130,6 +124,7 @@ void editWindow::exitButton_Pressed()
 */
 void editWindow::exitButton_Released()
 {
-	saveExitBtn->setStyleSheet(GUI_Stylesheet.buttonIdle);
+	saveExitBtn->setStyleSheet(buttonIdle);
+
 	close();
 }

@@ -7,8 +7,7 @@
  */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    GUI_Stylesheet(parent)
+    ui(new Ui::MainWindow)
 {
 	// call out GUI objects created in ui_MainWindow.h
 	ui->setupUi(this);
@@ -16,8 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowIcon(QIcon(MAIN_ICON));
 
     // style all objects
-    setStyleSheet(GUI_Stylesheet.mainWindowGrey);
-    ui->statusbar->setStyleSheet(GUI_Stylesheet.statusBar);
+    setStyleSheet(mainWindowGrey);
+    ui->statusbar->setStyleSheet(statusBarSTYLE);
 
     // connect signals 
 	connect(ui->mainPage, &mainScreen::switchToIntervalPage, this, &MainWindow::showIntervalTimer);
@@ -30,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
  */
 void MainWindow::showIntervalTimer()
 {
-	setStyleSheet(GUI_Stylesheet.mainWindowIdle);
+	setStyleSheet(mainWindowIdle);
 
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
@@ -59,11 +58,11 @@ void MainWindow::updateTimerState(int state)
    // if (IntervalTimerWidget->state == 0) // Rest
     if (state == 0) // Rest
     {
-        setStyleSheet(GUI_Stylesheet.mainWindowRest);
+        setStyleSheet(mainWindowRest);
     }
     else // Rolling
     {
-        setStyleSheet(GUI_Stylesheet.mainWindowRoll);
+        setStyleSheet(mainWindowRoll);
     }
 }
 
@@ -74,7 +73,7 @@ void MainWindow::updateTimerState(int state)
  */
 void MainWindow::showSituationalGame()
 {
-	setStyleSheet(GUI_Stylesheet.mainWindowIdle);
+	setStyleSheet(mainWindowIdle);
 
     // remove main window widget
     ui->mainLayout->removeWidget(ui->centralwidget);
@@ -113,7 +112,7 @@ void MainWindow::returnToMain(QString page)
     // revert to main page
     ui->mainPage = new mainScreen(this);
     ui->mainLayout->addWidget(ui->mainPage);
-    setStyleSheet(GUI_Stylesheet.mainWindowGrey);
+    setStyleSheet(mainWindowGrey);
 
     // connect signals 
 	connect(ui->mainPage, &mainScreen::switchToIntervalPage, this, &MainWindow::showIntervalTimer);
@@ -131,7 +130,7 @@ void MainWindow::returnToMain(QString page)
 */
 void MainWindow::sendStatusBar(QString message, int time)
 {
-    ui->statusbar->setStyleSheet(GUI_Stylesheet.statusBar);
+    ui->statusbar->setStyleSheet(statusBarSTYLE);
     ui->statusbar->showMessage(message, time);
 }
 

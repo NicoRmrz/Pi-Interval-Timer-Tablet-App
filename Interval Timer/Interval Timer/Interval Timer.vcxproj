@@ -95,7 +95,6 @@
     <ClCompile Include="mainScreenWidget.cpp" />
     <ClCompile Include="timer.cpp" />
     <QtMoc Include="MainWindow.h" />
-    <ClCompile Include="GUI_Stylesheet.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
