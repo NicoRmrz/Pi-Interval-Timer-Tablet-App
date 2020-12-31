@@ -1,4 +1,5 @@
 QT           += core gui widgets
+#QT           += texttospeech
 
 HEADERS       = intervalTimerPage.h \
 				editPopUp.h \
@@ -12,7 +13,6 @@ HEADERS       = intervalTimerPage.h \
 SOURCES       = intervalTimerPage.cpp \
                 main.cpp \
 				editPopUp.cpp \
-				GUI_Stylesheet.cpp \
 				mainScreenWidget.cpp \
 				MainWindow.cpp \
 				situationalPage.cpp \
