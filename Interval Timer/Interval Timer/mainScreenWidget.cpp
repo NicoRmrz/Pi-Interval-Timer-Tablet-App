@@ -31,6 +31,13 @@ mainScreen::mainScreen(QWidget *parent)
 {
 	setFixedSize(QSize(parent->size()));
 
+    // create title
+
+    appTitle = new QLabel(parent);
+    appTitle->setText("Jitz Trainer");
+    appTitle->setMinimumWidth(300);
+    appTitle->setAlignment(Qt::AlignCenter);
+
     // Create timer interval button
     showIntervalTimer = new QPushButton(parent);
     showIntervalTimer->setObjectName(QString::fromUtf8("showIntervalTimer"));
@@ -65,6 +72,7 @@ mainScreen::mainScreen(QWidget *parent)
 	mainLayout->setContentsMargins(20, 10, 20, 20);
 	mainLayout->setSpacing(0);
 	mainLayout->addWidget(exitButton, 0, Qt::AlignRight);
+	mainLayout->addWidget(appTitle, 1, Qt::AlignCenter);
     mainLayout->addLayout(buttonLayout, Qt::AlignTop);
 
     setLayout(mainLayout);
@@ -73,6 +81,8 @@ mainScreen::mainScreen(QWidget *parent)
     showIntervalTimer->setStyleSheet(iconOnlyButton);
     situationalBtn->setStyleSheet(iconOnlyButton);
 	exitButton->setStyleSheet(iconOnlyButton);
+    appTitle->setStyleSheet(appMainTitle);
+
 
 	// connect signals 
 	connect(showIntervalTimer, &QPushButton::pressed, this, &mainScreen::intervalTimerButton_Pressed);

@@ -26,7 +26,6 @@
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
 
-
 #define mainWindowGrey	QString("background-color: " + GREYBACKGROUND + "; ")
 #define mainWindowRest	QString("background-color: " + GREENBACKGROUND + "; ")
 #define mainWindowRoll	QString("background-color: " + REDBACKGROUND + "; ")
@@ -143,3 +142,12 @@
 										"width: 35px;"\
 										"height: 25px;}")*/
 
+
+#define appMainTitle    QString ("font: 40px'Times New Roman'; "\
+								"color: gold;"\
+                                "border-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,stop:0 white, stop : 0.4 rgba(10, 20, 30, 40),stop : 1 rgb(0, 200, 230, 200)); "\
+                                "border-top: none; "\
+                                "border-right: none; "\
+                                "border-left: none; "\
+                                "border-style: double; "\
+                                "border-bottom-width: 3px; ")				

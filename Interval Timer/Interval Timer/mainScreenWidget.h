@@ -23,6 +23,7 @@ public:
     ~mainScreen() {};
     QVBoxLayout *mainLayout;
     QHBoxLayout *buttonLayout;
+    QLabel      *appTitle;
     QPushButton *showIntervalTimer;
     QPushButton *situationalBtn;
     QPushButton *exitButton;
