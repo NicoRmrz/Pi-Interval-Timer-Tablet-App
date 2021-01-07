@@ -34,7 +34,7 @@ situationalGame::situationalGame(QWidget *parent)
     backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
 
     bjjBtn = new QPushButton(parent);
-    bjjBtn->setText("touch");
+    bjjBtn->setText("start");
     bjjBtn->setMaximumHeight(400);
 
     moveListWidget = new QListWidget(parent);
