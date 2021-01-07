@@ -16,6 +16,8 @@
 
 	Color scheme for GUI Objects setStyleSheet rgba/ hex values
  */
+#define TITLECOLOR_BOT_BORDER		QString("rgba(212,175,55,150)")
+#define TITLECOLOR			  		QString("rgba(255,223 ,88,200)")
 #define GREYBACKGROUND  QString("#20292F")
 #define GREENBACKGROUND QString("#07c40d")
 #define REDBACKGROUND   QString("#E3242B")
@@ -144,8 +146,12 @@
 
 
 #define appMainTitle    QString ("font: 40px'Times New Roman'; "\
-								"color: gold;"\
-                                "border-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,stop:0 white, stop : 0.4 rgba(10, 20, 30, 40),stop : 1 rgb(0, 200, 230, 200)); "\
+								"color: "+TITLECOLOR+";"\
+                                "border-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop: 0		" + GREYBACKGROUND + ", "\
+																				"	   stop: 0.25	" + GREYBACKGROUND + ", "\
+																				"	   stop: 0.5	" + TITLECOLOR_BOT_BORDER + ", "\
+																				"	   stop: 0.75   " + GREYBACKGROUND + ", "\
+																				"	   stop: 1		" + GREYBACKGROUND + "); "\
                                 "border-top: none; "\
                                 "border-right: none; "\
                                 "border-left: none; "\
