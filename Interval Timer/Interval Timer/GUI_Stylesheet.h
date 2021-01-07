@@ -35,7 +35,7 @@
 
 
 #define bjjMoveBoxSTYLE			QString("font: 150px Bold Courier New; "\
-										"color: white;"\
+										"color:  rgba(255,255,255,200);"\
 										"background-color: " + TABHOVER + "; "\
 										"border-width: 20px; "\
 										"border-radius: 60px; "\
@@ -43,12 +43,12 @@
 										"border-style: outset;")
 
 #define bjjMoveBox_pressed		QString("font: 150px Bold Courier New; "\
-										"color: white;"\
+										"color: rgba(255,255,255,200);"\
 										"background-color: " + ICONPRESSED + "; "\
 										"border-width: 20px; "\
 										"border-radius: 60px; "\
 										"border-color:  " + ICONPRESSED + ";"\
-										"border-style: outset;")
+										"border-style: inset;")
 
 #define moveListSTYLE			QString("QListWidget {"\
 										"font: 22px Verdana; "\
