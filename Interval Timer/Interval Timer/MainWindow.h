@@ -8,7 +8,7 @@
 
 //Path to icon image from resource file
 #define APP_VERSION QString("1.0")
-#define WINDOW_TITLE QString("BJJ Interval Timer v" + APP_VERSION)
+#define WINDOW_TITLE QString("Jitz Trainer v" + APP_VERSION)
 
 class MainWindow : public QMainWindow
 {

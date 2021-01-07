@@ -35,7 +35,7 @@ mainScreen::mainScreen(QWidget *parent)
 
     appTitle = new QLabel(parent);
     appTitle->setText("Jitz Trainer");
-    appTitle->setMinimumWidth(300);
+    appTitle->setMinimumWidth(500);
     appTitle->setAlignment(Qt::AlignCenter);
 
     // Create timer interval button
