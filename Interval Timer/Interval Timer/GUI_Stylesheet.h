@@ -25,6 +25,7 @@
 #define ICONPRESSED		QString("rgba(72,146,73,240)")
 #define ICONBUTTON      QString("rgba(0,0,0,0)")
 #define TABHOVER        QString("rgba(38,79,120,255)")
+#define TABHOVER_FADED        QString("rgba(38,79,120,150)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
 
@@ -66,7 +67,7 @@
 #define moveListSTYLE			QString("QListWidget {"\
 										"font: 22px Verdana; "\
 										"color: white;"\
-										"background-color: " + TABHOVER + "; "\
+										"background-color: " + TABHOVER_FADED + "; "\
 										"border: none; "\
 										"alternate-background-color: "+TITLECOLOR_BOT_BORDER+"; }"\
 										"QListWidget::item {"\
