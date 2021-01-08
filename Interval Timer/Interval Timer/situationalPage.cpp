@@ -37,6 +37,7 @@ situationalGame::situationalGame(QWidget *parent)
     bjjBtn->setText("start");
     bjjBtn->setMaximumHeight(400);
 
+
     moveListWidget = new QListWidget(parent);
     moveListWidget->setDragEnabled(true);
     moveListWidget->setAcceptDrops(false);
@@ -57,6 +58,7 @@ situationalGame::situationalGame(QWidget *parent)
     moveListWidget->setDragDropMode(QAbstractItemView::NoDragDrop);
     moveListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     moveListWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
+    moveListWidget->setAlternatingRowColors(true);
 
 	mainLayout = new QHBoxLayout();
 	mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -83,7 +85,6 @@ situationalGame::situationalGame(QWidget *parent)
     // connect signals
 	connect(backBtn, &QPushButton::pressed, this, &situationalGame::backButton_Pressed);
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
-	connect(bjjBtn, &QPushButton::pressed, this, &situationalGame::bjjButton_Pressed);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
@@ -131,7 +132,6 @@ void situationalGame::getMoveList(QString inputFile)
         bjjMove inputMove;
         inputMove.position = json_arr.at(i)["Name"].toString();
         inputMove.level = json_arr.at(i)["Level"].toString();
-        inputMove.position.replace(" ", "\n");
 
 		if (inputMove.level != "Beginner")
 		{
@@ -147,10 +147,11 @@ void situationalGame::getMoveList(QString inputFile)
 */
 void situationalGame::populateMoveList(QString move, QString difficulty)
 {
+
 	QListWidgetItem *item;
 	item = new QListWidgetItem(tr(""));
 	item->setData(Qt::UserRole, difficulty);    // set path to backend data for later retireval
-	item->setText(move);            // set for image icon to be dropped
+    item->setText(move);
     moveListWidget->addItem(item);                // add item to QListWidget
     moveListWidget->scrollToBottom();
 }
@@ -175,16 +176,6 @@ void situationalGame::backButton_Released()
 	emit returnPage("situational");
 }
 
-/* Function: bjjButton_Pressed
-
-		Slot to handle backbutton being pressed
-*/
-void situationalGame::bjjButton_Pressed()
-{
-	// color button green indicating pressed button
-	bjjBtn->setStyleSheet(bjjMoveBox_pressed);
-}
-
 /* Function: bjjButton_Released
 
 		Slot to handle back button is released.
@@ -194,8 +185,18 @@ void situationalGame::bjjButton_Released()
     int randomNum = rand() % bjjMoveList.size();
     moveListWidget->setCurrentRow(randomNum);
 
+    int size = bjjMoveList[randomNum].position.size();
+    if (size >= 10)
+    {
+        bjjBtn->setStyleSheet(bjjMoveBoxSTYLE_SMALL);
+    }
+    else
+    {
+        bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
+
+    }
+
     bjjBtn->setText(bjjMoveList[randomNum].position);
-	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
 }
 
 /* Function: eventFilter
@@ -241,5 +242,16 @@ bool situationalGame::eventFilter(QObject * obj, QEvent * event)
 */
 void situationalGame::moveListItemClicked(QListWidgetItem* listWidgetItem)
 {
+    int size = listWidgetItem->text().size();
+    if (size >= 9)
+    {
+        bjjBtn->setStyleSheet(bjjMoveBoxSTYLE_SMALL);
+    }
+    else
+    {
+        bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
+
+    }
+
 	bjjBtn->setText(listWidgetItem->text());
 }

@@ -56,7 +56,6 @@ private:
 public slots:
 	void backButton_Pressed();
 	void backButton_Released();	
-	void bjjButton_Pressed();
 	void bjjButton_Released();
 	void moveListItemClicked(QListWidgetItem* listWidgetItem);
 

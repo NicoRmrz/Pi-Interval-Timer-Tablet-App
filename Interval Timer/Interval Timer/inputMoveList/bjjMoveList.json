@@ -1,45 +1,64 @@
 {
-	"bjjPosition": 
-	[
-	    {
-	        "Name": "Saddle",
-	        "Level": "Advanced"
-	    },	    
-	    {
-	        "Name": "50/50",
-	        "Level": "Advanced"
-	    },	    
-	    {
-	        "Name": "Dog Fight",
-	        "Level": "All"
-	    },	    
-	    {
-	        "Name": "Full Guard",
-	        "Level": "Beginner"
-	    },	    
-	    {
-	        "Name": "Half Guard",
-	        "Level": "Beginner"
-	    },	    
-	    {
-	        "Name": "Spider Web",
-	        "Level": "All"
-	    },	    
-	    {
-	        "Name": "Back",
-	        "Level": "All"
-	    },	    
-	    {
-	        "Name": "Side Control",
-	        "Level": "All"
-	    },	    
-	    {
-	        "Name": "Full Mount",
-	        "Level": "Beginner"
-	    },	    
-	    {
-	        "Name": "Front Headlock",
-	        "Level": "All"
-	    }
-	]
+  "bjjPosition": [
+    {
+      "Name": "Saddle",
+      "Level": "Advanced"
+    },
+    {
+      "Name": "50/50",
+      "Level": "Advanced"
+    },
+    {
+      "Name": "Dog\nFight",
+      "Level": "All"
+    },
+    {
+      "Name": "Full\nGuard",
+      "Level": "Beginner"
+    },
+    {
+      "Name": "Half\nGuard",
+      "Level": "Beginner"
+    },
+    {
+      "Name": "Spider\nWeb",
+      "Level": "All"
+    },
+    {
+      "Name": "Back",
+      "Level": "All"
+    },
+    {
+      "Name": "Side\nControl",
+      "Level": "All"
+    },
+    {
+      "Name": "Mount",
+      "Level": "Beginner"
+    },
+    {
+      "Name": "Single\nLeg X",
+      "Level": "Advanced"
+    },
+    {
+      "Name": "Butterfly",
+      "Level": "All"
+    },
+    {
+      "Name": "Shin to\nShin",
+      "Level": "Advanced"
+    },
+    {
+      "Name": "De La\nRiva",
+      "Level": "All"
+    },
+    {
+      "Name": "Reverse\nDe La Riva",
+      "Level": "Advanced"
+    },
+    {
+      "Name": "Front\nHeadlock",
+      "Level": "All"
+    }
+  ]
 }

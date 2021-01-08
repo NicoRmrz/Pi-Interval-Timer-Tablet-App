@@ -33,35 +33,48 @@
 #define mainWindowRoll	QString("background-color: " + REDBACKGROUND + "; ")
 #define mainWindowIdle	QString("background-color: " + BLUEBACKGROUND + "; ")
 
+#define bjjMoveBoxSTYLE			QString("QPushButton {font: 150px Bold Courier New; "\
+										            "color:  rgba(255,255,255,200);"\
+										            "background-color: " + TABHOVER + "; "\
+										            "border-width: 20px; "\
+										            "border-radius: 60px; "\
+										            "border-color:  " + TABHOVER + ";"\
+										            "border-style: outset;}"\
+                                         "QPushButton:pressed {font: 150px Bold Courier New; "\
+										            "color: rgba(255,255,255,200);"\
+										            "background-color: " + ICONPRESSED + "; "\
+										            "border-width: 20px; "\
+										            "border-radius: 60px; "\
+										            "border-color:  " + ICONPRESSED + ";"\
+										            "border-style: inset;}")
 
-#define bjjMoveBoxSTYLE			QString("font: 150px Bold Courier New; "\
-										"color:  rgba(255,255,255,200);"\
-										"background-color: " + TABHOVER + "; "\
-										"border-width: 20px; "\
-										"border-radius: 60px; "\
-										"border-color:  " + TABHOVER + ";"\
-										"border-style: outset;")
-
-#define bjjMoveBox_pressed		QString("font: 150px Bold Courier New; "\
-										"color: rgba(255,255,255,200);"\
-										"background-color: " + ICONPRESSED + "; "\
-										"border-width: 20px; "\
-										"border-radius: 60px; "\
-										"border-color:  " + ICONPRESSED + ";"\
-										"border-style: inset;")
+#define bjjMoveBoxSTYLE_SMALL   QString("QPushButton {font: 100px Bold Courier New; "\
+										            "color:  rgba(255,255,255,200);"\
+										            "background-color: " + TABHOVER + "; "\
+										            "border-width: 20px; "\
+										            "border-radius: 60px; "\
+										            "border-color:  " + TABHOVER + ";"\
+										            "border-style: outset;}"\
+                                         "QPushButton:pressed {font: 100px Bold Courier New; "\
+										            "color: rgba(255,255,255,200);"\
+										            "background-color: " + ICONPRESSED + "; "\
+										            "border-width: 20px; "\
+										            "border-radius: 60px; "\
+										            "border-color:  " + ICONPRESSED + ";"\
+										            "border-style: inset;}")
 
 #define moveListSTYLE			QString("QListWidget {"\
 										"font: 22px Verdana; "\
 										"color: white;"\
 										"background-color: " + TABHOVER + "; "\
 										"border: none; "\
-										"padding: 9px;}"\
+										"alternate-background-color: "+TITLECOLOR_BOT_BORDER+"; }"\
 										"QListWidget::item {"\
 										"border: none;}"\
 										"QListWidget::item:selected {"\
 										"font: 22px Verdana; "\
 										"color: black;"\
-										"background-color: #add8e6;}")
+										"background-color: green;}")
 
 #define splitterClosed	QString("QSplitter::handle {image:url(:/images/icons/splitterOpen.png);}"\
 								"QSplitter::handle:horizontal{width: 50px; }"\

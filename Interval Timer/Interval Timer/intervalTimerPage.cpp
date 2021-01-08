@@ -261,6 +261,7 @@ void IntervalTimer::restartButton_Released()
 
     currTimer->restartTimer();
 	restartBtn->setIcon(QIcon(restartIcon));
+    playSound(switchTimer);
 }
 
 /* Function: backButton_Pressed
