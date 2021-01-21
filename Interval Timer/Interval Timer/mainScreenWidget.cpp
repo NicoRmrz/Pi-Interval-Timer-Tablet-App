@@ -10,12 +10,6 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-QString situationalIcon = ":/images/icons/situationalButton.PNG";            //Path to icon image from resource file
-QString situationalIconPressed = ":/images/icons/situationalButtonPressed.PNG";            //Path to icon image from resource file
-QString intervalTimerIcon = ":/images/icons/intervalTimer1.png";
-QString intervalTimerIconPressed = ":/images/icons/intervalTimer.png";
-QString exitIcon = ":/images/icons/exit.png";
-
 using namespace std;
 
 /* Constructor: mainScreen
@@ -32,7 +26,6 @@ mainScreen::mainScreen(QWidget *parent)
 	setFixedSize(QSize(parent->size()));
 
     // create title
-
     appTitle = new QLabel(parent);
     appTitle->setText("Jitz Trainer");
     appTitle->setMinimumWidth(500);
@@ -43,7 +36,6 @@ mainScreen::mainScreen(QWidget *parent)
     showIntervalTimer->setObjectName(QString::fromUtf8("showIntervalTimer"));
     showIntervalTimer->setMinimumSize(230, 230);
     showIntervalTimer->setMaximumSize(230, 230);
-	showIntervalTimer->setIcon(QIcon(intervalTimerIcon));
 	showIntervalTimer->setIconSize(QSize(250, 230));
 
     // Create timer interval button
@@ -51,7 +43,6 @@ mainScreen::mainScreen(QWidget *parent)
     situationalBtn->setObjectName(QString::fromUtf8("showSituationalPage"));
     situationalBtn->setMinimumSize(230, 230);
     situationalBtn->setMaximumSize(250, 260);
-    situationalBtn->setIcon(QIcon(situationalIcon));
     situationalBtn->setIconSize(QSize(240, 250));
 
 	// exit button
@@ -59,7 +50,6 @@ mainScreen::mainScreen(QWidget *parent)
 	exitButton->setObjectName(QString::fromUtf8("exitButton"));
 	exitButton->setMinimumSize(25, 25);
 	exitButton->setMaximumSize(25, 25);
-	exitButton->setIcon(QIcon(exitIcon));
 	exitButton->setIconSize(QSize(25, 25));
 
 	buttonLayout = new QHBoxLayout();
@@ -78,28 +68,16 @@ mainScreen::mainScreen(QWidget *parent)
     setLayout(mainLayout);
 
     setStyleSheet(mainWindowGrey);
-    showIntervalTimer->setStyleSheet(iconOnlyButton);
-    situationalBtn->setStyleSheet(iconOnlyButton);
-	exitButton->setStyleSheet(iconOnlyButton);
+    showIntervalTimer->setStyleSheet(timerButtonSTYLE);
+    situationalBtn->setStyleSheet(situationalButtonSTYLE);
+	exitButton->setStyleSheet(exitButtonStyle);
     appTitle->setStyleSheet(appMainTitle);
 
 
 	// connect signals 
-	connect(showIntervalTimer, &QPushButton::pressed, this, &mainScreen::intervalTimerButton_Pressed);
 	connect(showIntervalTimer, &QPushButton::released, this, &mainScreen::intervalTimerButton_Released);
-	connect(situationalBtn, &QPushButton::pressed, this, &mainScreen::situationalButton_Pressed);
 	connect(situationalBtn, &QPushButton::released, this, &mainScreen::situationalButton_Released);
 	connect(exitButton, &QPushButton::pressed, this, &mainScreen::exitButton_Pressed);
-}
-
-/* Function: intervalTimerButton_Pressed
-
-		Slot to handle interval timer button being pressed
-*/
-void mainScreen::intervalTimerButton_Pressed()
-{
-	// color button green indicating pressed button
-	showIntervalTimer->setIcon(QIcon(intervalTimerIconPressed));
 }
 
 /* Function: intervalTimerButton_Released
@@ -108,19 +86,9 @@ void mainScreen::intervalTimerButton_Pressed()
 */
 void mainScreen::intervalTimerButton_Released()
 {
-    showIntervalTimer->setIcon(QIcon(intervalTimerIcon));
 	emit switchToIntervalPage();
 }
 
-/* Function: situationalButton_Pressed
-
-		Slot to handle situational button being pressed
-*/
-void mainScreen::situationalButton_Pressed()
-{
-	// color button green indicating pressed button
-    situationalBtn->setIcon(QIcon(situationalIconPressed));
-}
 
 /* Function: situationalButton_Released
 
@@ -128,7 +96,6 @@ void mainScreen::situationalButton_Pressed()
 */
 void mainScreen::situationalButton_Released()
 {
-    situationalBtn->setIcon(QIcon(situationalIcon));
 	emit switchToSituationalPage();
 }
 

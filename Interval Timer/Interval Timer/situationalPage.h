@@ -4,7 +4,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QVBoxLayout>
-#include <QPushButton>
 #include <QList>
 #include <QFile>
 #include <QJsonDocument>
@@ -15,6 +14,8 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QEvent>
+#include <QProcess>
+//#include <QButtonGroup>
 
 #include "GUI_Stylesheet.h"
 
@@ -40,11 +41,14 @@ public:
     QPushButton	*backBtn;
     QHBoxLayout	*mainLayout;
     QHBoxLayout	*mainHLayout;
+    QVBoxLayout	*mainVLayout;
     QWidget		*leftContainer;
     QPushButton *bjjBtn;
+    //QButtonGroup *buttongroup;
+    QPushButton *beginnerDiffButton;
     QListWidget	*moveListWidget;
     QSplitter	*horizontalSplitter;
-    void getMoveList(QString inputFile);
+    void getMoveList(QString inputFile, int type);
 	bool eventFilter(QObject * obj, QEvent * event);
 
 private:
@@ -52,9 +56,10 @@ private:
     QJsonArray json_arr;
     bool splitterOpen;
     QList<bjjMove> bjjMoveList;
+    void playSound(QString sound);
+    QProcess    *soundProcess;
 
 public slots:
-	void backButton_Pressed();
 	void backButton_Released();	
 	void bjjButton_Released();
 	void moveListItemClicked(QListWidgetItem* listWidgetItem);

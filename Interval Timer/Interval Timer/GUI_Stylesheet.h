@@ -10,7 +10,26 @@
 
 #define ICONSIZE 100
 #define BACKICONSIZE 50
+
+// images
 #define MAIN_ICON QString(":/images/icons/specific/bjj_stand_up.PNG")
+#define BACKICON QString(":/images/icons/back.png")
+#define BACKICON_PRESSED QString( ":/images/icons/backPressed.png")
+#define PLAY_ICON QString( ":/images/icons/play.png")
+#define PAUSE_ICON QString( ":/images/icons/pause.png")
+#define RESTART_ICON QString( ":/images/icons/restart.png")
+#define RESTART_ICON_PRESSED QString( ":/images/icons/restartPressed.png")
+#define EDIT_ICON QString( ":/images/icons/edit.png")
+#define EDIT_ICON_PRESSED QString( ":/images/icons/editPressed.png")
+
+#define SITUATIONAL_ICON  QString( ":/images/icons/situationalButton.PNG")
+#define SITUATIONAL_ICON_PRESSED  QString( ":/images/icons/situationalButtonPressed.PNG")
+#define TIMER_ICON  QString( ":/images/icons/intervalTimer1.png")
+#define TIMER_ICON_PRESSED  QString( ":/images/icons/intervalTimer.png")
+#define EXIT_ICON  QString( ":/images/icons/exit.png")
+
+#define SPLITTER_OPEN_WINDOW QString(":/images/icons/splitterOpen.png")
+#define SPLITTER_WINDOW_IS_OPENED QString(":/images/icons/splitterBoth.png")
 
 /* Define: Color Scheme
 
@@ -25,7 +44,7 @@
 #define ICONPRESSED		QString("rgba(72,146,73,240)")
 #define ICONBUTTON      QString("rgba(0,0,0,0)")
 #define TABHOVER        QString("rgba(38,79,120,255)")
-#define TABHOVER_FADED        QString("rgba(38,79,120,150)")
+#define TABHOVER_FADED  QString("rgba(38,79,120,150)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
 
@@ -77,16 +96,16 @@
 										"color: black;"\
 										"background-color: green;}")
 
-#define splitterClosed	QString("QSplitter::handle {image:url(:/images/icons/splitterOpen.png);}"\
+#define splitterClosed	QString("QSplitter::handle {image:url("+SPLITTER_OPEN_WINDOW+");}"\
 								"QSplitter::handle:horizontal{width: 50px; }"\
 								"QSplitter::handle:vertical{height: 50px; }"\
-								"QSplitter::handle:pressed{image:url(:/images/icons/splitterBoth.png); "\
-								"background-color: " + ICONPRESSED + "; }")\
+								"QSplitter::handle:pressed{image:url("+SPLITTER_WINDOW_IS_OPENED+");}"\
+								"background-color: " + ICONPRESSED + "; }")
 
-#define splitterSTYLE 	QString("QSplitter::handle {image:url(:/images/icons/splitterBoth.png);}"\
+#define splitterSTYLE 	QString("QSplitter::handle {image:url("+SPLITTER_OPEN_WINDOW+");}"\
 								"QSplitter::handle:horizontal{width: 50px; }"\
 								"QSplitter::handle:vertical{height: 50px; }"\
-								"QSplitter::handle:pressed{image:url(:/images/icons/splitterBoth.png); "\
+								"QSplitter::handle:pressed{image:url("+SPLITTER_WINDOW_IS_OPENED+");}"\
 								"background-color: " + ICONPRESSED + "; }")
 
 #define mainTimer		QString("font: 220px Bold Courier New; "\
@@ -97,26 +116,40 @@
 								"color: white;"\
 								"border: none")
 
-#define iconBtn			QString("background-color: " + TABHOVER + " ;"\
-								"border-style: outset; "\
-								"border-width: 20px; "\
-								"border-radius: 60px; "\
-								"border-color:  " + TABHOVER + ";")
-
-#define iconBtn1		QString("background-color: " + TABHOVER + ";"\
-								"border-style: outset; "\
-								"border-width: 20px; "\
-								"border-radius: 60px; "\
-								"border-color:  " + TABHOVER + ";")
-
-#define iconBtnPressed	QString("background-color: " + ICONPRESSED + "; "\
-								"border-style: outset; "\
-								"border-width: 20px; "\
-								"border-color: " + ICONPRESSED + ";"\
-								"border-radius: 60px")
-
 #define iconOnlyButton	QString("background-color: " + ICONBUTTON + "; "\
 								"border: none; ")
+
+#define backButtonStyle   QString("QPushButton {image:url("+BACKICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+BACKICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
+
+
+#define situationalButtonSTYLE   QString("QPushButton {image:url("+SITUATIONAL_ICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+SITUATIONAL_ICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
+
+
+#define timerButtonSTYLE   QString("QPushButton {image:url("+TIMER_ICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+TIMER_ICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
+
+#define exitButtonStyle   QString("QPushButton {image:url("+EXIT_ICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
+
+#define editButtonStyle   QString("QPushButton {image:url("+EDIT_ICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
+
+#define restartButtonStyle   QString("QPushButton {image:url("+RESTART_ICON+");"\
+                                       " background-color: " + ICONBUTTON + ";} "\
+                                   "QPushButton:pressed {image:url("+RESTART_ICON_PRESSED+");}"\
+                                       " background-color: " + ICONBUTTON + ";} ")
 
 #define buttonPressed	QString("font: 30px Bold Courier New; "\
 								"color: white;"\
@@ -171,3 +204,11 @@
                                 "border-left: none; "\
                                 "border-style: double; "\
                                 "border-bottom-width: 3px; ")				
+
+#define difficultyButtonStyle        QString(   "#QRadioButton::indicator {width: 5px; height: 5px;} "\
+                                                "QRadioButton::indicator::unchecked{image:url("+PLAY_ICON+");}"\
+                                                "QRadioButton::indicator:unchecked:hover{image:url("+PLAY_ICON+");}"\
+                                                "QRadioButton::indicator:unchecked:pressed{image:url("+PAUSE_ICON+");}"\
+                                                "QRadioButton::indicator::checked{image:url("+BACKICON+");}"\
+                                                "QRadioButton::indicator:checked:hover{image:url("+BACKICON+");}"\
+                                                "RadioButton::indicator:checked:pressed{image:url("+BACKICON_PRESSED+");}  ")

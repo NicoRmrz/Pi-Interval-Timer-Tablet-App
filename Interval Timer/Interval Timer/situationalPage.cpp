@@ -8,8 +8,8 @@ Author: Nico Ramirez
 #include <QDebug>
 #include <string>
 
-QString backIcon2 = ":/images/icons/back.png";
-QString backIconPressed2= ":/images/icons/backPressed.png";
+#define BEGINNER 0
+#define ADVANCED 1
 
 using namespace std;
 
@@ -30,13 +30,28 @@ situationalGame::situationalGame(QWidget *parent)
     backBtn->setObjectName(QString::fromUtf8("back"));
     backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
     backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
-    backBtn->setIcon(QIcon(backIcon2));
     backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
 
     bjjBtn = new QPushButton(parent);
     bjjBtn->setText("start");
     bjjBtn->setMaximumHeight(400);
 
+
+
+    //beginnerDiffButton = new QRadioButton(parent);
+    //beginnerDiffButton->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+    //beginnerDiffButton->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
+    //beginnerDiffButton->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+
+    beginnerDiffButton = new QPushButton(parent);
+    beginnerDiffButton->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+    beginnerDiffButton->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
+    beginnerDiffButton->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+
+   // buttongroup = new QButtonGroup();
+
+ //   buttongroup->addButton(beginnerDiffButton);
+   // buttongroup->addButton(radioButtonFFT);
 
     moveListWidget = new QListWidget(parent);
     moveListWidget->setDragEnabled(true);
@@ -64,10 +79,17 @@ situationalGame::situationalGame(QWidget *parent)
 	mainLayout->setContentsMargins(0, 0, 0, 0);
 	mainLayout->setSpacing(0);
 	mainLayout->addWidget(backBtn, 0, Qt::AlignTop);
-	mainLayout->addWidget(bjjBtn, 0, Qt::AlignCenter);
+	mainLayout->addWidget(beginnerDiffButton, 0, Qt::AlignCenter);
+	//mainLayout->addItem(buttongroup);
+
+    mainVLayout = new QVBoxLayout();
+    mainVLayout->setContentsMargins(0, 0, 0, 0);
+    mainVLayout->setSpacing(0);
+    mainVLayout->addLayout(mainLayout);
+    mainVLayout->addWidget(bjjBtn, 1, Qt::AlignCenter);
 
 	leftContainer = new QWidget(parent);
-	leftContainer->setLayout(mainLayout);
+	leftContainer->setLayout(mainVLayout);
 
 	horizontalSplitter = new QSplitter(parent);
 	horizontalSplitter->addWidget(leftContainer);
@@ -83,19 +105,20 @@ situationalGame::situationalGame(QWidget *parent)
     setLayout(mainHLayout);
 
     // connect signals
-	connect(backBtn, &QPushButton::pressed, this, &situationalGame::backButton_Pressed);
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
 
     // set stylesheet for each object
     parent->setStyleSheet(mainWindowGrey);
-	backBtn->setStyleSheet(iconOnlyButton);
+	backBtn->setStyleSheet(backButtonStyle);
 	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
     moveListWidget->setStyleSheet(moveListSTYLE);
 	horizontalSplitter->setStyleSheet(splitterClosed);
+    beginnerDiffButton->setStyleSheet(iconOnlyButton);
+    //beginnerDiffButton->setStyleSheet(difficultyButtonStyle);
 
-    getMoveList(JSONmoveList);
+    getMoveList(JSONmoveList, ADVANCED);
 }
 
 /* Define: getMoveList
@@ -103,7 +126,7 @@ situationalGame::situationalGame(QWidget *parent)
     Get bjj moves list and store them in QMap
 
  */
-void situationalGame::getMoveList(QString inputFile)
+void situationalGame::getMoveList(QString inputFile, int type)
 {
     // read in JSON file
     QString val;
@@ -133,11 +156,25 @@ void situationalGame::getMoveList(QString inputFile)
         inputMove.position = json_arr.at(i)["Name"].toString();
         inputMove.level = json_arr.at(i)["Level"].toString();
 
-		if (inputMove.level != "Beginner")
+
+
+		if (type == BEGINNER)
 		{
-			bjjMoveList.append(inputMove);
-			populateMoveList(inputMove.position, inputMove.level);
+            if (inputMove.level != "Advanced")
+            {
+                bjjMoveList.append(inputMove);
+                populateMoveList(inputMove.position, inputMove.level);
+            }
 		}
+        //else if(inputMove.level != "ALL" || inputMove.level != "Advanced")
+        else if (type == ADVANCED)
+        {
+            if (inputMove.level != "Beginner")
+            {
+                bjjMoveList.append(inputMove);
+                populateMoveList(inputMove.position, inputMove.level);
+            }
+        }
     }
 }
 
@@ -156,23 +193,12 @@ void situationalGame::populateMoveList(QString move, QString difficulty)
     moveListWidget->scrollToBottom();
 }
 
-/* Function: backButton_Pressed
-
-		Slot to handle backbutton being pressed
-*/
-void situationalGame::backButton_Pressed()
-{
-	// color button green indicating pressed button
-	backBtn->setIcon(QIcon(backIconPressed2));
-}
-
 /* Function: backButton_Released
 
 		Slot to handle back button is released.
 */
 void situationalGame::backButton_Released()
 {
-	backBtn->setIcon(QIcon(backIcon2));
 	emit returnPage("situational");
 }
 
@@ -254,4 +280,14 @@ void situationalGame::moveListItemClicked(QListWidgetItem* listWidgetItem)
     }
 
 	bjjBtn->setText(listWidgetItem->text());
+}
+
+/* Function: playSound
+
+       PlaySound Tone
+*/
+void situationalGame::playSound(QString sound)
+{
+    soundProcess = new QProcess(this);
+    soundProcess->start(sound);
 }

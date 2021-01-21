@@ -33,11 +33,7 @@ signals:
 	void switchToSituationalPage();
 
 public slots:
-	void intervalTimerButton_Pressed();
 	void intervalTimerButton_Released();
-	void situationalButton_Pressed();
 	void situationalButton_Released();
-
 	void exitButton_Pressed();
-
 };

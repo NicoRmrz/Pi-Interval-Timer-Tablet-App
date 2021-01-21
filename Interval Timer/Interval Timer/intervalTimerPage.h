@@ -6,7 +6,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QPushButton>
 #include <QProcess>
 
 #include "GUI_Stylesheet.h"
@@ -50,11 +49,8 @@ public slots:
     void changeColor(int state);
     void startButton_Pressed();
     void startButton_Released();
-    void restartButton_Pressed();
     void restartButton_Released();
-    void backButton_Pressed();
     void backButton_Released();    
-	void editButton_Pressed();
     void editButton_Released();
 
 private:
