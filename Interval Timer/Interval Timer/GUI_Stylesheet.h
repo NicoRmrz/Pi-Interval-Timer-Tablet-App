@@ -123,44 +123,49 @@
 #define iconOnlyButton	QString("background-color: " + ICONBUTTON + "; "\
 								"border: none; ")
 
-#define backButtonStyle   QString("QPushButton {image:url("+BACKICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+BACKICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
+#define backButtonStyle	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+BACKICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+BACKICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
 
-#define difficultybuttonsSTYLE   QString("QPushButton{background-color: " + GREEN_FADED + "; "\
-                                           "font: 20px Bold Courier New; "\
-								            "color: white;} "\
-                                   "QPushButton:pressed{background-color: " + TABHOVER_EXTRA_FADED + ";} "\
-                                            "font: 20px Bold Courier New; "\
-								            "color: white;} ")
+#define difficultybuttonsSTYLE	QString("QPushButton {background-color: " + GREEN_FADED + "; "\
+						    "font: 20px Bold Courier New;"\
+						    "color: white;"\
+						    "border: none; }"\
+			       "QPushButton:pressed {color: white;"\
+						    "border: none; "\
+						   " background-color: " + TABHOVER_EXTRA_FADED + ";} ")
+						   
+#define situationalButtonSTYLE	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+SITUATIONAL_ICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+SITUATIONAL_ICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
+						   
+#define timerButtonSTYLE	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+TIMER_ICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+TIMER_ICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
 
+#define exitButtonStyle	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+EXIT_ICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
 
-#define situationalButtonSTYLE   QString("QPushButton {image:url("+SITUATIONAL_ICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+SITUATIONAL_ICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
+#define editButtonStyle	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+EDIT_ICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
 
-
-#define timerButtonSTYLE   QString("QPushButton {image:url("+TIMER_ICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+TIMER_ICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
-
-#define exitButtonStyle   QString("QPushButton {image:url("+EXIT_ICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
-
-#define editButtonStyle   QString("QPushButton {image:url("+EDIT_ICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+EDIT_ICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
-
-#define restartButtonStyle   QString("QPushButton {image:url("+RESTART_ICON+");"\
-                                       " background-color: " + ICONBUTTON + ";} "\
-                                   "QPushButton:pressed {image:url("+RESTART_ICON_PRESSED+");}"\
-                                       " background-color: " + ICONBUTTON + ";} ")
+#define restartButtonStyle	QString("QPushButton {background-color: " + ICONBUTTON + "; "\
+						    "image:url("+RESTART_ICON+");"\
+								"border: none; }"\
+			       "QPushButton:pressed {image:url("+RESTART_ICON_PRESSED+");"\
+						   " background-color: " + ICONBUTTON + ";} ")
 
 #define buttonPressed	QString("font: 30px Bold Courier New; "\
 								"color: white;"\

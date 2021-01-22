@@ -58,26 +58,30 @@ IntervalTimer::IntervalTimer(QWidget *parent)
     startBtn->setObjectName(QString::fromUtf8("startBtn"));
     startBtn->setMinimumSize(ICONSIZE, ICONSIZE);
     startBtn->setMaximumSize(ICONSIZE, ICONSIZE);
-	startBtn->setIconSize(QSize(ICONSIZE, ICONSIZE));
+    startBtn->setIconSize(QSize(ICONSIZE, ICONSIZE));
+    startBtn->setFocusPolicy(Qt::NoFocus);
 
     restartBtn = new QPushButton(parent);
     restartBtn->setObjectName(QString::fromUtf8("restartBtn"));
     restartBtn->setMinimumSize(ICONSIZE, ICONSIZE);
     restartBtn->setMaximumSize(ICONSIZE, ICONSIZE);
-	restartBtn->setIconSize(QSize(ICONSIZE, ICONSIZE));
-	restartBtn->setEnabled(false);
+    restartBtn->setIconSize(QSize(ICONSIZE, ICONSIZE));
+    restartBtn->setEnabled(false);
+    restartBtn->setFocusPolicy(Qt::NoFocus);
 
     backBtn = new QPushButton(parent);
     backBtn->setObjectName(QString::fromUtf8("back"));
     backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
     backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
-	backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    backBtn->setFocusPolicy(Qt::NoFocus);
 
-	editBtn = new QPushButton(parent);
-	editBtn->setObjectName(QString::fromUtf8("edit"));
-	editBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
-	editBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
-	editBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    editBtn = new QPushButton(parent);
+    editBtn->setObjectName(QString::fromUtf8("edit"));
+    editBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
+    editBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
+    editBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    editBtn->setFocusPolicy(Qt::NoFocus);
 
     // set layout
 	controlBtnLayout = new QHBoxLayout();

@@ -31,10 +31,12 @@ situationalGame::situationalGame(QWidget *parent)
     backBtn->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
     backBtn->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
     backBtn->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    backBtn->setFocusPolicy(Qt::NoFocus);
 
     bjjBtn = new QPushButton(parent);
     bjjBtn->setText("start");
     bjjBtn->setMaximumHeight(400);
+    bjjBtn->setFocusPolicy(Qt::NoFocus);
 
     beginnerDiffButton = new QPushButton(parent);
     beginnerDiffButton->setMinimumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
@@ -42,6 +44,7 @@ situationalGame::situationalGame(QWidget *parent)
     beginnerDiffButton->setIconSize(QSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT));
     beginnerDiffButton->setText("Beginner");
     beginnerDiffButton->setCheckable(true);
+    beginnerDiffButton->setFocusPolicy(Qt::NoFocus);
 
     advancedDiffButton = new QPushButton(parent);
     advancedDiffButton->setMinimumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
@@ -49,6 +52,7 @@ situationalGame::situationalGame(QWidget *parent)
     advancedDiffButton->setIconSize(QSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT));
     advancedDiffButton->setText("Advanced");
     advancedDiffButton->setCheckable(true);
+    advancedDiffButton->setFocusPolicy(Qt::NoFocus);
 
     // start on advanced
     beginnerDiffButton->setChecked(true);
@@ -61,9 +65,9 @@ situationalGame::situationalGame(QWidget *parent)
     moveListWidget->setDropIndicatorShown(true);
     moveListWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     moveListWidget->setDefaultDropAction(Qt::MoveAction);
-	moveListWidget->setMinimumWidth(0);
-	moveListWidget->setMaximumWidth(0);
-	moveListWidget->setFixedWidth(0);    
+    moveListWidget->setMinimumWidth(0);
+    moveListWidget->setMaximumWidth(0);
+    moveListWidget->setFixedWidth(0);    
     moveListWidget->setViewMode(QListView::ListMode);
     moveListWidget->setWordWrap(true);
     moveListWidget->setResizeMode(QListWidget::Adjust);
@@ -75,6 +79,7 @@ situationalGame::situationalGame(QWidget *parent)
     moveListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     moveListWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
     moveListWidget->setAlternatingRowColors(true);
+    moveListWidget->setFocusPolicy(Qt::NoFocus);
 
     buttonLayout = new QHBoxLayout();
     buttonLayout->setContentsMargins(0, 0, 0, 0);
@@ -82,11 +87,11 @@ situationalGame::situationalGame(QWidget *parent)
     buttonLayout->addWidget(beginnerDiffButton, 1, Qt::AlignRight);
     buttonLayout->addWidget(advancedDiffButton, 1, Qt::AlignLeft);
 
-	mainLayout = new QHBoxLayout();
-	mainLayout->setContentsMargins(0, 0, 0, 0);
-	mainLayout->setSpacing(0);
-	mainLayout->addWidget(backBtn, 0, Qt::AlignTop);
-	mainLayout->addLayout(buttonLayout, Qt::AlignCenter);
+    mainLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
+    mainLayout->addWidget(backBtn, 0, Qt::AlignTop);
+    mainLayout->addLayout(buttonLayout, Qt::AlignCenter);
 
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
@@ -119,10 +124,10 @@ situationalGame::situationalGame(QWidget *parent)
 
     // set stylesheet for each object
     parent->setStyleSheet(mainWindowGrey);
-	backBtn->setStyleSheet(backButtonStyle);
-	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
+    backBtn->setStyleSheet(backButtonStyle);
+    bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
     moveListWidget->setStyleSheet(moveListSTYLE);
-	horizontalSplitter->setStyleSheet(splitterClosed);
+    horizontalSplitter->setStyleSheet(splitterClosed);
     beginnerDiffButton->setStyleSheet(difficultybuttonsSTYLE);
     advancedDiffButton->setStyleSheet(difficultybuttonsSTYLE);
 

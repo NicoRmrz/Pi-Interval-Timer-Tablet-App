@@ -36,14 +36,16 @@ mainScreen::mainScreen(QWidget *parent)
     showIntervalTimer->setObjectName(QString::fromUtf8("showIntervalTimer"));
     showIntervalTimer->setMinimumSize(230, 230);
     showIntervalTimer->setMaximumSize(230, 230);
-	showIntervalTimer->setIconSize(QSize(250, 230));
-
+    showIntervalTimer->setIconSize(QSize(250, 230));
+    showIntervalTimer->setFocusPolicy(Qt::NoFocus);
+    
     // Create timer interval button
     situationalBtn = new QPushButton(parent);
     situationalBtn->setObjectName(QString::fromUtf8("showSituationalPage"));
     situationalBtn->setMinimumSize(230, 230);
     situationalBtn->setMaximumSize(250, 260);
     situationalBtn->setIconSize(QSize(240, 250));
+    situationalBtn->setFocusPolicy(Qt::NoFocus);
 
 	// exit button
 	exitButton = new QPushButton(parent);
@@ -51,6 +53,7 @@ mainScreen::mainScreen(QWidget *parent)
 	exitButton->setMinimumSize(25, 25);
 	exitButton->setMaximumSize(25, 25);
 	exitButton->setIconSize(QSize(25, 25));
+	exitButton->setFocusPolicy(Qt::NoFocus);
 
 	buttonLayout = new QHBoxLayout();
 	buttonLayout->setContentsMargins(0, 0, 0, 0);
@@ -70,7 +73,7 @@ mainScreen::mainScreen(QWidget *parent)
     setStyleSheet(mainWindowGrey);
     showIntervalTimer->setStyleSheet(timerButtonSTYLE);
     situationalBtn->setStyleSheet(situationalButtonSTYLE);
-	exitButton->setStyleSheet(exitButtonStyle);
+    exitButton->setStyleSheet(exitButtonStyle);
     appTitle->setStyleSheet(appMainTitle);
 
 
