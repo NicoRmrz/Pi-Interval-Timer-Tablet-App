@@ -92,13 +92,13 @@
 										"color: white;"\
 										"background-color: " + TABHOVER_FADED + "; "\
 										"border: none; "\
-										"alternate-background-color: "+TITLECOLOR_BOT_BORDER+"; }"\
+										"alternate-background-color: "+GREEN_FADED+"; }"\
 										"QListWidget::item {"\
 										"border: none;}"\
 										"QListWidget::item:selected {"\
 										"font: 22px Verdana; "\
 										"color: black;"\
-										"background-color: green;}")
+										"background-color:  "+TITLECOLOR_BOT_BORDER+";}")
 
 #define splitterClosed	QString("QSplitter::handle {image:url("+SPLITTER_OPEN_WINDOW+");}"\
 								"QSplitter::handle:horizontal{width: 50px; }"\
