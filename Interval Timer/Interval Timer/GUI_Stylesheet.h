@@ -10,6 +10,8 @@
 
 #define ICONSIZE 100
 #define BACKICONSIZE 50
+#define DIFFICULTY_BUTTON_WIDTH 150
+#define DIFFICULTY_BUTTON_HEIGHT 50
 
 // images
 #define MAIN_ICON QString(":/images/icons/specific/bjj_stand_up.PNG")
@@ -45,6 +47,8 @@
 #define ICONBUTTON      QString("rgba(0,0,0,0)")
 #define TABHOVER        QString("rgba(38,79,120,255)")
 #define TABHOVER_FADED  QString("rgba(38,79,120,150)")
+#define TABHOVER_EXTRA_FADED  QString("rgba(38,79,120,100)")
+#define GREEN_FADED     QString("rgba(38,255,120,75)")
 #define BUTTONPRESSED   QString("rgb(100,100,100)")
 #define UIBUTTON        QString("#6497b1")
 
@@ -123,6 +127,13 @@
                                        " background-color: " + ICONBUTTON + ";} "\
                                    "QPushButton:pressed {image:url("+BACKICON_PRESSED+");}"\
                                        " background-color: " + ICONBUTTON + ";} ")
+
+#define difficultybuttonsSTYLE   QString("QPushButton{background-color: " + GREEN_FADED + "; "\
+                                           "font: 20px Bold Courier New; "\
+								            "color: white;} "\
+                                   "QPushButton:pressed{background-color: " + TABHOVER_EXTRA_FADED + ";} "\
+                                            "font: 20px Bold Courier New; "\
+								            "color: white;} ")
 
 
 #define situationalButtonSTYLE   QString("QPushButton {image:url("+SITUATIONAL_ICON+");"\
@@ -205,10 +216,3 @@
                                 "border-style: double; "\
                                 "border-bottom-width: 3px; ")				
 
-#define difficultyButtonStyle        QString(   "#QRadioButton::indicator {width: 5px; height: 5px;} "\
-                                                "QRadioButton::indicator::unchecked{image:url("+PLAY_ICON+");}"\
-                                                "QRadioButton::indicator:unchecked:hover{image:url("+PLAY_ICON+");}"\
-                                                "QRadioButton::indicator:unchecked:pressed{image:url("+PAUSE_ICON+");}"\
-                                                "QRadioButton::indicator::checked{image:url("+BACKICON+");}"\
-                                                "QRadioButton::indicator:checked:hover{image:url("+BACKICON+");}"\
-                                                "RadioButton::indicator:checked:pressed{image:url("+BACKICON_PRESSED+");}  ")

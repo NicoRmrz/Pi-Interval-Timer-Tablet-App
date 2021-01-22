@@ -15,7 +15,6 @@
 #include <QListWidgetItem>
 #include <QEvent>
 #include <QProcess>
-//#include <QButtonGroup>
 
 #include "GUI_Stylesheet.h"
 
@@ -42,10 +41,11 @@ public:
     QHBoxLayout	*mainLayout;
     QHBoxLayout	*mainHLayout;
     QVBoxLayout	*mainVLayout;
+    QHBoxLayout	*buttonLayout;
     QWidget		*leftContainer;
     QPushButton *bjjBtn;
-    //QButtonGroup *buttongroup;
     QPushButton *beginnerDiffButton;
+    QPushButton *advancedDiffButton;
     QListWidget	*moveListWidget;
     QSplitter	*horizontalSplitter;
     void getMoveList(QString inputFile, int type);
@@ -62,6 +62,8 @@ private:
 public slots:
 	void backButton_Released();	
 	void bjjButton_Released();
+	void beginnerBtnPressed();
+	void advBtnPressed();
 	void moveListItemClicked(QListWidgetItem* listWidgetItem);
 
 signals:

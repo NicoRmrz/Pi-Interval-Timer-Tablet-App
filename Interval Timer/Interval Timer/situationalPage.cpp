@@ -36,22 +36,23 @@ situationalGame::situationalGame(QWidget *parent)
     bjjBtn->setText("start");
     bjjBtn->setMaximumHeight(400);
 
-
-
-    //beginnerDiffButton = new QRadioButton(parent);
-    //beginnerDiffButton->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
-    //beginnerDiffButton->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
-    //beginnerDiffButton->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
-
     beginnerDiffButton = new QPushButton(parent);
-    beginnerDiffButton->setMinimumSize(BACKICONSIZE, BACKICONSIZE);
-    beginnerDiffButton->setMaximumSize(BACKICONSIZE, BACKICONSIZE);
-    beginnerDiffButton->setIconSize(QSize(BACKICONSIZE, BACKICONSIZE));
+    beginnerDiffButton->setMinimumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
+    beginnerDiffButton->setMaximumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
+    beginnerDiffButton->setIconSize(QSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT));
+    beginnerDiffButton->setText("Beginner");
+    beginnerDiffButton->setCheckable(true);
 
-   // buttongroup = new QButtonGroup();
+    advancedDiffButton = new QPushButton(parent);
+    advancedDiffButton->setMinimumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
+    advancedDiffButton->setMaximumSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT);
+    advancedDiffButton->setIconSize(QSize(DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT));
+    advancedDiffButton->setText("Advanced");
+    advancedDiffButton->setCheckable(true);
 
- //   buttongroup->addButton(beginnerDiffButton);
-   // buttongroup->addButton(radioButtonFFT);
+    // start on advanced
+    beginnerDiffButton->setChecked(true);
+    beginnerDiffButton->setDown(true);
 
     moveListWidget = new QListWidget(parent);
     moveListWidget->setDragEnabled(true);
@@ -75,12 +76,17 @@ situationalGame::situationalGame(QWidget *parent)
     moveListWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
     moveListWidget->setAlternatingRowColors(true);
 
+    buttonLayout = new QHBoxLayout();
+    buttonLayout->setContentsMargins(0, 0, 0, 0);
+    buttonLayout->setSpacing(0);
+    buttonLayout->addWidget(beginnerDiffButton, 1, Qt::AlignRight);
+    buttonLayout->addWidget(advancedDiffButton, 1, Qt::AlignLeft);
+
 	mainLayout = new QHBoxLayout();
 	mainLayout->setContentsMargins(0, 0, 0, 0);
 	mainLayout->setSpacing(0);
 	mainLayout->addWidget(backBtn, 0, Qt::AlignTop);
-	mainLayout->addWidget(beginnerDiffButton, 0, Qt::AlignCenter);
-	//mainLayout->addItem(buttongroup);
+	mainLayout->addLayout(buttonLayout, Qt::AlignCenter);
 
     mainVLayout = new QVBoxLayout();
     mainVLayout->setContentsMargins(0, 0, 0, 0);
@@ -105,6 +111,8 @@ situationalGame::situationalGame(QWidget *parent)
     setLayout(mainHLayout);
 
     // connect signals
+	connect(beginnerDiffButton, &QPushButton::pressed, this, &situationalGame::beginnerBtnPressed);
+	connect(advancedDiffButton, &QPushButton::pressed, this, &situationalGame::advBtnPressed);
 	connect(backBtn, &QPushButton::released, this, &situationalGame::backButton_Released);
 	connect(bjjBtn, &QPushButton::released, this, &situationalGame::bjjButton_Released);
 	connect(moveListWidget, &QListWidget::itemClicked, this, &situationalGame::moveListItemClicked);
@@ -115,8 +123,8 @@ situationalGame::situationalGame(QWidget *parent)
 	bjjBtn->setStyleSheet(bjjMoveBoxSTYLE);
     moveListWidget->setStyleSheet(moveListSTYLE);
 	horizontalSplitter->setStyleSheet(splitterClosed);
-    beginnerDiffButton->setStyleSheet(iconOnlyButton);
-    //beginnerDiffButton->setStyleSheet(difficultyButtonStyle);
+    beginnerDiffButton->setStyleSheet(difficultybuttonsSTYLE);
+    advancedDiffButton->setStyleSheet(difficultybuttonsSTYLE);
 
     getMoveList(JSONmoveList, ADVANCED);
 }
@@ -192,6 +200,47 @@ void situationalGame::populateMoveList(QString move, QString difficulty)
     moveListWidget->addItem(item);                // add item to QListWidget
     moveListWidget->scrollToBottom();
 }
+
+/* Function: beginnerBtnPressed
+
+        Slot to handle difficulty push button pressed. RadioButton style like function
+*/
+void situationalGame::beginnerBtnPressed()
+{
+    if (!beginnerDiffButton->isChecked())
+    {
+        beginnerDiffButton->setChecked(true);
+        beginnerDiffButton->setDown(true);
+    }
+    else
+    {
+        moveListWidget->clear();
+        getMoveList(JSONmoveList, BEGINNER);
+        advancedDiffButton->setChecked(true);
+        advancedDiffButton->setDown(true);
+    }
+}
+
+/* Function: advBtnPressed
+
+    Slot to handle difficulty push button pressed. RadioButton style like function
+*/
+void situationalGame::advBtnPressed()
+{
+    if (!advancedDiffButton->isChecked())
+    {
+        advancedDiffButton->setChecked(true);
+        advancedDiffButton->setDown(true);
+    }
+    else
+    {
+        moveListWidget->clear();
+        getMoveList(JSONmoveList, ADVANCED);
+        beginnerDiffButton->setChecked(true);
+        beginnerDiffButton->setDown(true);
+    }
+}
+
 
 /* Function: backButton_Released
 
