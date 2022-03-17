@@ -2,10 +2,10 @@
 Pi Tablet App
 
 ## Home Screen
-![](/screenshots/Main Screen.png)
+![](/screenshots/Main_Screen.png)
 
 ## Timer Mode
-![](/screenshots/Timer Mode.png)
+![](/screenshots/Timer_Mode.png)
 
 ## Random Situation Generator Mode
-![](/screenshots/Situational Mode.png)
+![](/screenshots/Situational_Mode.png)
